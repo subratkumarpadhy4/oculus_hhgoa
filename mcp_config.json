@@ -1,0 +1,14 @@
+﻿{
+  "mcpServers": {
+    "tigergraph": {
+      "command": "C:\\HHGoa\\.venv\\Scripts\\python.exe",
+      "args": ["-m", "tigergraph_mcp.main", "--transport", "stdio", "--env-file", "C:\\HHGoa\\.env"],
+      "env": {
+        "TG_HOST": "http://localhost",
+        "TG_GRAPHNAME": "HHGoa",
+        "TG_USERNAME": "tigergraph",
+        "TG_PASSWORD": "tigergraph"
+      }
+    }
+  }
+}

@@ -1,0 +1,6 @@
+# NOTE: tigergraph-mcp requires Python >= 3.10
+# Use the .venv created with python3.12 (installed via brew)
+pyTigerGraph>=1.6.0
+tigergraph-mcp
+python-dotenv==1.0.1
+requests==2.32.3
