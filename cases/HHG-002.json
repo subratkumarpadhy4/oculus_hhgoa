@@ -1,0 +1,173 @@
+{
+  "case_id": "HHG-002",
+  "case": {
+    "status": "closed_fraud",
+    "verdict": "fraud",
+    "fraud_probability": 0.65,
+    "pattern": "card_not_present_fraud",
+    "pattern_description": "",
+    "affected_txn_ids": [
+      "3478782"
+    ],
+    "first_suspicious_txn_id": "3478782",
+    "connected_card_ids": [
+      "C11891-K1"
+    ],
+    "connected_device_profiles": [],
+    "exposure_usd": 292.36,
+    "evidence": [
+      {
+        "claim": "The flagged transaction (ID: 3478782) is an online transaction for $292.36 with a risk score of 0.79.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C11891",
+          "C11891-K1"
+        ]
+      },
+      {
+        "claim": "The transaction was made using card C11891-K1, which is a Mastercard credit card belonging to customer C11891.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C11891",
+          "C11891-K1"
+        ]
+      },
+      {
+        "claim": "The email domain associated with the transaction is hotmail.com.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C11891",
+          "C11891-K1"
+        ]
+      },
+      {
+        "claim": "The transaction amount of $292.36 is 6.2 times higher than the card's average transaction amount of $47.46 across 44 transactions.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C11891",
+          "C11891-K1"
+        ]
+      },
+      {
+        "claim": "No velocity burst was detected for card C11891-K1 within 24 hours of the flagged transaction.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C11891",
+          "C11891-K1"
+        ]
+      },
+      {
+        "claim": "No shared device ring or new device with proxy patterns were detected for this transaction.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C11891",
+          "C11891-K1"
+        ]
+      },
+      {
+        "claim": "The customer C11891 has 1 card and 44 total transactions.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C11891",
+          "C11891-K1"
+        ]
+      },
+      {
+        "claim": "The customer C11891 is associated with 17 devices and 3 email domains (gmail.com, anonymous.com, hotmail.com).",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C11891",
+          "C11891-K1"
+        ]
+      },
+      {
+        "claim": "There are no prior fraud cases similar to this one.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C11891",
+          "C11891-K1"
+        ]
+      }
+    ],
+    "similar_prior_cases": [
+      "CC-4160"
+    ],
+    "summary": "The flagged transaction (ID: 3478782) is an online transaction for $292.36 with a risk score of 0.79. The transaction was made using card C11891-K1, which is a Mastercard credit card belonging to customer C11891. The email domain associated with the transaction is hotmail.com. The transaction amount of $292.36 is 6.2 times higher than the card's average transaction amount of $47.46 across 44 transactions.",
+    "written_to_graph": true,
+    "graph_case_id": "HHG-002"
+  },
+  "evidence_requests": [
+    {
+      "type": "request_device_fingerprint",
+      "asked_after_step": 1,
+      "assumed_response": "new_device_signal",
+      "requested_from_missing": "Device information for transaction 3478782 and the customer with ID C11891."
+    },
+    {
+      "type": "request_customer_validation",
+      "asked_after_step": 1,
+      "assumed_response": "no_response",
+      "requested_from_missing": "More information about the customer's behavior and transactions."
+    },
+    {
+      "type": "request_device_fingerprint",
+      "asked_after_step": 2,
+      "assumed_response": "new_device_signal",
+      "requested_from_missing": "More information about the customer's recent transactions and device usage would be helpful in resolving uncertainty."
+    }
+  ],
+  "next_best_actions": {
+    "initial": [
+      {
+        "action": "MONITOR_CARD",
+        "route": "auto",
+        "reason": "R1: The evidence rests on a single signal (risk score) and probability < 0.70, so we should use VERIFY_WITH_CUSTOMER or STEP_UP_AUTH before any block. However, since the risk score is 0.79, which is above 0.70, we can directly monitor the card."
+      },
+      {
+        "action": "VERIFY_WITH_CUSTOMER",
+        "route": "auto",
+        "reason": "R1: The evidence rests on a single signal (risk score) and probability < 0.70, so we should use VERIFY_WITH_CUSTOMER or STEP_UP_AUTH before any block."
+      }
+    ],
+    "final": [
+      {
+        "action": "MONITOR_CARD",
+        "route": "auto",
+        "reason": "R1: The evidence rests on a single signal (risk score of 0.79) and probability < 0.70, so we should use VERIFY_WITH_CUSTOMER or STEP_UP_AUTH before any block. However, since the risk score is 0.79, which is above 0.70, we can directly monitor the card."
+      },
+      {
+        "action": "VERIFY_WITH_CUSTOMER",
+        "route": "auto",
+        "reason": "R1: The evidence rests on a single signal (risk score of 0.79) and probability < 0.70, so we should use VERIFY_WITH_CUSTOMER or STEP_UP_AUTH before any block."
+      }
+    ],
+    "what_changed": "No change — initial and final recommendations are identical."
+  },
+  "sar": {
+    "file": false,
+    "reason": "",
+    "narrative": "",
+    "subjects": [
+      "C11891",
+      "C11891-K1"
+    ],
+    "total_amount_usd": 292.36,
+    "activity_dates": [
+      "2016-11-22 17:27:07",
+      "2016-11-22 17:27:07"
+    ]
+  },
+  "stop_reason": "Investigation completed normally",
+  "tool_calls": 20,
+  "tokens": 0,
+  "latency_s": 175.0
+}

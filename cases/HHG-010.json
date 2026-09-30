@@ -1,0 +1,277 @@
+{
+  "case_id": "HHG-010",
+  "case": {
+    "status": "escalated",
+    "verdict": "uncertain",
+    "fraud_probability": 0.5,
+    "pattern": "card_testing",
+    "pattern_description": "",
+    "affected_txn_ids": [
+      "3506725"
+    ],
+    "first_suspicious_txn_id": "3506725",
+    "connected_card_ids": [
+      "C10434-K1"
+    ],
+    "connected_device_profiles": [
+      "9fd230e98695a579c23368a7cf6e4e8c"
+    ],
+    "exposure_usd": 1000.03,
+    "evidence": [
+      {
+        "claim": "The risk score for transaction 3506725 is 0.9.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C10434",
+          "C10434-K1"
+        ]
+      },
+      {
+        "claim": "Transaction 3506725 was flagged due to a high risk score.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C10434",
+          "C10434-K1"
+        ]
+      },
+      {
+        "claim": "The transaction amount for transaction 3506725 is $1,000.03.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C10434",
+          "C10434-K1"
+        ]
+      },
+      {
+        "claim": "Transaction 3506725 was conducted online.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C10434",
+          "C10434-K1"
+        ]
+      },
+      {
+        "claim": "The card used for transaction 3506725 is C10434-K1.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C10434",
+          "C10434-K1"
+        ]
+      },
+      {
+        "claim": "The customer ID associated with card C10434-K1 is C10434.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C10434",
+          "C10434-K1"
+        ]
+      },
+      {
+        "claim": "Card C10434-K1 has been used in 36 transactions.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C10434",
+          "C10434-K1"
+        ]
+      },
+      {
+        "claim": "The device used for transaction 3506725 is a desktop with Windows 10 OS.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C10434",
+          "C10434-K1"
+        ]
+      },
+      {
+        "claim": "The device used for transaction 3506725 is new for the account.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C10434",
+          "C10434-K1"
+        ]
+      },
+      {
+        "claim": "The billing region for transaction 3506725 is 469.0.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C10434",
+          "C10434-K1"
+        ]
+      },
+      {
+        "claim": "The email domain associated with transaction 3506725 is anonymous.com.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C10434",
+          "C10434-K1"
+        ]
+      },
+      {
+        "claim": "The average transaction amount for card C10434-K1 is $153.87.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C10434",
+          "C10434-K1"
+        ]
+      },
+      {
+        "claim": "The ratio of transaction amount 3506725 to the average transaction amount for card C10434-K1 is 6.5x.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C10434",
+          "C10434-K1"
+        ]
+      },
+      {
+        "claim": "Device 9fd230e98695a579c23368a7cf6e4e8c has been used by 3 distinct customers.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C10434",
+          "C10434-K1"
+        ]
+      },
+      {
+        "claim": "Device 9fd230e98695a579c23368a7cf6e4e8c has been used in 3 transactions.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C10434",
+          "C10434-K1"
+        ]
+      },
+      {
+        "claim": "Device 9fd230e98695a579c23368a7cf6e4e8c has been used with 3 distinct cards.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C10434",
+          "C10434-K1"
+        ]
+      }
+    ],
+    "similar_prior_cases": [
+      "CC-0873"
+    ],
+    "summary": "The risk score for transaction 3506725 is 0.9. Transaction 3506725 was flagged due to a high risk score. The transaction amount for transaction 3506725 is $1,000.03. Transaction 3506725 was conducted online.",
+    "written_to_graph": true,
+    "graph_case_id": "HHG-010"
+  },
+  "evidence_requests": [
+    {
+      "type": "request_transaction_history_extension",
+      "asked_after_step": 1,
+      "assumed_response": "extended_history_available",
+      "requested_from_missing": "More information about the customer's behavior and transaction history would be helpful to determine the legitimacy of the transaction.",
+      "extra_transactions": [
+        {
+          "txn_id": "EXT_13982_1",
+          "amount": 154.82,
+          "channel": "in-person",
+          "risk_score": 0.82
+        },
+        {
+          "txn_id": "EXT_13982_2",
+          "amount": 155.19,
+          "channel": "online",
+          "risk_score": 0.01
+        },
+        {
+          "txn_id": "EXT_13982_3",
+          "amount": 155.56,
+          "channel": "in-person",
+          "risk_score": 0.2
+        }
+      ]
+    },
+    {
+      "type": "request_transaction_history_extension",
+      "asked_after_step": 2,
+      "assumed_response": "extended_history_available",
+      "requested_from_missing": "More information about the customer's behavior and transaction history would be helpful to resolve remaining uncertainty.",
+      "extra_transactions": [
+        {
+          "txn_id": "EXT_13982_1",
+          "amount": 154.82,
+          "channel": "in-person",
+          "risk_score": 0.82
+        },
+        {
+          "txn_id": "EXT_13982_2",
+          "amount": 155.19,
+          "channel": "online",
+          "risk_score": 0.01
+        },
+        {
+          "txn_id": "EXT_13982_3",
+          "amount": 155.56,
+          "channel": "in-person",
+          "risk_score": 0.2
+        }
+      ]
+    }
+  ],
+  "next_best_actions": {
+    "initial": [
+      {
+        "action": "MONITOR_CARD",
+        "route": "auto",
+        "reason": "R6: Shared device ring pattern detected with a strength of weak, and amount anomaly pattern detected with a strength of moderate. The risk score for transaction 3506725 is 0.9."
+      },
+      {
+        "action": "CREATE_CASE",
+        "route": "auto",
+        "reason": "R6: Shared device ring pattern detected with a strength of weak, and amount anomaly pattern detected with a strength of moderate. The risk score for transaction 3506725 is 0.9."
+      },
+      {
+        "action": "FILE_REPORT",
+        "route": "L2",
+        "reason": "R6: Shared device ring pattern detected with a strength of weak, and amount anomaly pattern detected with a strength of moderate. The risk score for transaction 3506725 is 0.9."
+      }
+    ],
+    "final": [
+      {
+        "action": "MONITOR_CARD",
+        "route": "auto",
+        "reason": "R1: The risk score is 0.9, which is above the threshold of 0.7, but the evidence is not strong enough to block the card. Monitoring the card is necessary to gather more information."
+      },
+      {
+        "action": "VERIFY_WITH_CUSTOMER",
+        "route": "auto",
+        "reason": "R1: The risk score is 0.9, which is above the threshold of 0.7, and the customer's behavior and transaction history are not well understood. Verifying with the customer is necessary to gather more information."
+      }
+    ],
+    "what_changed": "Added: VERIFY_WITH_CUSTOMER; Removed: CREATE_CASE, FILE_REPORT after additional evidence was gathered."
+  },
+  "sar": {
+    "file": false,
+    "reason": "",
+    "narrative": "",
+    "subjects": [
+      "C10434",
+      "C10434-K1"
+    ],
+    "total_amount_usd": 1000.03,
+    "activity_dates": [
+      "2016-12-02 15:18:27",
+      "2016-12-02 15:18:27"
+    ]
+  },
+  "stop_reason": "Investigation completed normally",
+  "tool_calls": 20,
+  "tokens": 0,
+  "latency_s": 84.0
+}

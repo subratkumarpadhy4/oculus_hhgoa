@@ -1,0 +1,254 @@
+{
+  "case_id": "HHG-013",
+  "case": {
+    "status": "closed_fraud",
+    "verdict": "fraud",
+    "fraud_probability": 0.5,
+    "pattern": "card_testing",
+    "pattern_description": "",
+    "affected_txn_ids": [
+      "3526826"
+    ],
+    "first_suspicious_txn_id": "3526826",
+    "connected_card_ids": [
+      "C07671-K2"
+    ],
+    "connected_device_profiles": [
+      "12ca029d11a097ba8bd925418af0f512"
+    ],
+    "exposure_usd": 35.66,
+    "evidence": [
+      {
+        "claim": "The risk score for transaction 3526826 is 0.76.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C07671",
+          "C07671-K2"
+        ]
+      },
+      {
+        "claim": "Transaction 3526826 was flagged by a real-time model.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C07671",
+          "C07671-K2"
+        ]
+      },
+      {
+        "claim": "The transaction amount is $35.66.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C07671",
+          "C07671-K2"
+        ]
+      },
+      {
+        "claim": "The transaction was made online.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C07671",
+          "C07671-K2"
+        ]
+      },
+      {
+        "claim": "The card used for transaction 3526826 is C07671-K2.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C07671",
+          "C07671-K2"
+        ]
+      },
+      {
+        "claim": "The customer ID associated with the card is C07671.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C07671",
+          "C07671-K2"
+        ]
+      },
+      {
+        "claim": "The card type is debit.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C07671",
+          "C07671-K2"
+        ]
+      },
+      {
+        "claim": "The device used for transaction 3526826 is a desktop with Windows OS.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C07671",
+          "C07671-K2"
+        ]
+      },
+      {
+        "claim": "The device has been used before for this account.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C07671",
+          "C07671-K2"
+        ]
+      },
+      {
+        "claim": "The device has been used for 286 transactions and 7 distinct cards.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C07671",
+          "C07671-K2"
+        ]
+      },
+      {
+        "claim": "The device has been shared across 7 distinct customer(s).",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C07671",
+          "C07671-K2"
+        ]
+      },
+      {
+        "claim": "There are 1569 total transactions on card C07671-K2 in the graph.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C07671",
+          "C07671-K2"
+        ]
+      },
+      {
+        "claim": "There are 2 transactions on card C07671-K2 within 1 hour of the seed transaction.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C07671",
+          "C07671-K2"
+        ]
+      },
+      {
+        "claim": "There are 25 transactions within 24 hours of the seed transaction.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C07671",
+          "C07671-K2"
+        ]
+      },
+      {
+        "claim": "The card average is $112.42 across 1569 transactions on card C07671-K2.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C07671",
+          "C07671-K2"
+        ]
+      },
+      {
+        "claim": "The ratio of the seed amount to the card average is 0.3x.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C07671",
+          "C07671-K2"
+        ]
+      }
+    ],
+    "similar_prior_cases": [
+      "CC-3761",
+      "CC-4294",
+      "CC-3216",
+      "CC-1475"
+    ],
+    "summary": "The risk score for transaction 3526826 is 0.76. Transaction 3526826 was flagged by a real-time model. The transaction amount is $35.66. The transaction was made online.",
+    "written_to_graph": true,
+    "graph_case_id": "HHG-013"
+  },
+  "evidence_requests": [
+    {
+      "type": "request_device_fingerprint",
+      "asked_after_step": 1,
+      "assumed_response": "known_device",
+      "requested_from_missing": "More information about the device's location and the card's billing address would be helpful in resolving uncertainty."
+    },
+    {
+      "type": "request_transaction_history_extension",
+      "asked_after_step": 2,
+      "assumed_response": "extended_history_available",
+      "requested_from_missing": "More information about the customer's behavior and transaction history would be helpful to determine the likelihood of card testing.",
+      "extra_transactions": [
+        {
+          "txn_id": "EXT_73317_1",
+          "amount": 248.17,
+          "channel": "online",
+          "risk_score": 0.17
+        },
+        {
+          "txn_id": "EXT_73317_2",
+          "amount": 248.54,
+          "channel": "in-person",
+          "risk_score": 0.36
+        }
+      ]
+    }
+  ],
+  "next_best_actions": {
+    "initial": [
+      {
+        "action": "MONITOR_CARD",
+        "route": "auto",
+        "reason": "R4: Insufficient evidence to support blocking, but monitoring is warranted due to the risk score of 0.76 and the presence of a shared device ring (strong strength)."
+      },
+      {
+        "action": "VERIFY_WITH_CUSTOMER",
+        "route": "auto",
+        "reason": "R1: The risk score of 0.76 is below 0.70, and there is insufficient evidence to support blocking, so verification with the customer is recommended before any further action."
+      }
+    ],
+    "final": [
+      {
+        "action": "MONITOR_CARD",
+        "route": "auto",
+        "reason": "R6: Shared device ring detected with strength 'strong' (policy rule R6), and the device has been used before for this account, and the device has been shared across 7 distinct customer(s)."
+      },
+      {
+        "action": "CREATE_CASE",
+        "route": "auto",
+        "reason": "R6: Shared device ring detected with strength 'strong' (policy rule R6), and the device has been used before for this account, and the device has been shared across 7 distinct customer(s)."
+      },
+      {
+        "action": "FILE_REPORT",
+        "route": "L2",
+        "reason": "R6: Shared device ring detected with strength 'strong' (policy rule R6), and the device has been used before for this account, and the device has been shared across 7 distinct customer(s)."
+      }
+    ],
+    "what_changed": "Added: CREATE_CASE, FILE_REPORT; Removed: VERIFY_WITH_CUSTOMER after additional evidence was gathered."
+  },
+  "sar": {
+    "file": true,
+    "reason": "R6: Shared device ring detected with strength 'strong' (policy rule R6), and the device has been used before for this account, and the device has been shared across 7 distinct customer(s).",
+    "narrative": "This Suspicious Activity Report details suspicious online debit card activity indicative of an organized device-sharing ring and potential card testing. On December 9, 2016, at approximately 02:39 UTC, an online purchase totaling $35.66 was conducted using a customer's debit card. The transaction originated from a Windows-based desktop device utilizing a commercial web browser and a public email domain. Further investigation revealed that this single desktop device has been shared across at least seven distinct customer accounts and seven separate payment cards, generating 286 transactions across the financial institution. In addition, the card exhibited accelerated transaction velocity, recording 25 transactions within a 24-hour period and two transactions within a single hour surrounding the flagged event. Historical activity associated with the account also reflects fragmented usage spanning 14 different billing regions and 20 distinct email domains. The combination of a low-dollar transaction, rapid transaction velocity, and extensive multi-account device consolidation strongly indicates coordinated card-testing fraud. The institution has applied enhanced monitoring to the card account and is filing this narrative to assist law enforcement in identifying broader organized fraud network activities.",
+    "subjects": [
+      "C07671",
+      "C07671-K2"
+    ],
+    "total_amount_usd": 35.66,
+    "activity_dates": [
+      "2016-12-09 02:39:29",
+      "2016-12-09 02:39:29"
+    ]
+  },
+  "stop_reason": "Investigation completed normally",
+  "tool_calls": 20,
+  "tokens": 0,
+  "latency_s": 61.0
+}

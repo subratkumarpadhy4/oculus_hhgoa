@@ -1,0 +1,271 @@
+{
+  "case_id": "HHG-007",
+  "case": {
+    "status": "closed_fraud",
+    "verdict": "fraud",
+    "fraud_probability": 0.5,
+    "pattern": "card_testing",
+    "pattern_description": "",
+    "affected_txn_ids": [
+      "3514948"
+    ],
+    "first_suspicious_txn_id": "3514948",
+    "connected_card_ids": [
+      "C09933-K2"
+    ],
+    "connected_device_profiles": [],
+    "exposure_usd": 111.92,
+    "evidence": [
+      {
+        "claim": "The risk score for transaction 3514948 is 0.87.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C09933",
+          "C09933-K2"
+        ]
+      },
+      {
+        "claim": "Transaction 3514948 was flagged due to a high risk score.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C09933",
+          "C09933-K2"
+        ]
+      },
+      {
+        "claim": "The card used for transaction 3514948 is C09933-K2.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C09933",
+          "C09933-K2"
+        ]
+      },
+      {
+        "claim": "The customer ID associated with card C09933-K2 is C09933.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C09933",
+          "C09933-K2"
+        ]
+      },
+      {
+        "claim": "The transaction amount for 3514948 is $111.92.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C09933",
+          "C09933-K2"
+        ]
+      },
+      {
+        "claim": "The transaction was made in billing region 264.0.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C09933",
+          "C09933-K2"
+        ]
+      },
+      {
+        "claim": "The transaction was made in-person.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C09933",
+          "C09933-K2"
+        ]
+      },
+      {
+        "claim": "There are 2792 total transactions on card C09933-K2 in the graph.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C09933",
+          "C09933-K2"
+        ]
+      },
+      {
+        "claim": "There are 3 transactions on card C09933-K2 within 1 hour of the seed transaction.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C09933",
+          "C09933-K2"
+        ]
+      },
+      {
+        "claim": "There are 31 transactions within 24 hours of the seed transaction.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C09933",
+          "C09933-K2"
+        ]
+      },
+      {
+        "claim": "The card average for card C09933-K2 is $123.85 across 2792 transactions.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C09933",
+          "C09933-K2"
+        ]
+      },
+      {
+        "claim": "The ratio of the seed amount to the card average is 0.9x.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C09933",
+          "C09933-K2"
+        ]
+      },
+      {
+        "claim": "No device was used for transaction 3514948 (no FROM_DEVICE edge).",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C09933",
+          "C09933-K2"
+        ]
+      },
+      {
+        "claim": "The customer has 1 card.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C09933",
+          "C09933-K2"
+        ]
+      },
+      {
+        "claim": "The customer's card count is 1.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C09933",
+          "C09933-K2"
+        ]
+      }
+    ],
+    "similar_prior_cases": [
+      "CC-2565",
+      "CC-1524",
+      "CC-0104",
+      "CC-2834",
+      "CC-1228"
+    ],
+    "summary": "The risk score for transaction 3514948 is 0.87. Transaction 3514948 was flagged due to a high risk score. The card used for transaction 3514948 is C09933-K2. The customer ID associated with card C09933-K2 is C09933.",
+    "written_to_graph": true,
+    "graph_case_id": "HHG-007"
+  },
+  "evidence_requests": [
+    {
+      "type": "request_transaction_history_extension",
+      "asked_after_step": 1,
+      "assumed_response": "extended_history_available",
+      "requested_from_missing": "More information about the customer's behavior and transaction history would be helpful to determine the likelihood of fraud.",
+      "extra_transactions": [
+        {
+          "txn_id": "EXT_72895_1",
+          "amount": 243.95,
+          "channel": "online",
+          "risk_score": 0.95
+        },
+        {
+          "txn_id": "EXT_72895_2",
+          "amount": 244.32,
+          "channel": "in-person",
+          "risk_score": 0.14
+        },
+        {
+          "txn_id": "EXT_72895_3",
+          "amount": 244.69,
+          "channel": "online",
+          "risk_score": 0.33
+        }
+      ]
+    },
+    {
+      "type": "request_transaction_history_extension",
+      "asked_after_step": 2,
+      "assumed_response": "extended_history_available",
+      "requested_from_missing": "More information about the customer's behavior and transaction history",
+      "extra_transactions": [
+        {
+          "txn_id": "EXT_72895_1",
+          "amount": 243.95,
+          "channel": "online",
+          "risk_score": 0.95
+        },
+        {
+          "txn_id": "EXT_72895_2",
+          "amount": 244.32,
+          "channel": "in-person",
+          "risk_score": 0.14
+        },
+        {
+          "txn_id": "EXT_72895_3",
+          "amount": 244.69,
+          "channel": "online",
+          "risk_score": 0.33
+        }
+      ]
+    },
+    {
+      "type": "request_device_fingerprint",
+      "asked_after_step": 2,
+      "assumed_response": "inconclusive",
+      "requested_from_missing": "More information about the device associated with the transaction"
+    }
+  ],
+  "next_best_actions": {
+    "initial": [
+      {
+        "action": "MONITOR_CARD",
+        "route": "auto",
+        "reason": "R4: Insufficient evidence to support blocking, but monitoring is warranted due to the moderate behavioral evidence and velocity burst pattern."
+      },
+      {
+        "action": "STEP_UP_AUTH",
+        "route": "auto",
+        "reason": "R1: The risk score is 0.87, which is below the 0.70 threshold, but the evidence is insufficient to support blocking. Therefore, step-up authentication is recommended to further verify the customer's identity."
+      }
+    ],
+    "final": [
+      {
+        "action": "MONITOR_CARD",
+        "route": "auto",
+        "reason": "R4: No reply within 24 hours, and the evidence suggests a moderate level of uncertainty (behavioral_evidence: moderate, graph_evidence: moderate)."
+      },
+      {
+        "action": "STEP_UP_AUTH",
+        "route": "auto",
+        "reason": "R1: The evidence rests on a single signal (risk_score 0.87) and probability < 0.70, so we should use STEP_UP_AUTH before any block."
+      }
+    ],
+    "what_changed": "No change — initial and final recommendations are identical."
+  },
+  "sar": {
+    "file": false,
+    "reason": "",
+    "narrative": "",
+    "subjects": [
+      "C09933",
+      "C09933-K2"
+    ],
+    "total_amount_usd": 111.92,
+    "activity_dates": [
+      "2016-12-05 00:46:14",
+      "2016-12-05 00:46:14"
+    ]
+  },
+  "stop_reason": "Investigation completed normally",
+  "tool_calls": 20,
+  "tokens": 0,
+  "latency_s": 71.0
+}

