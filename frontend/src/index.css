@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    border-color: #E2E8F0;
+  }
+  body {
+    background-color: #F8FAFC;
+    color: #0F172A;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+}
+
+/* Custom crisp scrollbars for enterprise dense views */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94A3B8;
+}
+
+/* Graph ring pulse */
+@keyframes ringPulse {
+  0% {
+    r: 110;
+    opacity: 0.35;
+  }
+  50% {
+    r: 122;
+    opacity: 0.15;
+  }
+  100% {
+    r: 110;
+    opacity: 0.35;
+  }
+}
+
+.animate-ring-pulse {
+  animation: ringPulse 3.5s ease-in-out infinite;
+}
+
+/* Glassmorphism light */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  border: 1px solid #E2E8F0;
+}
