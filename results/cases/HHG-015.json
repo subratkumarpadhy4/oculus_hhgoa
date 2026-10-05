@@ -1,0 +1,40 @@
+{
+  "case_id": "HHG-015",
+  "trigger_type": "risk_score",
+  "final_status": "open",
+  "sufficiency": "sufficient",
+  "evidence_rounds": 2,
+  "llm_findings": {
+    "findings": [
+      "LLM unavailable — fallback used"
+    ],
+    "fraud_type_hypothesis": "unknown",
+    "uncertainty_dimensions": {
+      "graph_evidence": "none",
+      "prior_case_match": "none",
+      "behavioral_evidence": "none",
+      "contradictory_evidence": "none"
+    },
+    "missing_evidence": [
+      "LLM unavailable"
+    ],
+    "contradictions": [],
+    "confidence": 0.0
+  },
+  "recommended_actions": [
+    {
+      "action": "ESCALATE_TO_ANALYST",
+      "route": "auto",
+      "reason": "LLM unavailable or invalid output: Error code: 429 - {'error': {'message': 'Rate limit reached for model `qwen/qwen3.8-27b` in organization `org_01keve3cd8ezpvfwnmavae5dew` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 197753, Requested 4250. Please try again in 14m25.295999999s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    }
+  ],
+  "approval_route": "auto",
+  "evidence_requests": [
+    {
+      "type": "customer_validation",
+      "asked_after_step": 1,
+      "assumed_response": "Mock: customer did not make this purchase."
+    }
+  ],
+  "elapsed_seconds": 12.78
+}

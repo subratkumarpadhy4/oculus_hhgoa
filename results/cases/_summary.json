@@ -1,0 +1,1059 @@
+[
+  {
+    "case_id": "HHG-001",
+    "trigger_type": "risk_score",
+    "final_status": "open",
+    "sufficiency": "sufficient",
+    "evidence_rounds": 2,
+    "llm_findings": {
+      "findings": [
+        "Transaction 3514030 for $77.07 was flagged with a risk score of 0.61.",
+        "The transaction occurred in billing region 444.0, which is the same as the customer's billing region.",
+        "The transaction channel is 'in_person'.",
+        "The transaction amount ($77.07) is 0.7x the card's average transaction amount ($115.60).",
+        "There is no device associated with this transaction, consistent with an in-person channel.",
+        "The customer C12382 has a history of 4 prior confirmed fraud cases on the same card (C12382-K1).",
+        "Three of the four prior cases were identified as 'out_of_region_use' and one as 'card_not_present_new_device'.",
+        "The customer has a total of 422 transactions on this card in the graph.",
+        "The customer has been associated with 40 different billing regions in the past."
+      ],
+      "fraud_type_hypothesis": "out_of_region_use",
+      "uncertainty_dimensions": {
+        "graph_evidence": "weak",
+        "prior_case_match": "strong",
+        "behavioral_evidence": "weak",
+        "contradictory_evidence": "minor"
+      },
+      "missing_evidence": [
+        "Confirmation of whether region 444.0 is a typical region for this customer or an outlier.",
+        "Details on the specific merchant or location for transaction 3514030 to verify legitimacy.",
+        "Customer contact information to verify if the transaction was authorized."
+      ],
+      "contradictions": [
+        "The transaction is in the billing region (444.0), which contradicts the 'out_of_region_use' hypothesis, although the customer has a history of fraud in other regions."
+      ],
+      "confidence": 0.4
+    },
+    "recommended_actions": [
+      {
+        "action": "VERIFY_WITH_CUSTOMER",
+        "route": "auto",
+        "reason": "R1: The risk score is 0.61 (< 0.70) and the evidence is mixed (transaction is in the billing region, contradicting the 'out_of_region_use' hypothesis, despite a history of fraud). Verification is required before any block."
+      }
+    ],
+    "approval_route": "auto",
+    "evidence_requests": [
+      {
+        "type": "customer_validation",
+        "asked_after_step": 1,
+        "assumed_response": "Mock: customer did not make this purchase."
+      }
+    ],
+    "elapsed_seconds": 71.06
+  },
+  {
+    "case_id": "HHG-002",
+    "trigger_type": "risk_score",
+    "final_status": "open",
+    "sufficiency": "sufficient",
+    "evidence_rounds": 2,
+    "llm_findings": {
+      "findings": [
+        "Transaction 3478782 for $292.36 was flagged with a risk score of 0.79.",
+        "The transaction occurred on 2016-11-22 at 17:27:07 via the online channel.",
+        "The transaction amount is 6.2x the card's average transaction amount of $47.46.",
+        "The customer has a prior confirmed fraud case (CC-4160) on the same card (C11891-K1) involving card_not_present_fraud.",
+        "The customer has 17 associated devices and 3 email domains in the graph.",
+        "No velocity burst was detected, with only 1 transaction on the card within 1 hour of the flagged transaction."
+      ],
+      "fraud_type_hypothesis": "card_not_present_fraud",
+      "uncertainty_dimensions": {
+        "graph_evidence": "moderate",
+        "prior_case_match": "strong",
+        "behavioral_evidence": "moderate",
+        "contradictory_evidence": "none"
+      },
+      "missing_evidence": [
+        "Device fingerprint for the current transaction to determine if it is a new or known device.",
+        "Geolocation or IP address data to verify if the transaction originated from an expected region.",
+        "Customer confirmation or denial of the transaction."
+      ],
+      "contradictions": [],
+      "confidence": 0.85
+    },
+    "recommended_actions": [
+      {
+        "action": "VERIFY_WITH_CUSTOMER",
+        "route": "auto",
+        "reason": "R1: Evidence rests on a single signal (risk score 0.79) and probability is < 0.70 (0.79 is not strictly < 0.70, but the evidence is not conclusive enough to block without verification given the missing device/IP data and the need to confirm the transaction). The customer has a prior fraud case, but the current transaction lacks device fingerprint and geolocation data to confirm fraud. Verification is required before any block."
+      },
+      {
+        "action": "STEP_UP_AUTH",
+        "route": "auto",
+        "reason": "R1: Given the risk score of 0.79 and the prior fraud history on the same card, step-up authentication is appropriate to verify the customer's identity before allowing the transaction to proceed."
+      }
+    ],
+    "approval_route": "auto",
+    "evidence_requests": [
+      {
+        "type": "customer_validation",
+        "asked_after_step": 1,
+        "assumed_response": "Mock: customer did not make this purchase."
+      }
+    ],
+    "elapsed_seconds": 71.21
+  },
+  {
+    "case_id": "HHG-003",
+    "trigger_type": "customer_report",
+    "final_status": "open",
+    "sufficiency": "sufficient",
+    "evidence_rounds": 2,
+    "llm_findings": {
+      "findings": [
+        "The flagged transaction 3530164 for $49.00 was processed via the 'in_person' channel on 2016-12-10 at 13:01:21.",
+        "The transaction is associated with card C08623-K2, a Mastercard credit card belonging to customer C08623.",
+        "The transaction has a risk score of 0.4, while the case-level risk score is 0.0.",
+        "The transaction occurred in billing region 330.0 (country code 87.0).",
+        "The customer has a history of 5 prior cases on the same card, of which 4 were confirmed fraud and 1 was cleared.",
+        "Three of the prior confirmed fraud cases (CC-2935, CC-2817, CC-4957) were identified as 'out_of_region_use' involving card-present activity.",
+        "One prior confirmed fraud case (CC-3327) was identified as 'account_takeover' involving mixed-channel activity.",
+        "The transaction amount of $49.00 is 0.4x the card's average transaction amount of $129.36.",
+        "There were 2 other transactions on this card within 1 hour of the flagged transaction and 13 within 24 hours.",
+        "No device information is associated with the flagged transaction, consistent with the 'in_person' channel."
+      ],
+      "fraud_type_hypothesis": "out_of_region_use",
+      "uncertainty_dimensions": {
+        "graph_evidence": "moderate",
+        "prior_case_match": "strong",
+        "behavioral_evidence": "weak",
+        "contradictory_evidence": "none"
+      },
+      "missing_evidence": [
+        "Confirmation of the customer's physical location or travel history for the date of the transaction (2016-12-10) to verify if region 330.0 is consistent with their normal activity.",
+        "Merchant details for transaction 3530164 to assess the plausibility of the purchase."
+      ],
+      "contradictions": [],
+      "confidence": 0.75
+    },
+    "recommended_actions": [
+      {
+        "action": "VERIFY_WITH_CUSTOMER",
+        "route": "auto",
+        "reason": "R1: The evidence rests on a single signal (customer report) with a transaction risk score of 0.4 (< 0.70). Although prior cases show a strong pattern of out-of-region fraud, the current transaction's location (region 330.0) is not confirmed as out-of-region for the customer's travel history. Verification is required to confirm the denial and location before blocking."
+      },
+      {
+        "action": "MONITOR_CARD",
+        "route": "auto",
+        "reason": "R1: Given the high frequency of prior fraud (4 out of 5 cases) and the current uncertainty, monitoring the card is prudent while verification is pending to detect any further unauthorized activity."
+      }
+    ],
+    "approval_route": "auto",
+    "evidence_requests": [
+      {
+        "type": "customer_validation",
+        "asked_after_step": 1,
+        "assumed_response": "Mock: customer did not make this purchase."
+      }
+    ],
+    "elapsed_seconds": 90.4
+  },
+  {
+    "case_id": "HHG-004",
+    "trigger_type": "customer_report",
+    "final_status": "open",
+    "sufficiency": "sufficient",
+    "evidence_rounds": 2,
+    "llm_findings": {
+      "findings": [
+        "Customer C08106 reported transaction 3583227 for $128.33 as unauthorized.",
+        "Transaction 3583227 occurred on 2016-12-29 at 01:53:54 via the online channel.",
+        "The transaction was made using card C08106-K1, which is a Visa debit card.",
+        "The device used for the transaction (1c36726b014028048b4ceb6f8a58405c) is flagged as new to the account.",
+        "The device profile indicates a desktop environment running Firefox 47.0.",
+        "The transaction amount of $128.33 is 3.6x the card's average transaction amount of $35.52.",
+        "Customer C08106 has a history of 3 prior confirmed card_not_present_fraud cases on the same card (CC-3778, CC-1736, CC-2121).",
+        "The device used in the flagged transaction is not shared with any other customers.",
+        "There were 6 transactions on the card within 24 hours of the flagged transaction."
+      ],
+      "fraud_type_hypothesis": "card_not_present_fraud",
+      "uncertainty_dimensions": {
+        "graph_evidence": "moderate",
+        "prior_case_match": "strong",
+        "behavioral_evidence": "moderate",
+        "contradictory_evidence": "none"
+      },
+      "missing_evidence": [
+        "Verification of whether the customer was physically present in the region associated with the transaction at the time of purchase.",
+        "Detailed merchant information for transaction 3583227 to assess legitimacy.",
+        "Confirmation of whether the card details were compromised in a previous breach or data leak."
+      ],
+      "contradictions": [],
+      "confidence": 0.85
+    },
+    "recommended_actions": [
+      {
+        "action": "VERIFY_WITH_CUSTOMER",
+        "route": "auto",
+        "reason": "R1: The evidence rests on a single signal (customer report) and the risk score is 0.0 (< 0.70). Verification is required before any block."
+      },
+      {
+        "action": "MONITOR_CARD",
+        "route": "auto",
+        "reason": "R4: While awaiting customer verification, the card should be monitored to detect further unauthorized activity."
+      }
+    ],
+    "approval_route": "auto",
+    "evidence_requests": [
+      {
+        "type": "customer_validation",
+        "asked_after_step": 1,
+        "assumed_response": "Mock: customer did not make this purchase."
+      }
+    ],
+    "elapsed_seconds": 91.91
+  },
+  {
+    "case_id": "HHG-005",
+    "trigger_type": "risk_score",
+    "final_status": "open",
+    "sufficiency": "sufficient",
+    "evidence_rounds": 2,
+    "llm_findings": {
+      "findings": [
+        "Transaction 3523199 for $100.07 was flagged with a risk score of 0.54.",
+        "The transaction occurred on a new device (5b64ce5e4c424f98907282c26174c131) for the account.",
+        "The device used for the transaction is shared across 4 distinct customers.",
+        "The device is an iOS Device running iOS 9.3.5 with mobile safari 9.0.",
+        "The transaction used the email domain icloud.com, while the registered email domain is gmail.com.",
+        "Customer C02923 has 3 prior confirmed fraud cases (CC-2717, CC-2400, CC-2857) all identified as account_takeover.",
+        "The transaction amount of $100.07 is 0.6x the card's average transaction amount of $176.02.",
+        "There is no velocity burst associated with this transaction (1 transaction in 1 hour, 1 in 24 hours)."
+      ],
+      "fraud_type_hypothesis": "account_takeover",
+      "uncertainty_dimensions": {
+        "graph_evidence": "strong",
+        "prior_case_match": "strong",
+        "behavioral_evidence": "moderate",
+        "contradictory_evidence": "none"
+      },
+      "missing_evidence": [
+        "Verification of whether the customer has recently changed their email address or device preferences.",
+        "IP address geolocation to confirm if the transaction originated from a region consistent with the customer's history."
+      ],
+      "contradictions": [],
+      "confidence": 0.85
+    },
+    "recommended_actions": [
+      {
+        "action": "VERIFY_WITH_CUSTOMER",
+        "route": "auto",
+        "reason": "R1: Risk score is 0.54 (< 0.70) and evidence, while strong, relies on a single flagged transaction. Verification is required before any block or decline to confirm if the customer recognizes the activity on the new device."
+      },
+      {
+        "action": "STEP_UP_AUTH",
+        "route": "auto",
+        "reason": "R1: The transaction is pending and the risk score is below the 0.70 threshold for immediate blocking. Step-up authentication is the appropriate control to verify identity given the new device and email domain mismatch."
+      }
+    ],
+    "approval_route": "auto",
+    "evidence_requests": [
+      {
+        "type": "customer_validation",
+        "asked_after_step": 1,
+        "assumed_response": "Mock: customer did not make this purchase."
+      }
+    ],
+    "elapsed_seconds": 91.83
+  },
+  {
+    "case_id": "HHG-006",
+    "trigger_type": "customer_report",
+    "final_status": "open",
+    "sufficiency": "sufficient",
+    "evidence_rounds": 2,
+    "llm_findings": {
+      "findings": [
+        "Customer C07297 reported that they did not make the $482.12 purchase associated with transaction 3476682.",
+        "Transaction 3476682 occurred on 2016-11-21 at 20:30:00 via the online channel.",
+        "The transaction was made using card C07297-K1, which is a debit Mastercard.",
+        "The device used for the transaction (ID: 7059dc480f519e47f9b20fe954044aac) is marked as new for the account.",
+        "The device used for the transaction is shared across 4 distinct customers and has been used for 14 transactions involving 4 distinct cards.",
+        "The transaction amount of $482.12 is 4.3 times the card's average transaction amount of $112.56.",
+        "There were 4 transactions on card C07297-K1 within 1 hour of the flagged transaction and 6 within 24 hours.",
+        "The customer has 261 total transactions on record for this card.",
+        "The transaction risk score is 0.25, while the case-level risk score is 0.0.",
+        "No prior similar cases were found for customer C07297."
+      ],
+      "fraud_type_hypothesis": "card_not_present_new_device",
+      "uncertainty_dimensions": {
+        "graph_evidence": "strong",
+        "prior_case_match": "none",
+        "behavioral_evidence": "moderate",
+        "contradictory_evidence": "none"
+      },
+      "missing_evidence": [
+        "Verification of whether the customer authorized the use of the new device.",
+        "Detailed IP address or geolocation data for the transaction to confirm physical location.",
+        "Confirmation of whether the other 3 customers sharing the device are known associates or unrelated parties."
+      ],
+      "contradictions": [],
+      "confidence": 0.85
+    },
+    "recommended_actions": [
+      {
+        "action": "BLOCK_CARD",
+        "route": "auto",
+        "reason": "R2: Customer denied the transaction. Evidence includes a new device shared across 4 customers (SharedDeviceRing) and a 4.3x amount anomaly, supporting fraud."
+      },
+      {
+        "action": "CREATE_CASE",
+        "route": "auto",
+        "reason": "R2: Customer denied the transaction, requiring a formal case to be created for investigation."
+      },
+      {
+        "action": "FILE_REPORT",
+        "route": "L1",
+        "reason": "R2: Exposure is $482.12 (which is < $1,000), but the device is shared across 4 distinct customers, triggering the 'shared device' condition for filing a report."
+      }
+    ],
+    "approval_route": "auto",
+    "evidence_requests": [
+      {
+        "type": "customer_validation",
+        "asked_after_step": 1,
+        "assumed_response": "Mock: customer did not make this purchase."
+      }
+    ],
+    "elapsed_seconds": 71.33
+  },
+  {
+    "case_id": "HHG-007",
+    "trigger_type": "risk_score",
+    "final_status": "open",
+    "sufficiency": "sufficient",
+    "evidence_rounds": 2,
+    "llm_findings": {
+      "findings": [
+        "Transaction 3514948 for $111.92 was flagged with a risk score of 0.87.",
+        "The transaction occurred on 2016-12-05 at 00:46:14 via the 'in_person' channel.",
+        "The transaction took place in billing region 264.0 (country code 87.0).",
+        "The transaction is associated with card C09933-K2, a Visa debit card belonging to customer C09933.",
+        "The card has a history of 2,792 total transactions in the graph.",
+        "The transaction amount ($111.92) is 0.9x the card's average transaction amount ($123.85), indicating no significant amount anomaly.",
+        "A 'VelocityBurst' pattern was detected with moderate strength, noting 3 transactions within 1 hour and 31 within 24 hours of the seed transaction.",
+        "No device information is available for this transaction as it is an in-person transaction.",
+        "Customer C09933 has 5 prior confirmed fraud cases on the same card (C09933-K2).",
+        "Prior cases include patterns of 'out_of_region_use' (CC-2565, CC-0104) and 'account_takeover' (CC-1524, CC-1228, CC-2834).",
+        "The most recent prior case (CC-2834) was opened on 2016-08-31, approximately 3.5 months before the current flagged transaction."
+      ],
+      "fraud_type_hypothesis": "out_of_region_use",
+      "uncertainty_dimensions": {
+        "graph_evidence": "moderate",
+        "prior_case_match": "strong",
+        "behavioral_evidence": "weak",
+        "contradictory_evidence": "none"
+      },
+      "missing_evidence": [
+        "Confirmation of whether region 264.0 is a typical or atypical region for this customer's recent activity.",
+        "Details on the specific merchants or locations associated with the 31 transactions in the 24-hour velocity burst.",
+        "Customer contact information to verify if the transaction was authorized."
+      ],
+      "contradictions": [],
+      "confidence": 0.65
+    },
+    "recommended_actions": [
+      {
+        "action": "VERIFY_WITH_CUSTOMER",
+        "route": "auto",
+        "reason": "R1: Evidence rests on a single signal (risk score 0.87) and the LLM confidence is 0.65 (< 0.70). Verification is required before any block."
+      },
+      {
+        "action": "STEP_UP_AUTH",
+        "route": "auto",
+        "reason": "R1: Given the high risk score and moderate VelocityBurst pattern, step-up authentication is appropriate to confirm the transaction's legitimacy."
+      }
+    ],
+    "approval_route": "auto",
+    "evidence_requests": [
+      {
+        "type": "customer_validation",
+        "asked_after_step": 1,
+        "assumed_response": "Mock: customer did not make this purchase."
+      }
+    ],
+    "elapsed_seconds": 97.59
+  },
+  {
+    "case_id": "HHG-008",
+    "trigger_type": "customer_report",
+    "final_status": "open",
+    "sufficiency": "sufficient",
+    "evidence_rounds": 2,
+    "llm_findings": {
+      "findings": [
+        "Customer C13171 reported transaction 3558054 for $55.68 as unauthorized.",
+        "Transaction 3558054 occurred on 2016-12-19 at 22:08:56 via the online channel.",
+        "The transaction was made using card C13171-K2, a Visa credit card.",
+        "The device used for the transaction (f89aeb1d49ce10354e15a013984757e9) is marked as new for the account.",
+        "The device f89aeb1d49ce10354e15a013984757e9 is shared across 4 distinct customers and has been used for 104 transactions.",
+        "The transaction amount of $55.68 is consistent with the card's average transaction amount of $54.27.",
+        "There were 3 transactions on card C13171-K2 within 1 hour of the flagged transaction.",
+        "Customer C13171 has a history of 4 confirmed fraud cases on the same card (C13171-K2) between August and September 2016.",
+        "The prior fraud cases (CC-1715, CC-2716, CC-3422, CC-3566) involved online purchases from new or inconsistent devices.",
+        "The transaction risk score is 0.38, while the case-level risk score is 0.0."
+      ],
+      "fraud_type_hypothesis": "card_not_present_new_device",
+      "uncertainty_dimensions": {
+        "graph_evidence": "strong",
+        "prior_case_match": "strong",
+        "behavioral_evidence": "moderate",
+        "contradictory_evidence": "none"
+      },
+      "missing_evidence": [
+        "Verification of whether the customer has recently changed their device or email address legitimately.",
+        "Detailed merchant information for transaction 3558054 to assess legitimacy.",
+        "Confirmation if the shared device f89aeb1d49ce10354e15a013984757e9 is associated with known fraud rings."
+      ],
+      "contradictions": [],
+      "confidence": 0.85
+    },
+    "recommended_actions": [
+      {
+        "action": "VERIFY_WITH_CUSTOMER",
+        "route": "auto",
+        "reason": "R1: The evidence rests on a single signal (customer report) with a transaction risk score of 0.38 (< 0.70). Verification is required before any block to confirm the unauthorized nature of the transaction."
+      },
+      {
+        "action": "MONITOR_CARD",
+        "route": "auto",
+        "reason": "R4: While awaiting customer verification, the card should be monitored to detect further unauthorized activity, especially given the history of 4 prior fraud cases on this card."
+      }
+    ],
+    "approval_route": "auto",
+    "evidence_requests": [
+      {
+        "type": "customer_validation",
+        "asked_after_step": 1,
+        "assumed_response": "Mock: customer did not make this purchase."
+      }
+    ],
+    "elapsed_seconds": 99.46
+  },
+  {
+    "case_id": "HHG-009",
+    "trigger_type": "customer_report",
+    "final_status": "open",
+    "sufficiency": "sufficient",
+    "evidence_rounds": 2,
+    "llm_findings": {
+      "findings": [
+        "Customer C08299 reported that they did not make transaction 3581141 for $30.02.",
+        "Transaction 3581141 occurred on 2016-12-28 at 12:10:53 via the online channel.",
+        "The transaction was made using card C08299-K1, which is a Visa credit card.",
+        "The device used for the transaction (2edf2958166561c5c08cd228e53bbcdc) is not new to the account.",
+        "The device 2edf2958166561c5c08cd228e53bbcdc is shared across 12 distinct customers.",
+        "There are 214 transactions associated with device 2edf2958166561c5c08cd228e53bbcdc.",
+        "There are 12 distinct cards associated with device 2edf2958166561c5c08cd228e53bbcdc.",
+        "The transaction amount of $30.02 is 0.5x the card's average transaction amount of $61.17.",
+        "There is no velocity burst detected for this card around the time of the transaction.",
+        "No prior similar cases were found for customer C08299."
+      ],
+      "fraud_type_hypothesis": "card_not_present_fraud",
+      "uncertainty_dimensions": {
+        "graph_evidence": "strong",
+        "prior_case_match": "none",
+        "behavioral_evidence": "moderate",
+        "contradictory_evidence": "none"
+      },
+      "missing_evidence": [
+        "Verification of whether the customer authorized the use of the shared device for this specific transaction.",
+        "Detailed logs of the device usage to determine if the customer was physically present or if the device was compromised."
+      ],
+      "contradictions": [],
+      "confidence": 0.75
+    },
+    "recommended_actions": [
+      {
+        "action": "VERIFY_WITH_CUSTOMER",
+        "route": "auto",
+        "reason": "R1: Evidence rests on a single signal (customer report) with a risk score of 0.0 and confidence of 0.75. Verification is required before any block to confirm the denial."
+      },
+      {
+        "action": "CREATE_CASE",
+        "route": "auto",
+        "reason": "R6: Shared origin across cards (Device 2edf2958166561c5c08cd228e53bbcdc shared across 12 customers) requires naming the pattern and creating a case."
+      },
+      {
+        "action": "FILE_REPORT",
+        "route": "L1",
+        "reason": "R6: Shared origin across cards requires filing a report to document the SharedDeviceRing pattern."
+      },
+      {
+        "action": "MONITOR_CONNECTED_CARDS",
+        "route": "auto",
+        "reason": "R6: Shared origin across cards requires monitoring connected cards to detect further fraudulent activity."
+      }
+    ],
+    "approval_route": "auto",
+    "evidence_requests": [
+      {
+        "type": "customer_validation",
+        "asked_after_step": 1,
+        "assumed_response": "Mock: customer did not make this purchase."
+      }
+    ],
+    "elapsed_seconds": 50.96
+  },
+  {
+    "case_id": "HHG-010",
+    "trigger_type": "risk_score",
+    "final_status": "open",
+    "sufficiency": "sufficient",
+    "evidence_rounds": 2,
+    "llm_findings": {
+      "findings": [
+        "Transaction 3506725 for $1,000.03 was flagged with a risk score of 0.90.",
+        "The transaction occurred on an online channel on 2016-12-02 at 15:18:27.",
+        "The device used (9fd230e98695a579c23368a7cf6e4e8c) is marked as new for the account.",
+        "The device is a Windows 10 desktop running Edge 16.0.",
+        "The device is shared across 3 distinct customers and 3 distinct cards.",
+        "The transaction amount is 6.5x the card's average transaction amount of $153.87.",
+        "The email domain used is 'anonymous.com', which is one of 9 domains associated with the customer.",
+        "The customer has 13 devices and 6 billing regions associated with their profile.",
+        "A prior case (CC-0873) for the same customer and card was cleared after the cardholder confirmed travel."
+      ],
+      "fraud_type_hypothesis": "card_not_present_new_device",
+      "uncertainty_dimensions": {
+        "graph_evidence": "moderate",
+        "prior_case_match": "weak",
+        "behavioral_evidence": "moderate",
+        "contradictory_evidence": "minor"
+      },
+      "missing_evidence": [
+        "Confirmation from the customer regarding the transaction and the new device.",
+        "Details on the other 2 customers sharing the device to assess if it is a shared household or business device.",
+        "Verification of the 'anonymous.com' email domain legitimacy or if it is a disposable email service."
+      ],
+      "contradictions": [
+        "The prior case CC-0873 was cleared due to confirmed travel, suggesting the customer may have a history of legitimate high-risk score transactions, which contradicts the high risk score of the current transaction."
+      ],
+      "confidence": 0.65
+    },
+    "recommended_actions": [
+      {
+        "action": "VERIFY_WITH_CUSTOMER",
+        "route": "auto",
+        "reason": "R1: Evidence rests on a single signal (risk score 0.90) and the LLM confidence is 0.65 (< 0.70). The transaction involves a new device and a 6.5x amount anomaly, but prior case CC-0873 was cleared for travel, creating uncertainty. Verification is required before any block."
+      },
+      {
+        "action": "STEP_UP_AUTH",
+        "route": "auto",
+        "reason": "R1: Given the high risk score (0.90) and the use of a new device with a shared origin (3 customers), step-up authentication is appropriate to confirm the cardholder's identity before allowing the transaction to proceed."
+      }
+    ],
+    "approval_route": "auto",
+    "evidence_requests": [
+      {
+        "type": "customer_validation",
+        "asked_after_step": 1,
+        "assumed_response": "Mock: customer did not make this purchase."
+      }
+    ],
+    "elapsed_seconds": 77.42
+  },
+  {
+    "case_id": "HHG-011",
+    "trigger_type": "customer_report",
+    "final_status": "open",
+    "sufficiency": "sufficient",
+    "evidence_rounds": 2,
+    "llm_findings": {
+      "findings": [
+        "Customer C11923 reported a $131.30 purchase (Txn 3583368) as unauthorized.",
+        "The flagged transaction occurred on 2016-12-29 at 03:27:44 via the online channel.",
+        "The transaction was made using a device (a6e029ef1f642c6704be62f72216d8c7) that is new to the account.",
+        "The device used is a mobile device (SM-G610F) running Chrome 66.0 for Android.",
+        "The transaction amount of $131.30 is 3.3x the card's average transaction amount of $39.45.",
+        "There were 6 transactions on card C11923-K2 within 1 hour of the flagged transaction.",
+        "There were 52 transactions on card C11923-K2 within 24 hours of the flagged transaction.",
+        "The customer has a history of 5 prior confirmed fraud cases on the same card (C11923-K2).",
+        "Prior fraud cases for this customer include patterns of 'card_not_present_new_device' and 'card_testing'.",
+        "The device used in the flagged transaction is not shared with other customers (SharedDeviceRing strength: none)."
+      ],
+      "fraud_type_hypothesis": "card_not_present_new_device",
+      "uncertainty_dimensions": {
+        "graph_evidence": "strong",
+        "prior_case_match": "strong",
+        "behavioral_evidence": "moderate",
+        "contradictory_evidence": "none"
+      },
+      "missing_evidence": [
+        "Verification of whether the customer has recently changed their device or location.",
+        "Detailed merchant information for the flagged transaction to assess legitimacy.",
+        "Confirmation if the card was physically present with the customer at the time of the transaction."
+      ],
+      "contradictions": [],
+      "confidence": 0.95
+    },
+    "recommended_actions": [
+      {
+        "action": "BLOCK_CARD",
+        "route": "auto",
+        "reason": "R2: Customer denied the transaction. Evidence includes a new device (a6e029ef1f642c6704be62f72216d8c7), online channel, and 5 prior confirmed fraud cases on the same card with matching patterns (card_not_present_new_device, card_testing)."
+      },
+      {
+        "action": "CREATE_CASE",
+        "route": "auto",
+        "reason": "R2: Customer denied the transaction, requiring a formal case to be created for investigation and record-keeping."
+      },
+      {
+        "action": "FILE_REPORT",
+        "route": "L1",
+        "reason": "R2: Exposure is $131.30 which is less than $1,000, but the customer has a history of 5 prior confirmed fraud cases on this card, indicating a persistent threat that warrants a formal report to the fraud department."
+      }
+    ],
+    "approval_route": "auto",
+    "evidence_requests": [
+      {
+        "type": "customer_validation",
+        "asked_after_step": 1,
+        "assumed_response": "Mock: customer did not make this purchase."
+      }
+    ],
+    "elapsed_seconds": 102.68
+  },
+  {
+    "case_id": "HHG-012",
+    "trigger_type": "risk_score",
+    "final_status": "open",
+    "sufficiency": "sufficient",
+    "evidence_rounds": 2,
+    "llm_findings": {
+      "findings": [
+        "Transaction 3553342 for $30.91 was scored at 0.55 by the real-time model.",
+        "The transaction occurred in-person in billing region 494.0.",
+        "The transaction amount is 0.4x the card's average transaction amount of $80.06.",
+        "The card C05876-K2 has a history of 991 total transactions.",
+        "There were 2 other transactions on the card within 1 hour of the flagged transaction.",
+        "There were 7 other transactions on the card within 24 hours of the flagged transaction.",
+        "A prior case (CC-2370) for the same customer and card resulted in confirmed card_not_present_fraud with $149.99 exposure.",
+        "A prior case (CC-0003) for the same customer and card was cleared after the cardholder confirmed travel."
+      ],
+      "fraud_type_hypothesis": "none",
+      "uncertainty_dimensions": {
+        "graph_evidence": "weak",
+        "prior_case_match": "moderate",
+        "behavioral_evidence": "weak",
+        "contradictory_evidence": "none"
+      },
+      "missing_evidence": [
+        "Verification of whether the in-person transaction was authorized by the cardholder.",
+        "Details on the 2 transactions within 1 hour to assess if they form a suspicious burst."
+      ],
+      "contradictions": [],
+      "confidence": 0.65
+    },
+    "recommended_actions": [
+      {
+        "action": "VERIFY_WITH_CUSTOMER",
+        "route": "auto",
+        "reason": "R1: Evidence rests on a single signal (risk score 0.55) which is < 0.70. The transaction is in-person, amount is below average, and there is no strong behavioral anomaly, so verification is required before any block."
+      }
+    ],
+    "approval_route": "auto",
+    "evidence_requests": [
+      {
+        "type": "customer_validation",
+        "asked_after_step": 1,
+        "assumed_response": "Mock: customer did not make this purchase."
+      }
+    ],
+    "elapsed_seconds": 76.04
+  },
+  {
+    "case_id": "HHG-013",
+    "trigger_type": "risk_score",
+    "final_status": "open",
+    "sufficiency": "sufficient",
+    "evidence_rounds": 2,
+    "llm_findings": {
+      "findings": [
+        "Transaction 3526826 for $35.66 was flagged with a risk score of 0.76.",
+        "The transaction occurred on 2016-12-09 at 02:39:29 via the online channel.",
+        "The device used (12ca029d11a097ba8bd925418af0f512) is not new to the account.",
+        "The device is shared across 7 distinct customers and has been used for 286 transactions.",
+        "The device is associated with 7 distinct cards.",
+        "The transaction amount ($35.66) is 0.3x the card's average transaction amount ($112.42).",
+        "There were 2 transactions on card C07671-K2 within 1 hour of the flagged transaction.",
+        "There were 25 transactions on card C07671-K2 within 24 hours of the flagged transaction.",
+        "Customer C07671 has a history of 3 confirmed fraud cases on card C07671-K2, including account takeover and card not present fraud.",
+        "Customer C07671 has a history of 1 cleared case on card C07671-K2."
+      ],
+      "fraud_type_hypothesis": "card_not_present_fraud",
+      "uncertainty_dimensions": {
+        "graph_evidence": "strong",
+        "prior_case_match": "strong",
+        "behavioral_evidence": "moderate",
+        "contradictory_evidence": "minor"
+      },
+      "missing_evidence": [
+        "Verification of whether the customer authorized the specific transaction 3526826.",
+        "Details on the other 24 transactions within the 24-hour window to determine if they form a coordinated attack pattern.",
+        "Information on the other 6 customers sharing the device to assess if it is a known fraud ring or a shared legitimate device (e.g., public computer)."
+      ],
+      "contradictions": [
+        "The device is not new to the account, which contradicts the 'new device' aspect of some prior fraud patterns, but the device is shared across multiple customers, which is a strong fraud indicator."
+      ],
+      "confidence": 0.85
+    },
+    "recommended_actions": [
+      {
+        "action": "ESCALATE_TO_ANALYST",
+        "route": "auto",
+        "reason": "LLM unavailable or invalid output: Error code: 400 - {'error': {'message': \"Failed to generate JSON. Please adjust your prompt. See 'failed_generation' for more details.\", 'type': 'invalid_request_error', 'code': 'json_validate_failed', 'failed_generation': 'max completion tokens reached before generating a valid document'}}"
+      }
+    ],
+    "approval_route": "auto",
+    "evidence_requests": [
+      {
+        "type": "customer_validation",
+        "asked_after_step": 1,
+        "assumed_response": "Mock: customer did not make this purchase."
+      }
+    ],
+    "elapsed_seconds": 169.92
+  },
+  {
+    "case_id": "HHG-014",
+    "trigger_type": "analyst_request",
+    "final_status": "open",
+    "sufficiency": "sufficient",
+    "evidence_rounds": 2,
+    "llm_findings": {
+      "findings": [
+        "Transaction 3478561 on card C13487-K1 was an online purchase of $74.96 on 2016-11-22 16:11:00.",
+        "The device used for transaction 3478561 (ID: c72bd41105eb39dd85c6622e779423fe) is a mobile device (SM-G935F, Android 7.0) that is marked as new for the account.",
+        "The device used for transaction 3478561 is associated with an anonymous IP proxy (IP_PROXY:ANONYMOUS).",
+        "The pattern 'NewDeviceWithProxy' was detected with a strength of 'strong' for this transaction.",
+        "The device c72bd41105eb39dd85c6622e779423fe is shared across only 1 distinct customer (C13487) and 1 distinct card (C13487-K1).",
+        "The transaction amount of $74.96 is 1.3x the card's average transaction amount of $57.43.",
+        "There were 3 transactions within 24 hours of the seed transaction, but no velocity burst pattern was flagged (strength: none).",
+        "The customer C13487 has 1 card and 85 total transactions in the graph.",
+        "No prior similar cases were found for customer C13487."
+      ],
+      "fraud_type_hypothesis": "card_not_present_new_device",
+      "uncertainty_dimensions": {
+        "graph_evidence": "moderate",
+        "prior_case_match": "none",
+        "behavioral_evidence": "weak",
+        "contradictory_evidence": "none"
+      },
+      "missing_evidence": [
+        "Verification of whether the customer authorized the use of the new device.",
+        "Details on the other 2 transactions on the same device to determine if they are also suspicious.",
+        "Geolocation data for the device to confirm if it matches the customer's usual region.",
+        "Information on the other device (04d675c5ded72e48bd76f16b96dd9f4f) associated with the account to compare usage patterns."
+      ],
+      "contradictions": [],
+      "confidence": 0.65
+    },
+    "recommended_actions": [
+      {
+        "action": "VERIFY_WITH_CUSTOMER",
+        "route": "auto",
+        "reason": "R1: Evidence rests on a single strong signal (NewDeviceWithProxy) with a confidence of 0.65 (< 0.70). Verification is required before any blocking action to confirm if the customer authorized the use of the new device and anonymous proxy."
+      },
+      {
+        "action": "MONITOR_CARD",
+        "route": "auto",
+        "reason": "R1: While verification is pending, the card should be monitored for further suspicious activity, especially given the 'strong' NewDeviceWithProxy pattern and the analyst's note about unusual device profiles."
+      }
+    ],
+    "approval_route": "auto",
+    "evidence_requests": [
+      {
+        "type": "customer_validation",
+        "asked_after_step": 1,
+        "assumed_response": "Mock: customer did not make this purchase."
+      }
+    ],
+    "elapsed_seconds": 125.24
+  },
+  {
+    "case_id": "HHG-015",
+    "trigger_type": "risk_score",
+    "final_status": "open",
+    "sufficiency": "sufficient",
+    "evidence_rounds": 2,
+    "llm_findings": {
+      "findings": [
+        "Transaction 3464869 for $599.94 was flagged with a risk score of 0.77.",
+        "The transaction occurred on 2016-11-17 at 14:03:36 via the online channel.",
+        "The device used (8a33751c9961587710cc1a8c164a5b14) is marked as new for the account.",
+        "The device profile indicates a Trident/7.0 model running Windows 8.1 with IE 11.0.",
+        "The transaction amount is 4.1x the card's average transaction amount of $144.57.",
+        "Customer C03042 has a history of two confirmed fraud cases (CC-3886 and CC-0615) involving card_not_present_new_device patterns.",
+        "The email domain 'anonymous.com' is associated with the transaction and appears in the customer's history of 13 email domains.",
+        "The device is not shared with other customers (SharedDeviceRing strength is 'none').",
+        "There is no evidence of a proxy being used in this transaction."
+      ],
+      "fraud_type_hypothesis": "card_not_present_new_device",
+      "uncertainty_dimensions": {
+        "graph_evidence": "moderate",
+        "prior_case_match": "strong",
+        "behavioral_evidence": "moderate",
+        "contradictory_evidence": "none"
+      },
+      "missing_evidence": [
+        "Customer confirmation of the transaction or device usage.",
+        "Detailed IP address or geolocation data to verify if the transaction originated from a typical location for the customer.",
+        "Verification of whether the 'anonymous.com' email domain is a known alias or disposable email service used by the customer."
+      ],
+      "contradictions": [],
+      "confidence": 0.85
+    },
+    "recommended_actions": [
+      {
+        "action": "VERIFY_WITH_CUSTOMER",
+        "route": "auto",
+        "reason": "R1: Evidence rests on a single signal (risk score 0.77) and probability is < 0.70 (0.77 is not strictly < 0.70, but the evidence is not conclusive enough to block without verification given the 'moderate' uncertainty dimensions and missing customer confirmation). The customer has a history of fraud, but also a history of cleared alerts. Verification is required to confirm if the transaction is legitimate before taking further action."
+      },
+      {
+        "action": "MONITOR_CARD",
+        "route": "auto",
+        "reason": "R4: While waiting for customer reply, the card should be monitored. If no reply is received within 24 hours, the policy dictates monitoring and declining pending authorizations. This is a precautionary step given the high risk score and prior fraud history."
+      }
+    ],
+    "approval_route": "auto",
+    "evidence_requests": [
+      {
+        "type": "customer_validation",
+        "asked_after_step": 1,
+        "assumed_response": "Mock: customer did not make this purchase."
+      }
+    ],
+    "elapsed_seconds": 72.08
+  },
+  {
+    "case_id": "HHG-016",
+    "trigger_type": "customer_report",
+    "final_status": "open",
+    "sufficiency": "sufficient",
+    "evidence_rounds": 2,
+    "llm_findings": {
+      "findings": [
+        "Customer C09988 reported that they did not make transaction 3534820 for $59.67.",
+        "Transaction 3534820 occurred on 2016-12-11 at 22:39:08 via the online channel.",
+        "The transaction was made using card C09988-K1, which is a Visa debit card.",
+        "The device used for the transaction (c7dd64850bf1ead84e71e99ed6336102) is flagged as new to the account.",
+        "The device used for the transaction is a Windows desktop running Edge 16.0.",
+        "The device used for the transaction is shared across 4 distinct customers.",
+        "The device used for the transaction has been associated with 78 transactions and 4 distinct cards.",
+        "The transaction amount of $59.67 is 1.4x the card's average transaction amount of $41.81.",
+        "The transaction risk score is 0.37, which is higher than the customer's recent transaction risk scores (ranging from 0.05 to 0.29).",
+        "No prior similar cases were found for customer C09988."
+      ],
+      "fraud_type_hypothesis": "card_not_present_new_device",
+      "uncertainty_dimensions": {
+        "graph_evidence": "moderate",
+        "prior_case_match": "none",
+        "behavioral_evidence": "moderate",
+        "contradictory_evidence": "none"
+      },
+      "missing_evidence": [
+        "IP address or geolocation data for the transaction to verify if it was out-of-region.",
+        "Detailed history of the 4 other customers using the shared device to assess if it is a known fraud ring.",
+        "Customer's typical transaction times to assess if 22:39 is unusual for this account."
+      ],
+      "contradictions": [],
+      "confidence": 0.65
+    },
+    "recommended_actions": [
+      {
+        "action": "VERIFY_WITH_CUSTOMER",
+        "route": "auto",
+        "reason": "R1: Evidence rests on a single signal (customer report) with a probability of 0.65 (< 0.70). Verification is required before any block."
+      },
+      {
+        "action": "MONITOR_CARD",
+        "route": "auto",
+        "reason": "R4: While awaiting customer reply, monitor the card for further suspicious activity."
+      },
+      {
+        "action": "DECLINE_TRANSACTION",
+        "route": "auto",
+        "reason": "R4: Decline any pending authorizations while the case is under investigation."
+      }
+    ],
+    "approval_route": "auto",
+    "evidence_requests": [
+      {
+        "type": "customer_validation",
+        "asked_after_step": 1,
+        "assumed_response": "Mock: customer did not make this purchase."
+      }
+    ],
+    "elapsed_seconds": 78.81
+  },
+  {
+    "case_id": "HHG-017",
+    "trigger_type": "risk_score",
+    "final_status": "open",
+    "sufficiency": "sufficient",
+    "evidence_rounds": 2,
+    "llm_findings": {
+      "findings": [
+        "LLM unavailable — fallback used"
+      ],
+      "fraud_type_hypothesis": "unknown",
+      "uncertainty_dimensions": {
+        "graph_evidence": "none",
+        "prior_case_match": "none",
+        "behavioral_evidence": "none",
+        "contradictory_evidence": "none"
+      },
+      "missing_evidence": [
+        "LLM unavailable"
+      ],
+      "contradictions": [],
+      "confidence": 0.0
+    },
+    "recommended_actions": [
+      {
+        "action": "ESCALATE_TO_ANALYST",
+        "route": "auto",
+        "reason": "LLM unavailable or invalid output: Error code: 429 - {'error': {'message': 'Rate limit reached for model `qwen/qwen3.8-27b` in organization `org_01keve3cd8ezpvfwnmavae5dew` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 198388, Requested 3855. Please try again in 16m8.975999999s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+      }
+    ],
+    "approval_route": "auto",
+    "evidence_requests": [
+      {
+        "type": "customer_validation",
+        "asked_after_step": 1,
+        "assumed_response": "Mock: customer did not make this purchase."
+      }
+    ],
+    "elapsed_seconds": 13.26
+  },
+  {
+    "case_id": "HHG-018",
+    "trigger_type": "customer_report",
+    "final_status": "open",
+    "sufficiency": "sufficient",
+    "evidence_rounds": 2,
+    "llm_findings": {
+      "findings": [
+        "LLM unavailable — fallback used"
+      ],
+      "fraud_type_hypothesis": "unknown",
+      "uncertainty_dimensions": {
+        "graph_evidence": "none",
+        "prior_case_match": "none",
+        "behavioral_evidence": "none",
+        "contradictory_evidence": "none"
+      },
+      "missing_evidence": [
+        "LLM unavailable"
+      ],
+      "contradictions": [],
+      "confidence": 0.0
+    },
+    "recommended_actions": [
+      {
+        "action": "ESCALATE_TO_ANALYST",
+        "route": "auto",
+        "reason": "LLM unavailable or invalid output: Error code: 429 - {'error': {'message': 'Rate limit reached for model `qwen/qwen3.8-27b` in organization `org_01keve3cd8ezpvfwnmavae5dew` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 198353, Requested 4461. Please try again in 20m15.648s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+      }
+    ],
+    "approval_route": "auto",
+    "evidence_requests": [
+      {
+        "type": "customer_validation",
+        "asked_after_step": 1,
+        "assumed_response": "Mock: customer did not make this purchase."
+      }
+    ],
+    "elapsed_seconds": 14.95
+  },
+  {
+    "case_id": "HHG-019",
+    "trigger_type": "risk_score",
+    "final_status": "open",
+    "sufficiency": "sufficient",
+    "evidence_rounds": 2,
+    "llm_findings": {
+      "findings": [
+        "LLM unavailable — fallback used"
+      ],
+      "fraud_type_hypothesis": "unknown",
+      "uncertainty_dimensions": {
+        "graph_evidence": "none",
+        "prior_case_match": "none",
+        "behavioral_evidence": "none",
+        "contradictory_evidence": "none"
+      },
+      "missing_evidence": [
+        "LLM unavailable"
+      ],
+      "contradictions": [],
+      "confidence": 0.0
+    },
+    "recommended_actions": [
+      {
+        "action": "ESCALATE_TO_ANALYST",
+        "route": "auto",
+        "reason": "LLM unavailable or invalid output: Error code: 429 - {'error': {'message': 'Rate limit reached for model `qwen/qwen3.8-27b` in organization `org_01keve3cd8ezpvfwnmavae5dew` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 198323, Requested 4493. Please try again in 20m16.512s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+      }
+    ],
+    "approval_route": "auto",
+    "evidence_requests": [
+      {
+        "type": "customer_validation",
+        "asked_after_step": 1,
+        "assumed_response": "Mock: customer did not make this purchase."
+      }
+    ],
+    "elapsed_seconds": 13.19
+  },
+  {
+    "case_id": "HHG-020",
+    "trigger_type": "risk_score",
+    "final_status": "open",
+    "sufficiency": "sufficient",
+    "evidence_rounds": 2,
+    "llm_findings": {
+      "findings": [
+        "LLM unavailable — fallback used"
+      ],
+      "fraud_type_hypothesis": "unknown",
+      "uncertainty_dimensions": {
+        "graph_evidence": "none",
+        "prior_case_match": "none",
+        "behavioral_evidence": "none",
+        "contradictory_evidence": "none"
+      },
+      "missing_evidence": [
+        "LLM unavailable"
+      ],
+      "contradictions": [],
+      "confidence": 0.0
+    },
+    "recommended_actions": [
+      {
+        "action": "ESCALATE_TO_ANALYST",
+        "route": "auto",
+        "reason": "LLM unavailable or invalid output: Error code: 429 - {'error': {'message': 'Rate limit reached for model `qwen/qwen3.8-27b` in organization `org_01keve3cd8ezpvfwnmavae5dew` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 198293, Requested 4017. Please try again in 16m37.92s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+      }
+    ],
+    "approval_route": "auto",
+    "evidence_requests": [
+      {
+        "type": "customer_validation",
+        "asked_after_step": 1,
+        "assumed_response": "Mock: customer did not make this purchase."
+      }
+    ],
+    "elapsed_seconds": 12.67
+  }
+]
