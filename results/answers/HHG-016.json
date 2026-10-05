@@ -1,0 +1,228 @@
+{
+  "case_id": "HHG-016",
+  "case": {
+    "status": "closed_fraud",
+    "verdict": "fraud",
+    "fraud_probability": 0.0,
+    "pattern": "card_testing",
+    "pattern_description": "",
+    "affected_txn_ids": [
+      "3534820"
+    ],
+    "first_suspicious_txn_id": "3534820",
+    "connected_card_ids": [
+      "C09988-K1"
+    ],
+    "connected_device_profiles": [
+      "c7dd64850bf1ead84e71e99ed6336102"
+    ],
+    "exposure_usd": 59.67,
+    "evidence": [
+      {
+        "claim": "Customer C09988 has reported a disputed transaction (3534820) with a value of $59.67.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C09988",
+          "C09988-K1"
+        ]
+      },
+      {
+        "claim": "The disputed transaction (3534820) was made using card C09988-K1, which is a debit card.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C09988",
+          "C09988-K1"
+        ]
+      },
+      {
+        "claim": "The customer (C09988) has only one card (C09988-K1) in their account.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C09988",
+          "C09988-K1"
+        ]
+      },
+      {
+        "claim": "The transaction (3534820) was made online and the risk score is 0.37.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C09988",
+          "C09988-K1"
+        ]
+      },
+      {
+        "claim": "The device used for the transaction (3534820) is a desktop with Windows operating system and is a new device for the account.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C09988",
+          "C09988-K1"
+        ]
+      },
+      {
+        "claim": "The customer (C09988) has a history of transactions on this device, with 78 transactions and 4 distinct cards.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C09988",
+          "C09988-K1"
+        ]
+      },
+      {
+        "claim": "The device (c7dd64850bf1ead84e71e99ed6336102) has been shared across 4 distinct customer(s).",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C09988",
+          "C09988-K1"
+        ]
+      },
+      {
+        "claim": "The customer (C09988) has a moderate strength of SharedDeviceRing pattern.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C09988",
+          "C09988-K1"
+        ]
+      },
+      {
+        "claim": "The customer (C09988) has a moderate strength of NewDeviceWithProxy pattern.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C09988",
+          "C09988-K1"
+        ]
+      },
+      {
+        "claim": "The disputed transaction (3534820) is not an amount anomaly, with a ratio of 1.4x compared to the card average of $41.81.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C09988",
+          "C09988-K1"
+        ]
+      },
+      {
+        "claim": "There is no velocity burst pattern detected for the customer (C09988) on card C09988-K1.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C09988",
+          "C09988-K1"
+        ]
+      },
+      {
+        "claim": "The customer (C09988) has no prior cases similar to this one.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C09988",
+          "C09988-K1"
+        ]
+      },
+      {
+        "claim": "The customer (C09988) has no missing evidence to resolve the uncertainty.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C09988",
+          "C09988-K1"
+        ]
+      },
+      {
+        "claim": "There are no contradictions in the evidence.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C09988",
+          "C09988-K1"
+        ]
+      }
+    ],
+    "similar_prior_cases": [],
+    "summary": "Customer C09988 has reported a disputed transaction (3534820) with a value of $59.67. The disputed transaction (3534820) was made using card C09988-K1, which is a debit card. The customer (C09988) has only one card (C09988-K1) in their account. The transaction (3534820) was made online and the risk score is 0.37.",
+    "written_to_graph": true,
+    "graph_case_id": "HHG-016"
+  },
+  "evidence_requests": [
+    {
+      "type": "request_device_fingerprint",
+      "asked_after_step": 1,
+      "assumed_response": "new_device_signal",
+      "requested_from_missing": "More information about the device (c7dd64850bf1ead84e71e99ed6336102) and its usage patterns."
+    },
+    {
+      "type": "request_customer_validation",
+      "asked_after_step": 1,
+      "assumed_response": "confirmed",
+      "requested_from_missing": "More information about the customer's (C09988) behavior and transaction patterns."
+    },
+    {
+      "type": "request_device_fingerprint",
+      "asked_after_step": 2,
+      "assumed_response": "new_device_signal",
+      "requested_from_missing": "More information about the customer's account activity and device usage would be helpful to determine the likelihood of card testing."
+    }
+  ],
+  "next_best_actions": {
+    "initial": [
+      {
+        "action": "BLOCK_CARD",
+        "route": "L1",
+        "reason": "R2: Customer has denied the transaction, and exposure is $59.67, which is below the threshold of $1,000. However, a shared device ring has been detected, which warrants blocking the card."
+      },
+      {
+        "action": "CREATE_CASE",
+        "route": "auto",
+        "reason": "R2: Customer has denied the transaction, and a shared device ring has been detected, which requires an internal case."
+      },
+      {
+        "action": "FILE_REPORT",
+        "route": "L2",
+        "reason": "R2: A shared device ring has been detected, which requires a SAR report."
+      }
+    ],
+    "final": [
+      {
+        "action": "BLOCK_CARD",
+        "route": "L1",
+        "reason": "R2: Customer has denied the transaction, and exposure is $59.67, which is below the threshold of $1,000. However, a shared device ring is detected, which warrants blocking the card."
+      },
+      {
+        "action": "CREATE_CASE",
+        "route": "auto",
+        "reason": "R2: Customer has denied the transaction, and a shared device ring is detected, which requires an internal case."
+      },
+      {
+        "action": "FILE_REPORT",
+        "route": "L2",
+        "reason": "R2: A shared device ring is detected, which requires a SAR report."
+      }
+    ],
+    "what_changed": "No change — initial and final recommendations are identical."
+  },
+  "sar": {
+    "file": true,
+    "reason": "R2: A shared device ring is detected, which requires a SAR report.",
+    "narrative": "This Suspicious Activity Report details unauthorized debit card activity identified following a fraud dispute initiated by customer C09988. On December 11, 2016, at 22:39:08 UTC, an online purchase totaling $59.67 was processed against the customer's Visa debit card C09988-K1. The customer subsequently contacted the bank to dispute the transaction, explicitly stating that they did not authorize or conduct the purchase. The online transaction was initiated through an electronic commerce channel utilizing a Hotmail email address. Technical analysis revealed that the payment originated from a Windows desktop device operating Microsoft Edge, which was previously unseen on the customer's profile. Further investigation established that this same device has been shared across four distinct customer accounts and four separate payment cards, generating 78 transactions. This pattern indicates that the card credentials were compromised and utilized in an unauthorized manner via an organized multi-account device ring, likely for card testing or fraudulent exploitation. In response to the confirmed unauthorized activity, the financial institution blocked the impacted debit card to mitigate further loss and maintains ongoing monitoring of all associated identifiers.",
+    "subjects": [
+      "C09988",
+      "C09988-K1"
+    ],
+    "total_amount_usd": 59.67,
+    "activity_dates": [
+      "2016-12-11 22:39:08",
+      "2016-12-11 22:39:08"
+    ]
+  },
+  "stop_reason": "Investigation completed normally",
+  "tool_calls": 20,
+  "tokens": 0,
+  "latency_s": 108.0
+}

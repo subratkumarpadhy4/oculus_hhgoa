@@ -1,0 +1,260 @@
+{
+  "case_id": "HHG-009",
+  "case": {
+    "status": "closed_fraud",
+    "verdict": "fraud",
+    "fraud_probability": 0.0,
+    "pattern": "card_testing",
+    "pattern_description": "",
+    "affected_txn_ids": [
+      "3581141"
+    ],
+    "first_suspicious_txn_id": "3581141",
+    "connected_card_ids": [
+      "C08299-K1"
+    ],
+    "connected_device_profiles": [
+      "2edf2958166561c5c08cd228e53bbcdc"
+    ],
+    "exposure_usd": 30.02,
+    "evidence": [
+      {
+        "claim": "The customer has reported the transaction 3581141 as unauthorized.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C08299",
+          "C08299-K1"
+        ]
+      },
+      {
+        "claim": "The risk score for the transaction 3581141 is 0.28, which is above the threshold.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C08299",
+          "C08299-K1"
+        ]
+      },
+      {
+        "claim": "The transaction 3581141 was made online.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C08299",
+          "C08299-K1"
+        ]
+      },
+      {
+        "claim": "The transaction 3581141 was made using a credit card (C08299-K1).",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C08299",
+          "C08299-K1"
+        ]
+      },
+      {
+        "claim": "The customer has only one credit card (C08299-K1).",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C08299",
+          "C08299-K1"
+        ]
+      },
+      {
+        "claim": "The device used for the transaction 3581141 is not new for the account.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C08299",
+          "C08299-K1"
+        ]
+      },
+      {
+        "claim": "The device used for the transaction 3581141 does not have a proxy.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C08299",
+          "C08299-K1"
+        ]
+      },
+      {
+        "claim": "The transaction 3581141 was made in region 203.0.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C08299",
+          "C08299-K1"
+        ]
+      },
+      {
+        "claim": "The customer's email domain is gmail.com.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C08299",
+          "C08299-K1"
+        ]
+      },
+      {
+        "claim": "The card used for the transaction 3581141 is a Visa card.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C08299",
+          "C08299-K1"
+        ]
+      },
+      {
+        "claim": "The card used for the transaction 3581141 has a card network of Visa.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C08299",
+          "C08299-K1"
+        ]
+      },
+      {
+        "claim": "The card used for the transaction 3581141 has a card type of credit.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C08299",
+          "C08299-K1"
+        ]
+      },
+      {
+        "claim": "The card used for the transaction 3581141 has a card count of 1.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C08299",
+          "C08299-K1"
+        ]
+      },
+      {
+        "claim": "The customer has a card count of 1.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C08299",
+          "C08299-K1"
+        ]
+      },
+      {
+        "claim": "The transaction 3581141 was made on a device that has been used by 12 distinct customers.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C08299",
+          "C08299-K1"
+        ]
+      },
+      {
+        "claim": "The device used for the transaction 3581141 has been used for 214 transactions.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C08299",
+          "C08299-K1"
+        ]
+      },
+      {
+        "claim": "The device used for the transaction 3581141 has been used for 12 distinct cards.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C08299",
+          "C08299-K1"
+        ]
+      },
+      {
+        "claim": "The card used for the transaction 3581141 has been used for 56 transactions in the graph.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C08299",
+          "C08299-K1"
+        ]
+      },
+      {
+        "claim": "The card used for the transaction 3581141 has an average transaction amount of $61.17.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C08299",
+          "C08299-K1"
+        ]
+      },
+      {
+        "claim": "The ratio of the transaction amount to the card average is 0.5x.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C08299",
+          "C08299-K1"
+        ]
+      }
+    ],
+    "similar_prior_cases": [],
+    "summary": "The customer has reported the transaction 3581141 as unauthorized. The risk score for the transaction 3581141 is 0.28, which is above the threshold. The transaction 3581141 was made online. The transaction 3581141 was made using a credit card (C08299-K1).",
+    "written_to_graph": true,
+    "graph_case_id": "HHG-009"
+  },
+  "evidence_requests": [
+    {
+      "type": "request_customer_validation",
+      "asked_after_step": 1,
+      "assumed_response": "no_response",
+      "requested_from_missing": "customer_confirmation"
+    }
+  ],
+  "next_best_actions": {
+    "initial": [
+      {
+        "action": "BLOCK_CARD",
+        "route": "L1",
+        "reason": "R2: Customer has denied the transaction, and the exposure is $30.02, which is less than $1,000. Therefore, we recommend blocking the card and creating a case."
+      },
+      {
+        "action": "CREATE_CASE",
+        "route": "auto",
+        "reason": "R2: Customer has denied the transaction, and the exposure is $30.02, which is less than $1,000. Therefore, we recommend creating a case."
+      }
+    ],
+    "final": [
+      {
+        "action": "BLOCK_CARD",
+        "route": "L1",
+        "reason": "R2: Customer has denied the transaction, and the exposure is less than $1,000. Policy requires blocking the card and creating a case."
+      },
+      {
+        "action": "CREATE_CASE",
+        "route": "auto",
+        "reason": "R2: Customer has denied the transaction, and the exposure is less than $1,000. Policy requires creating a case."
+      }
+    ],
+    "what_changed": "No change — initial and final recommendations are identical."
+  },
+  "sar": {
+    "file": false,
+    "reason": "",
+    "narrative": "",
+    "subjects": [
+      "C08299",
+      "C08299-K1"
+    ],
+    "total_amount_usd": 30.02,
+    "activity_dates": [
+      "2016-12-28 12:10:53",
+      "2016-12-28 12:10:53"
+    ]
+  },
+  "stop_reason": "Investigation completed normally",
+  "tool_calls": 13,
+  "tokens": 0,
+  "latency_s": 69.0
+}

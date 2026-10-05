@@ -1,0 +1,198 @@
+{
+  "case_id": "HHG-003",
+  "case": {
+    "status": "closed_fraud",
+    "verdict": "fraud",
+    "fraud_probability": 0.5,
+    "pattern": "card_testing",
+    "pattern_description": "",
+    "affected_txn_ids": [
+      "3530164"
+    ],
+    "first_suspicious_txn_id": "3530164",
+    "connected_card_ids": [
+      "C08623-K2"
+    ],
+    "connected_device_profiles": [],
+    "exposure_usd": 49.0,
+    "evidence": [
+      {
+        "claim": "Customer C08623 has reported a disputed transaction (3530164) with a value of $49.00.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C08623",
+          "C08623-K2"
+        ]
+      },
+      {
+        "claim": "The disputed transaction (3530164) was made using card C08623-K2, which has a total of 1140 transactions in the graph.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C08623",
+          "C08623-K2"
+        ]
+      },
+      {
+        "claim": "The disputed transaction (3530164) was made in-person, with no device information available.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C08623",
+          "C08623-K2"
+        ]
+      },
+      {
+        "claim": "The risk score for the disputed transaction (3530164) is 0.4.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C08623",
+          "C08623-K2"
+        ]
+      },
+      {
+        "claim": "The customer (C08623) has only one card (C08623-K2) in the graph.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C08623",
+          "C08623-K2"
+        ]
+      },
+      {
+        "claim": "The disputed transaction (3530164) was made in region 330.0, which is the same region as the customer's billing region.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C08623",
+          "C08623-K2"
+        ]
+      },
+      {
+        "claim": "The disputed transaction (3530164) was made using the email domain 'me.com', which is also used by the customer.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C08623",
+          "C08623-K2"
+        ]
+      },
+      {
+        "claim": "The disputed transaction (3530164) was made using the product code 'W'.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C08623",
+          "C08623-K2"
+        ]
+      },
+      {
+        "claim": "The disputed transaction (3530164) was made on 2016-12-10 13:01:21.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C08623",
+          "C08623-K2"
+        ]
+      },
+      {
+        "claim": "The customer (C08623) has not been involved in any similar cases in the past.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C08623",
+          "C08623-K2"
+        ]
+      },
+      {
+        "claim": "No shared device was detected for the disputed transaction (3530164).",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C08623",
+          "C08623-K2"
+        ]
+      },
+      {
+        "claim": "No exposure greater than $1,000 was detected for the disputed transaction (3530164).",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C08623",
+          "C08623-K2"
+        ]
+      }
+    ],
+    "similar_prior_cases": [
+      "CC-1589",
+      "CC-2935",
+      "CC-4957",
+      "CC-2817",
+      "CC-3327"
+    ],
+    "summary": "Customer C08623 has reported a disputed transaction (3530164) with a value of $49.00. The disputed transaction (3530164) was made using card C08623-K2, which has a total of 1140 transactions in the graph. The disputed transaction (3530164) was made in-person, with no device information available. The risk score for the disputed transaction (3530164) is 0.4.",
+    "written_to_graph": true,
+    "graph_case_id": "HHG-003"
+  },
+  "evidence_requests": [
+    {
+      "type": "request_customer_validation",
+      "asked_after_step": 1,
+      "assumed_response": "no_response",
+      "requested_from_missing": "customer_confirmation"
+    },
+    {
+      "type": "request_device_fingerprint",
+      "asked_after_step": 2,
+      "assumed_response": "known_device",
+      "requested_from_missing": "More information about the customer's device usage and email activity would be helpful in resolving the uncertainty."
+    }
+  ],
+  "next_best_actions": {
+    "initial": [
+      {
+        "action": "BLOCK_CARD",
+        "route": "L1",
+        "reason": "R2: Customer has denied the transaction, and the exposure is $49.00, which is less than $1,000. Therefore, we must block the card and create a case."
+      },
+      {
+        "action": "CREATE_CASE",
+        "route": "auto",
+        "reason": "R2: Customer has denied the transaction, and we must create a case to investigate further."
+      }
+    ],
+    "final": [
+      {
+        "action": "BLOCK_CARD",
+        "route": "L1",
+        "reason": "R2: Customer has denied the transaction, and the exposure is less than $1,000. Policy requires blocking the card and creating a case."
+      },
+      {
+        "action": "CREATE_CASE",
+        "route": "auto",
+        "reason": "R2: Customer has denied the transaction, and the exposure is less than $1,000. Policy requires creating a case."
+      }
+    ],
+    "what_changed": "No change — initial and final recommendations are identical."
+  },
+  "sar": {
+    "file": false,
+    "reason": "",
+    "narrative": "",
+    "subjects": [
+      "C08623",
+      "C08623-K2"
+    ],
+    "total_amount_usd": 49.0,
+    "activity_dates": [
+      "2016-12-10 13:01:21",
+      "2016-12-10 13:01:21"
+    ]
+  },
+  "stop_reason": "Investigation completed normally",
+  "tool_calls": 20,
+  "tokens": 0,
+  "latency_s": 89.0
+}

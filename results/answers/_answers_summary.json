@@ -1,0 +1,289 @@
+[
+  {
+    "case_id": "HHG-001",
+    "status": "closed_legitimate",
+    "verdict": "legitimate",
+    "pattern": "none",
+    "actions": [
+      "MONITOR_CARD",
+      "VERIFY_WITH_CUSTOMER"
+    ],
+    "approval_route": "auto",
+    "sar_filed": false,
+    "elapsed_s": 100.67,
+    "skipped": false
+  },
+  {
+    "case_id": "HHG-002",
+    "status": "closed_fraud",
+    "verdict": "fraud",
+    "pattern": "card_not_present_fraud",
+    "actions": [
+      "MONITOR_CARD",
+      "VERIFY_WITH_CUSTOMER"
+    ],
+    "approval_route": "auto",
+    "sar_filed": false,
+    "elapsed_s": 176.43,
+    "skipped": false
+  },
+  {
+    "case_id": "HHG-003",
+    "status": "closed_fraud",
+    "verdict": "fraud",
+    "pattern": "card_testing",
+    "actions": [
+      "BLOCK_CARD",
+      "CREATE_CASE"
+    ],
+    "approval_route": "L1",
+    "sar_filed": false,
+    "elapsed_s": 91.3,
+    "skipped": false
+  },
+  {
+    "case_id": "HHG-004",
+    "status": "closed_fraud",
+    "verdict": "fraud",
+    "pattern": "card_testing",
+    "actions": [
+      "BLOCK_CARD",
+      "CREATE_CASE"
+    ],
+    "approval_route": "L1",
+    "sar_filed": false,
+    "elapsed_s": 59.16,
+    "skipped": false
+  },
+  {
+    "case_id": "HHG-005",
+    "status": "closed_fraud",
+    "verdict": "fraud",
+    "pattern": "card_testing",
+    "actions": [
+      "STEP_UP_AUTH",
+      "MONITOR_CARD"
+    ],
+    "approval_route": "auto",
+    "sar_filed": false,
+    "elapsed_s": 73.92,
+    "skipped": false
+  },
+  {
+    "case_id": "HHG-006",
+    "status": "closed_fraud",
+    "verdict": "fraud",
+    "pattern": "card_not_present_new_device",
+    "actions": [
+      "BLOCK_CARD",
+      "CREATE_CASE",
+      "FILE_REPORT"
+    ],
+    "approval_route": "L2",
+    "sar_filed": true,
+    "elapsed_s": 120.7,
+    "skipped": false
+  },
+  {
+    "case_id": "HHG-007",
+    "status": "closed_fraud",
+    "verdict": "fraud",
+    "pattern": "card_testing",
+    "actions": [
+      "MONITOR_CARD",
+      "STEP_UP_AUTH"
+    ],
+    "approval_route": "auto",
+    "sar_filed": false,
+    "elapsed_s": 73.73,
+    "skipped": false
+  },
+  {
+    "case_id": "HHG-008",
+    "status": "closed_fraud",
+    "verdict": "fraud",
+    "pattern": "card_not_present_new_device",
+    "actions": [
+      "BLOCK_CARD",
+      "CREATE_CASE",
+      "FILE_REPORT"
+    ],
+    "approval_route": "L2",
+    "sar_filed": true,
+    "elapsed_s": 284.37,
+    "skipped": false
+  },
+  {
+    "case_id": "HHG-009",
+    "status": "closed_fraud",
+    "verdict": "fraud",
+    "pattern": "card_testing",
+    "actions": [
+      "BLOCK_CARD",
+      "CREATE_CASE"
+    ],
+    "approval_route": "L1",
+    "sar_filed": false,
+    "elapsed_s": 72.02,
+    "skipped": false
+  },
+  {
+    "case_id": "HHG-010",
+    "status": "open",
+    "verdict": "uncertain",
+    "pattern": "card_testing | card_not_present_fraud | card_not_present_new_device | out_of_region_use | account_takeover | undocumented | none | unknown",
+    "actions": [
+      "MONITOR_CARD",
+      "VERIFY_WITH_CUSTOMER"
+    ],
+    "approval_route": "auto",
+    "sar_filed": false,
+    "elapsed_s": 86.16,
+    "skipped": false
+  },
+  {
+    "case_id": "HHG-011",
+    "status": "closed_fraud",
+    "verdict": "fraud",
+    "pattern": "card_testing",
+    "actions": [
+      "BLOCK_CARD",
+      "CREATE_CASE"
+    ],
+    "approval_route": "L1",
+    "sar_filed": false,
+    "elapsed_s": 20.24,
+    "skipped": false
+  },
+  {
+    "case_id": "HHG-012",
+    "status": "open",
+    "verdict": "uncertain",
+    "pattern": "card_testing | card_not_present_fraud | card_not_present_new_device | out_of_region_use | account_takeover | undocumented | none | unknown",
+    "actions": [
+      "MONITOR_CARD",
+      "VERIFY_WITH_CUSTOMER"
+    ],
+    "approval_route": "auto",
+    "sar_filed": false,
+    "elapsed_s": 99.9,
+    "skipped": false
+  },
+  {
+    "case_id": "HHG-013",
+    "status": "closed_fraud",
+    "verdict": "fraud",
+    "pattern": "card_testing",
+    "actions": [
+      "MONITOR_CARD",
+      "CREATE_CASE",
+      "FILE_REPORT"
+    ],
+    "approval_route": "L2",
+    "sar_filed": true,
+    "elapsed_s": 110.22,
+    "skipped": false
+  },
+  {
+    "case_id": "HHG-014",
+    "status": "open",
+    "verdict": "uncertain",
+    "pattern": "card_testing | card_not_present_fraud | card_not_present_new_device | out_of_region_use | account_takeover | undocumented | none | unknown",
+    "actions": [
+      "CREATE_CASE",
+      "FILE_REPORT",
+      "MONITOR_CONNECTED_CARDS"
+    ],
+    "approval_route": "L2",
+    "sar_filed": true,
+    "elapsed_s": 164.52,
+    "skipped": false
+  },
+  {
+    "case_id": "HHG-015",
+    "status": "open",
+    "verdict": "uncertain",
+    "pattern": "card_testing | card_not_present_fraud",
+    "actions": [
+      "MONITOR_CARD",
+      "STEP_UP_AUTH"
+    ],
+    "approval_route": "auto",
+    "sar_filed": false,
+    "elapsed_s": 74.93,
+    "skipped": false
+  },
+  {
+    "case_id": "HHG-016",
+    "status": "closed_fraud",
+    "verdict": "fraud",
+    "pattern": "card_testing",
+    "actions": [
+      "BLOCK_CARD",
+      "CREATE_CASE",
+      "FILE_REPORT"
+    ],
+    "approval_route": "L2",
+    "sar_filed": true,
+    "elapsed_s": 162.39,
+    "skipped": false
+  },
+  {
+    "case_id": "HHG-017",
+    "status": "closed_fraud",
+    "verdict": "fraud",
+    "pattern": "card_testing",
+    "actions": [
+      "MONITOR_CARD",
+      "CREATE_CASE",
+      "FILE_REPORT",
+      "MONITOR_CONNECTED_CARDS"
+    ],
+    "approval_route": "L2",
+    "sar_filed": true,
+    "elapsed_s": 121.36,
+    "skipped": false
+  },
+  {
+    "case_id": "HHG-018",
+    "status": "closed_fraud",
+    "verdict": "fraud",
+    "pattern": "card_testing",
+    "actions": [
+      "BLOCK_CARD",
+      "CREATE_CASE"
+    ],
+    "approval_route": "L1",
+    "sar_filed": false,
+    "elapsed_s": 82.56,
+    "skipped": false
+  },
+  {
+    "case_id": "HHG-019",
+    "status": "closed_fraud",
+    "verdict": "fraud",
+    "pattern": "card_testing",
+    "actions": [
+      "STEP_UP_AUTH",
+      "MONITOR_CARD"
+    ],
+    "approval_route": "auto",
+    "sar_filed": false,
+    "elapsed_s": 66.19,
+    "skipped": false
+  },
+  {
+    "case_id": "HHG-020",
+    "status": "closed_fraud",
+    "verdict": "fraud",
+    "pattern": "card_testing",
+    "actions": [
+      "MONITOR_CARD",
+      "STEP_UP_AUTH"
+    ],
+    "approval_route": "auto",
+    "sar_filed": false,
+    "elapsed_s": 55.84,
+    "skipped": false
+  }
+]

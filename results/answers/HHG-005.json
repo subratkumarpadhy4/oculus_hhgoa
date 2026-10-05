@@ -1,0 +1,278 @@
+{
+  "case_id": "HHG-005",
+  "case": {
+    "status": "closed_fraud",
+    "verdict": "fraud",
+    "fraud_probability": 0.5,
+    "pattern": "card_testing",
+    "pattern_description": "",
+    "affected_txn_ids": [
+      "3523199"
+    ],
+    "first_suspicious_txn_id": "3523199",
+    "connected_card_ids": [
+      "C02923-K1"
+    ],
+    "connected_device_profiles": [
+      "5b64ce5e4c424f98907282c26174c131"
+    ],
+    "exposure_usd": 100.07,
+    "evidence": [
+      {
+        "claim": "The risk score for transaction 3523199 is 0.54.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C02923",
+          "C02923-K1"
+        ]
+      },
+      {
+        "claim": "Transaction 3523199 was flagged by a real-time model.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C02923",
+          "C02923-K1"
+        ]
+      },
+      {
+        "claim": "The transaction amount is $100.07.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C02923",
+          "C02923-K1"
+        ]
+      },
+      {
+        "claim": "The transaction was made online.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C02923",
+          "C02923-K1"
+        ]
+      },
+      {
+        "claim": "The card used for transaction 3523199 is C02923-K1.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C02923",
+          "C02923-K1"
+        ]
+      },
+      {
+        "claim": "The customer ID associated with the card is C02923.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C02923",
+          "C02923-K1"
+        ]
+      },
+      {
+        "claim": "The card type is credit.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C02923",
+          "C02923-K1"
+        ]
+      },
+      {
+        "claim": "The device used for transaction 3523199 is an iOS device.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C02923",
+          "C02923-K1"
+        ]
+      },
+      {
+        "claim": "The device is new for the account.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C02923",
+          "C02923-K1"
+        ]
+      },
+      {
+        "claim": "The device has no proxy.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C02923",
+          "C02923-K1"
+        ]
+      },
+      {
+        "claim": "There are 92 total transactions on card C02923-K1.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C02923",
+          "C02923-K1"
+        ]
+      },
+      {
+        "claim": "There are 20 total devices in the graph.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C02923",
+          "C02923-K1"
+        ]
+      },
+      {
+        "claim": "There are 10 total email domains in the graph.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C02923",
+          "C02923-K1"
+        ]
+      },
+      {
+        "claim": "There are 5 total billing regions in the graph.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C02923",
+          "C02923-K1"
+        ]
+      },
+      {
+        "claim": "The detected pattern 'SharedDeviceRing' has a moderate strength.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C02923",
+          "C02923-K1"
+        ]
+      },
+      {
+        "claim": "The detected pattern 'NewDeviceWithProxy' has a moderate strength.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C02923",
+          "C02923-K1"
+        ]
+      },
+      {
+        "claim": "The customer has 1 card.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C02923",
+          "C02923-K1"
+        ]
+      },
+      {
+        "claim": "The customer has made 92 transactions in total.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C02923",
+          "C02923-K1"
+        ]
+      }
+    ],
+    "similar_prior_cases": [
+      "CC-2400",
+      "CC-2717",
+      "CC-2857"
+    ],
+    "summary": "The risk score for transaction 3523199 is 0.54. Transaction 3523199 was flagged by a real-time model. The transaction amount is $100.07. The transaction was made online.",
+    "written_to_graph": true,
+    "graph_case_id": "HHG-005"
+  },
+  "evidence_requests": [
+    {
+      "type": "request_transaction_history_extension",
+      "asked_after_step": 1,
+      "assumed_response": "extended_history_available",
+      "requested_from_missing": "More information about the customer's behavior and transaction history",
+      "extra_transactions": [
+        {
+          "txn_id": "EXT_48534_1",
+          "amount": 250.34,
+          "channel": "in-person",
+          "risk_score": 0.34
+        },
+        {
+          "txn_id": "EXT_48534_2",
+          "amount": 250.71,
+          "channel": "online",
+          "risk_score": 0.53
+        },
+        {
+          "txn_id": "EXT_48534_3",
+          "amount": 251.08,
+          "channel": "in-person",
+          "risk_score": 0.72
+        }
+      ]
+    },
+    {
+      "type": "request_device_fingerprint",
+      "asked_after_step": 1,
+      "assumed_response": "known_device",
+      "requested_from_missing": "More information about the device's usage and location"
+    },
+    {
+      "type": "request_device_fingerprint",
+      "asked_after_step": 2,
+      "assumed_response": "known_device",
+      "requested_from_missing": "More information about the device used for transaction 3523199"
+    }
+  ],
+  "next_best_actions": {
+    "initial": [
+      {
+        "action": "MONITOR_CARD",
+        "route": "auto",
+        "reason": "R4: Insufficient evidence to support blocking, but monitoring is recommended due to moderate strength of detected patterns (SharedDeviceRing and NewDeviceWithProxy) and moderate uncertainty dimensions (graph_evidence and behavioral_evidence)."
+      },
+      {
+        "action": "STEP_UP_AUTH",
+        "route": "auto",
+        "reason": "R1: Single signal (risk score 0.54) with probability < 0.70, so step up authentication is recommended before any block."
+      }
+    ],
+    "final": [
+      {
+        "action": "STEP_UP_AUTH",
+        "route": "auto",
+        "reason": "R1: The evidence rests on a single signal (risk score) and probability < 0.70, use STEP_UP_AUTH before any block."
+      },
+      {
+        "action": "MONITOR_CARD",
+        "route": "auto",
+        "reason": "R4: No prior cases, but the detected pattern 'SharedDeviceRing' has a moderate strength, recommend monitoring the card."
+      }
+    ],
+    "what_changed": "No change — initial and final recommendations are identical."
+  },
+  "sar": {
+    "file": false,
+    "reason": "",
+    "narrative": "",
+    "subjects": [
+      "C02923",
+      "C02923-K1"
+    ],
+    "total_amount_usd": 100.07,
+    "activity_dates": [
+      "2016-12-07 21:38:37",
+      "2016-12-07 21:38:37"
+    ]
+  },
+  "stop_reason": "Investigation completed normally",
+  "tool_calls": 20,
+  "tokens": 0,
+  "latency_s": 72.0
+}

@@ -1,0 +1,258 @@
+{
+  "case_id": "HHG-019",
+  "case": {
+    "status": "closed_fraud",
+    "verdict": "fraud",
+    "fraud_probability": 0.5,
+    "pattern": "card_testing",
+    "pattern_description": "",
+    "affected_txn_ids": [
+      "3503878"
+    ],
+    "first_suspicious_txn_id": "3503878",
+    "connected_card_ids": [
+      "C07987-K2"
+    ],
+    "connected_device_profiles": [
+      "8d1c12a568f705067b34f6794b468c7e"
+    ],
+    "exposure_usd": 99.92,
+    "evidence": [
+      {
+        "claim": "The risk score for transaction 3503878 is 0.9.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C07987",
+          "C07987-K2"
+        ]
+      },
+      {
+        "claim": "The transaction amount is $99.92.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C07987",
+          "C07987-K2"
+        ]
+      },
+      {
+        "claim": "The transaction channel is online.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C07987",
+          "C07987-K2"
+        ]
+      },
+      {
+        "claim": "The card ID associated with the transaction is C07987-K2.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C07987",
+          "C07987-K2"
+        ]
+      },
+      {
+        "claim": "The customer ID associated with the transaction is C07987.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C07987",
+          "C07987-K2"
+        ]
+      },
+      {
+        "claim": "The device used for the transaction is a desktop with Windows operating system.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C07987",
+          "C07987-K2"
+        ]
+      },
+      {
+        "claim": "The device is new for the account.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C07987",
+          "C07987-K2"
+        ]
+      },
+      {
+        "claim": "The billing region for the transaction is 264.0.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C07987",
+          "C07987-K2"
+        ]
+      },
+      {
+        "claim": "The email domains associated with the transaction are gmail.com and verizon.net.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C07987",
+          "C07987-K2"
+        ]
+      },
+      {
+        "claim": "The card type is credit.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C07987",
+          "C07987-K2"
+        ]
+      },
+      {
+        "claim": "The card network is visa.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C07987",
+          "C07987-K2"
+        ]
+      },
+      {
+        "claim": "The card average transaction amount is $199.23 across 248 transactions on card C07987-K2.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C07987",
+          "C07987-K2"
+        ]
+      },
+      {
+        "claim": "The ratio of the transaction amount to the card average is 0.5x.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C07987",
+          "C07987-K2"
+        ]
+      },
+      {
+        "claim": "There is no shared device ring pattern detected.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C07987",
+          "C07987-K2"
+        ]
+      },
+      {
+        "claim": "There is no velocity burst pattern detected.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C07987",
+          "C07987-K2"
+        ]
+      },
+      {
+        "claim": "There is no amount anomaly pattern detected.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C07987",
+          "C07987-K2"
+        ]
+      },
+      {
+        "claim": "There is a new device with proxy pattern detected with moderate strength.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C07987",
+          "C07987-K2"
+        ]
+      }
+    ],
+    "similar_prior_cases": [
+      "CC-5026",
+      "CC-2011",
+      "CC-2087",
+      "CC-2860"
+    ],
+    "summary": "The risk score for transaction 3503878 is 0.9. The transaction amount is $99.92. The transaction channel is online. The card ID associated with the transaction is C07987-K2.",
+    "written_to_graph": true,
+    "graph_case_id": "HHG-019"
+  },
+  "evidence_requests": [
+    {
+      "type": "request_transaction_history_extension",
+      "asked_after_step": 1,
+      "assumed_response": "extended_history_available",
+      "requested_from_missing": "More information about the customer's behavior and transaction history would be helpful to determine the risk level of the transaction.",
+      "extra_transactions": [
+        {
+          "txn_id": "EXT_2809_1",
+          "amount": 43.09,
+          "channel": "online",
+          "risk_score": 0.09
+        },
+        {
+          "txn_id": "EXT_2809_2",
+          "amount": 43.46,
+          "channel": "in-person",
+          "risk_score": 0.28
+        }
+      ]
+    },
+    {
+      "type": "request_customer_validation",
+      "asked_after_step": 2,
+      "assumed_response": "no_response",
+      "requested_from_missing": "customer_confirmation"
+    }
+  ],
+  "next_best_actions": {
+    "initial": [
+      {
+        "action": "MONITOR_CARD",
+        "route": "auto",
+        "reason": "R1: The risk score is 0.9, which is above the typical threshold for a low-risk transaction, but the NewDeviceWithProxy pattern has a moderate strength. We should monitor the card to gather more information before making a decision."
+      },
+      {
+        "action": "VERIFY_WITH_CUSTOMER",
+        "route": "auto",
+        "reason": "R1: The risk score is 0.9, which is above the typical threshold for a low-risk transaction, but the NewDeviceWithProxy pattern has a moderate strength. We should verify with the customer to confirm the transaction and gather more information."
+      }
+    ],
+    "final": [
+      {
+        "action": "STEP_UP_AUTH",
+        "route": "auto",
+        "reason": "R1: The evidence rests on a single signal (risk score) and probability < 0.70, use STEP_UP_AUTH before any block."
+      },
+      {
+        "action": "MONITOR_CARD",
+        "route": "auto",
+        "reason": "R4: No prior cases and no shared device ring pattern detected, recommend monitoring the card."
+      }
+    ],
+    "what_changed": "Added: STEP_UP_AUTH; Removed: VERIFY_WITH_CUSTOMER after additional evidence was gathered."
+  },
+  "sar": {
+    "file": false,
+    "reason": "",
+    "narrative": "",
+    "subjects": [
+      "C07987",
+      "C07987-K2"
+    ],
+    "total_amount_usd": 99.92,
+    "activity_dates": [
+      "2016-12-01 17:28:53",
+      "2016-12-01 17:28:53"
+    ]
+  },
+  "stop_reason": "Investigation completed normally",
+  "tool_calls": 20,
+  "tokens": 0,
+  "latency_s": 64.0
+}

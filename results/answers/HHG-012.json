@@ -1,0 +1,301 @@
+{
+  "case_id": "HHG-012",
+  "case": {
+    "status": "escalated",
+    "verdict": "uncertain",
+    "fraud_probability": 0.0,
+    "pattern": "card_testing",
+    "pattern_description": "",
+    "affected_txn_ids": [
+      "3553342"
+    ],
+    "first_suspicious_txn_id": "3553342",
+    "connected_card_ids": [
+      "C05876-K2"
+    ],
+    "connected_device_profiles": [],
+    "exposure_usd": 30.91,
+    "evidence": [
+      {
+        "claim": "The risk score for transaction 3553342 is 0.55.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C05876",
+          "C05876-K2"
+        ]
+      },
+      {
+        "claim": "Transaction 3553342 was flagged by a real-time model.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C05876",
+          "C05876-K2"
+        ]
+      },
+      {
+        "claim": "The transaction amount for transaction 3553342 is $30.91.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C05876",
+          "C05876-K2"
+        ]
+      },
+      {
+        "claim": "The billing region for transaction 3553342 is 494.0.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C05876",
+          "C05876-K2"
+        ]
+      },
+      {
+        "claim": "The card ID for transaction 3553342 is C05876-K2.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C05876",
+          "C05876-K2"
+        ]
+      },
+      {
+        "claim": "The customer ID for transaction 3553342 is C05876.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C05876",
+          "C05876-K2"
+        ]
+      },
+      {
+        "claim": "The card type for card C05876-K2 is debit.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C05876",
+          "C05876-K2"
+        ]
+      },
+      {
+        "claim": "The card network for card C05876-K2 is visa.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C05876",
+          "C05876-K2"
+        ]
+      },
+      {
+        "claim": "There are 991 total transactions on card C05876-K2 in the graph.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C05876",
+          "C05876-K2"
+        ]
+      },
+      {
+        "claim": "There are 3 recent transactions on card C05876-K2 within the last 24 hours.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C05876",
+          "C05876-K2"
+        ]
+      },
+      {
+        "claim": "The recent transactions on card C05876-K2 have risk scores of 0.15, 0.29, and 0.03.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C05876",
+          "C05876-K2"
+        ]
+      },
+      {
+        "claim": "The average transaction amount on card C05876-K2 is $80.06.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C05876",
+          "C05876-K2"
+        ]
+      },
+      {
+        "claim": "The ratio of the transaction amount for transaction 3553342 to the card average is 0.4x.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C05876",
+          "C05876-K2"
+        ]
+      },
+      {
+        "claim": "No device was used for transaction 3553342 (no FROM_DEVICE edge).",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C05876",
+          "C05876-K2"
+        ]
+      },
+      {
+        "claim": "The detected pattern 'SharedDeviceRing' has a strength of 'none' and observes 'No device \u2014 in-person transaction (no FROM_DEVICE edge)'.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C05876",
+          "C05876-K2"
+        ]
+      },
+      {
+        "claim": "The detected pattern 'VelocityBurst' has a strength of 'weak' and observes '2 transaction(s) on card C05876-K2 within 1 hour of seed', '7 transaction(s) within 24 hours of seed', and '991 total transaction(s) on this card in the graph'.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C05876",
+          "C05876-K2"
+        ]
+      },
+      {
+        "claim": "The detected pattern 'AmountAnomaly' has a strength of 'none' and observes 'Seed amount: $30.91', 'Card average: $80.06 across 991 transaction(s) on card C05876-K2', and 'Ratio: 0.4x'.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C05876",
+          "C05876-K2"
+        ]
+      },
+      {
+        "claim": "The detected pattern 'NewDeviceWithProxy' has a strength of 'none' and observes 'No device \u2014 in-person transaction (no FROM_DEVICE edge)'.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C05876",
+          "C05876-K2"
+        ]
+      },
+      {
+        "claim": "There are no prior cases similar to this transaction.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C05876",
+          "C05876-K2"
+        ]
+      },
+      {
+        "claim": "There is no contradictory evidence in the graph.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C05876",
+          "C05876-K2"
+        ]
+      }
+    ],
+    "similar_prior_cases": [
+      "CC-0003",
+      "CC-2370"
+    ],
+    "summary": "The risk score for transaction 3553342 is 0.55. Transaction 3553342 was flagged by a real-time model. The transaction amount for transaction 3553342 is $30.91. The billing region for transaction 3553342 is 494.0.",
+    "written_to_graph": true,
+    "graph_case_id": "HHG-012"
+  },
+  "evidence_requests": [
+    {
+      "type": "request_transaction_history_extension",
+      "asked_after_step": 1,
+      "assumed_response": "extended_history_available",
+      "requested_from_missing": "More information about the customer's behavior and transaction history",
+      "extra_transactions": [
+        {
+          "txn_id": "EXT_71124_1",
+          "amount": 226.24,
+          "channel": "in-person",
+          "risk_score": 0.24
+        },
+        {
+          "txn_id": "EXT_71124_2",
+          "amount": 226.61,
+          "channel": "online",
+          "risk_score": 0.43
+        }
+      ]
+    },
+    {
+      "type": "request_transaction_history_extension",
+      "asked_after_step": 1,
+      "assumed_response": "extended_history_available",
+      "requested_from_missing": "More information about the card's usage and transaction history",
+      "extra_transactions": [
+        {
+          "txn_id": "EXT_71124_1",
+          "amount": 226.24,
+          "channel": "in-person",
+          "risk_score": 0.24
+        },
+        {
+          "txn_id": "EXT_71124_2",
+          "amount": 226.61,
+          "channel": "online",
+          "risk_score": 0.43
+        }
+      ]
+    },
+    {
+      "type": "request_device_fingerprint",
+      "asked_after_step": 2,
+      "assumed_response": "new_device_signal",
+      "requested_from_missing": "More information about the customer's behavior and device usage would help resolve remaining uncertainty."
+    }
+  ],
+  "next_best_actions": {
+    "initial": [
+      {
+        "action": "MONITOR_CARD",
+        "route": "auto",
+        "reason": "R4: Insufficient evidence to support blocking, but monitoring is recommended due to the risk score of 0.55 and the lack of prior cases similar to this transaction."
+      },
+      {
+        "action": "STEP_UP_AUTH",
+        "route": "auto",
+        "reason": "R1: The risk score of 0.55 is below 0.70, and there is insufficient evidence to support blocking, so step-up authentication is recommended to verify the customer's identity."
+      }
+    ],
+    "final": [
+      {
+        "action": "MONITOR_CARD",
+        "route": "auto",
+        "reason": "R1: The risk score for transaction 3553342 is 0.55, which is below the threshold of 0.70, and there is no contradictory evidence in the graph. Therefore, we should use VERIFY_WITH_CUSTOMER or STEP_UP_AUTH before any block, but since there is no clear indication of fraud, we will monitor the card instead."
+      },
+      {
+        "action": "VERIFY_WITH_CUSTOMER",
+        "route": "auto",
+        "reason": "R1: The risk score for transaction 3553342 is 0.55, which is below the threshold of 0.70, and there is no contradictory evidence in the graph. Therefore, we should use VERIFY_WITH_CUSTOMER or STEP_UP_AUTH before any block."
+      }
+    ],
+    "what_changed": "Added: VERIFY_WITH_CUSTOMER; Removed: STEP_UP_AUTH after additional evidence was gathered."
+  },
+  "sar": {
+    "file": false,
+    "reason": "",
+    "narrative": "",
+    "subjects": [
+      "C05876",
+      "C05876-K2"
+    ],
+    "total_amount_usd": 30.91,
+    "activity_dates": [
+      "2016-12-18 04:00:31",
+      "2016-12-18 04:00:31"
+    ]
+  },
+  "stop_reason": "Investigation completed normally",
+  "tool_calls": 20,
+  "tokens": 0,
+  "latency_s": 98.0
+}

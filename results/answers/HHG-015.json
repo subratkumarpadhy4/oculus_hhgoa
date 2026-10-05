@@ -1,0 +1,274 @@
+{
+  "case_id": "HHG-015",
+  "case": {
+    "status": "escalated",
+    "verdict": "uncertain",
+    "fraud_probability": 0.5,
+    "pattern": "card_testing",
+    "pattern_description": "",
+    "affected_txn_ids": [
+      "3464869"
+    ],
+    "first_suspicious_txn_id": "3464869",
+    "connected_card_ids": [
+      "C03042-K1"
+    ],
+    "connected_device_profiles": [
+      "8a33751c9961587710cc1a8c164a5b14"
+    ],
+    "exposure_usd": 599.94,
+    "evidence": [
+      {
+        "claim": "The risk score for transaction 3464869 is 0.77.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C03042",
+          "C03042-K1"
+        ]
+      },
+      {
+        "claim": "The transaction amount is $599.94.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C03042",
+          "C03042-K1"
+        ]
+      },
+      {
+        "claim": "The transaction was made online.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C03042",
+          "C03042-K1"
+        ]
+      },
+      {
+        "claim": "The card used for the transaction is C03042-K1.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C03042",
+          "C03042-K1"
+        ]
+      },
+      {
+        "claim": "The customer ID associated with the card is C03042.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C03042",
+          "C03042-K1"
+        ]
+      },
+      {
+        "claim": "The card type is credit.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C03042",
+          "C03042-K1"
+        ]
+      },
+      {
+        "claim": "The card network is Mastercard.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C03042",
+          "C03042-K1"
+        ]
+      },
+      {
+        "claim": "The billing region for the transaction is 327.0.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C03042",
+          "C03042-K1"
+        ]
+      },
+      {
+        "claim": "The device used for the transaction is a desktop with Trident/7.0 browser and Windows 8.1 OS.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C03042",
+          "C03042-K1"
+        ]
+      },
+      {
+        "claim": "The device is new for the account.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C03042",
+          "C03042-K1"
+        ]
+      },
+      {
+        "claim": "There is no proxy used for the transaction.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C03042",
+          "C03042-K1"
+        ]
+      },
+      {
+        "claim": "The customer has 1 card.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C03042",
+          "C03042-K1"
+        ]
+      },
+      {
+        "claim": "The customer has made 79 transactions in total.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C03042",
+          "C03042-K1"
+        ]
+      },
+      {
+        "claim": "The recent transactions on the card show a velocity burst with 4 transactions within 24 hours of the seed transaction.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C03042",
+          "C03042-K1"
+        ]
+      },
+      {
+        "claim": "The recent transactions on the card show an amount anomaly with a ratio of 4.1x compared to the card average.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C03042",
+          "C03042-K1"
+        ]
+      },
+      {
+        "claim": "The device has been shared across 1 distinct customer(s).",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C03042",
+          "C03042-K1"
+        ]
+      }
+    ],
+    "similar_prior_cases": [
+      "CC-1313",
+      "CC-3886",
+      "CC-0615"
+    ],
+    "summary": "The risk score for transaction 3464869 is 0.77. The transaction amount is $599.94. The transaction was made online. The card used for the transaction is C03042-K1.",
+    "written_to_graph": true,
+    "graph_case_id": "HHG-015"
+  },
+  "evidence_requests": [
+    {
+      "type": "request_transaction_history_extension",
+      "asked_after_step": 1,
+      "assumed_response": "extended_history_available",
+      "requested_from_missing": "More information about the customer's behavior and transaction history would be helpful to determine the likelihood of card testing.",
+      "extra_transactions": [
+        {
+          "txn_id": "EXT_6451_1",
+          "amount": 79.51,
+          "channel": "online",
+          "risk_score": 0.51
+        },
+        {
+          "txn_id": "EXT_6451_2",
+          "amount": 79.88,
+          "channel": "in-person",
+          "risk_score": 0.7
+        },
+        {
+          "txn_id": "EXT_6451_3",
+          "amount": 80.25,
+          "channel": "online",
+          "risk_score": 0.89
+        }
+      ]
+    },
+    {
+      "type": "request_transaction_history_extension",
+      "asked_after_step": 2,
+      "assumed_response": "extended_history_available",
+      "requested_from_missing": "More information about the customer's behavior and transaction history would be helpful to determine the likelihood of card testing.",
+      "extra_transactions": [
+        {
+          "txn_id": "EXT_6451_1",
+          "amount": 79.51,
+          "channel": "online",
+          "risk_score": 0.51
+        },
+        {
+          "txn_id": "EXT_6451_2",
+          "amount": 79.88,
+          "channel": "in-person",
+          "risk_score": 0.7
+        },
+        {
+          "txn_id": "EXT_6451_3",
+          "amount": 80.25,
+          "channel": "online",
+          "risk_score": 0.89
+        }
+      ]
+    }
+  ],
+  "next_best_actions": {
+    "initial": [
+      {
+        "action": "MONITOR_CARD",
+        "route": "auto",
+        "reason": "R1: The risk score for transaction 3464869 is 0.77, which is a single signal, and the probability is less than 0.70. Therefore, we should use VERIFY_WITH_CUSTOMER or STEP_UP_AUTH before any block, but since the evidence is insufficient to support STEP_UP_AUTH, we recommend MONITOR_CARD."
+      },
+      {
+        "action": "VERIFY_WITH_CUSTOMER",
+        "route": "auto",
+        "reason": "R1: The risk score for transaction 3464869 is 0.77, which is a single signal, and the probability is less than 0.70. Therefore, we should use VERIFY_WITH_CUSTOMER or STEP_UP_AUTH before any block."
+      }
+    ],
+    "final": [
+      {
+        "action": "MONITOR_CARD",
+        "route": "auto",
+        "reason": "R1: The risk score is 0.77, which is below the threshold of 0.70, and there is no prior case match or contradictory evidence. Additionally, the device is new for the account, and there is no proxy used for the transaction. Therefore, we should monitor the card before taking any further action."
+      },
+      {
+        "action": "STEP_UP_AUTH",
+        "route": "auto",
+        "reason": "R1: The risk score is 0.77, which is below the threshold of 0.70, and there is no prior case match or contradictory evidence. Additionally, the device is new for the account, and there is no proxy used for the transaction. Therefore, we should step up the authentication process to verify the customer's identity."
+      }
+    ],
+    "what_changed": "Added: STEP_UP_AUTH; Removed: VERIFY_WITH_CUSTOMER after additional evidence was gathered."
+  },
+  "sar": {
+    "file": false,
+    "reason": "",
+    "narrative": "",
+    "subjects": [
+      "C03042",
+      "C03042-K1"
+    ],
+    "total_amount_usd": 599.94,
+    "activity_dates": [
+      "2016-11-17 14:03:36",
+      "2016-11-17 14:03:36"
+    ]
+  },
+  "stop_reason": "Investigation completed normally",
+  "tool_calls": 20,
+  "tokens": 0,
+  "latency_s": 73.0
+}

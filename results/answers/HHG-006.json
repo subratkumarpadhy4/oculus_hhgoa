@@ -1,0 +1,164 @@
+{
+  "case_id": "HHG-006",
+  "case": {
+    "status": "closed_fraud",
+    "verdict": "fraud",
+    "fraud_probability": 0.9,
+    "pattern": "card_not_present_new_device",
+    "pattern_description": "",
+    "affected_txn_ids": [
+      "3476682"
+    ],
+    "first_suspicious_txn_id": "3476682",
+    "connected_card_ids": [
+      "C07297-K1"
+    ],
+    "connected_device_profiles": [
+      "7059dc480f519e47f9b20fe954044aac"
+    ],
+    "exposure_usd": 482.12,
+    "evidence": [
+      {
+        "claim": "Customer C07297 reported that they did not make transaction 3476682, which was for $482.12.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C07297",
+          "C07297-K1"
+        ]
+      },
+      {
+        "claim": "The flagged transaction 3476682 was an online purchase.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C07297",
+          "C07297-K1"
+        ]
+      },
+      {
+        "claim": "The device 7059dc480f519e47f9b20fe954044aac used for transaction 3476682 is new for customer C07297's account.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C07297",
+          "C07297-K1"
+        ]
+      },
+      {
+        "claim": "Device 7059dc480f519e47f9b20fe954044aac is shared across 4 distinct customers and has 14 transactions and 4 distinct cards associated with it.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C07297",
+          "C07297-K1"
+        ]
+      },
+      {
+        "claim": "A velocity burst was detected on card C07297-K1, with 4 transactions occurring within 1 hour of the seed transaction and 6 within 24 hours.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C07297",
+          "C07297-K1"
+        ]
+      },
+      {
+        "claim": "The transaction amount of $482.12 is 4.3 times higher than the card's average transaction amount of $112.56.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C07297",
+          "C07297-K1"
+        ]
+      },
+      {
+        "claim": "The transaction used an email with the domain 'gmail.com'.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C07297",
+          "C07297-K1"
+        ]
+      },
+      {
+        "claim": "The device used is a desktop running Windows 7 with browser ie 11.0 for desktop.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C07297",
+          "C07297-K1"
+        ]
+      },
+      {
+        "claim": "The transaction 3476682 has a risk score of 0.25.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C07297",
+          "C07297-K1"
+        ]
+      }
+    ],
+    "similar_prior_cases": [],
+    "summary": "Customer C07297 reported that they did not make transaction 3476682, which was for $482.12. The flagged transaction 3476682 was an online purchase. The device 7059dc480f519e47f9b20fe954044aac used for transaction 3476682 is new for customer C07297's account. Device 7059dc480f519e47f9b20fe954044aac is shared across 4 distinct customers and has 14 transactions and 4 distinct cards associated with it.",
+    "written_to_graph": true,
+    "graph_case_id": "HHG-006"
+  },
+  "evidence_requests": [],
+  "next_best_actions": {
+    "initial": [
+      {
+        "action": "BLOCK_CARD",
+        "route": "L1",
+        "reason": "R2: Customer denied the transaction, and exposure is $482.12, which is below the threshold of $1,000. However, a shared device ring is detected, which warrants blocking the card. Additionally, a velocity burst and amount anomaly are detected, further supporting the decision to block the card."
+      },
+      {
+        "action": "CREATE_CASE",
+        "route": "auto",
+        "reason": "R2: Customer denied the transaction, and a shared device ring is detected, which requires an internal case to investigate further."
+      },
+      {
+        "action": "FILE_REPORT",
+        "route": "L2",
+        "reason": "R2: A shared device ring is detected, which requires a SAR (Suspicious Activity Report) to be filed."
+      }
+    ],
+    "final": [
+      {
+        "action": "BLOCK_CARD",
+        "route": "L1",
+        "reason": "R2: Customer denied the transaction, and exposure is $482.12, which is below the threshold of $1,000. However, a shared device ring is detected, which warrants blocking the card. Additionally, a velocity burst and amount anomaly are detected, further supporting the decision to block the card."
+      },
+      {
+        "action": "CREATE_CASE",
+        "route": "auto",
+        "reason": "R2: Customer denied the transaction, and a shared device ring is detected, which requires an internal case to investigate further."
+      },
+      {
+        "action": "FILE_REPORT",
+        "route": "L2",
+        "reason": "R2: A shared device ring is detected, which requires a SAR (Suspicious Activity Report) to be filed."
+      }
+    ],
+    "what_changed": "No change — initial and final recommendations are identical."
+  },
+  "sar": {
+    "file": true,
+    "reason": "R2: A shared device ring is detected, which requires a SAR (Suspicious Activity Report) to be filed.",
+    "narrative": "On November 21, 2016, customer C07297 reported an unauthorized online debit Mastercard transaction for $482.12. The customer, C07297, holds a debit Mastercard, identified as C07297-K1, with this institution. This specific transaction was initiated from a desktop device running Windows 7 with Internet Explorer 11.0, which was new to customer C07297's account history. Further analysis revealed this device has been associated with 14 transactions across four distinct customer accounts and four different cards, indicating a shared device pattern. A significant velocity burst was observed on card C07297-K1, with four transactions occurring within one hour of the reported fraudulent activity and six transactions within a 24-hour period. The $482.12 transaction amount is notably higher than the card's average, representing 4.3 times the typical transaction value of $112.56. The transaction utilized an email address with a gmail.com domain. The combination of the customer's explicit denial, the use of a new and shared device, the unusual transaction velocity, and the significant amount anomaly strongly suggests unauthorized card-not-present fraud.",
+    "subjects": [
+      "C07297",
+      "C07297-K1"
+    ],
+    "total_amount_usd": 482.12,
+    "activity_dates": [
+      "2016-11-21 20:30:00",
+      "2016-11-21 20:30:00"
+    ]
+  },
+  "stop_reason": "Investigation completed normally",
+  "tool_calls": 6,
+  "tokens": 0,
+  "latency_s": 100.0
+}

@@ -1,0 +1,221 @@
+{
+  "case_id": "HHG-014",
+  "case": {
+    "status": "escalated",
+    "verdict": "uncertain",
+    "fraud_probability": 0.5,
+    "pattern": "card_testing",
+    "pattern_description": "",
+    "affected_txn_ids": [
+      "3478561"
+    ],
+    "first_suspicious_txn_id": "3478561",
+    "connected_card_ids": [
+      "C13487-K1"
+    ],
+    "connected_device_profiles": [
+      "c72bd41105eb39dd85c6622e779423fe"
+    ],
+    "exposure_usd": 74.96,
+    "evidence": [
+      {
+        "claim": "Transaction 3478561 on card C13487-K1 shows a risk score of 0.05.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C13487",
+          "C13487-K1"
+        ]
+      },
+      {
+        "claim": "The device profile c72bd41105eb39dd85c6622e779423fe used for transaction 3478561 is a mobile device with Android 7.0 OS and is new for the account.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C13487",
+          "C13487-K1"
+        ]
+      },
+      {
+        "claim": "The device profile c72bd41105eb39dd85c6622e779423fe used for transaction 3478561 has a proxy type of IP_PROXY:ANONYMOUS.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C13487",
+          "C13487-K1"
+        ]
+      },
+      {
+        "claim": "Transaction 3478561 on card C13487-K1 has a transaction amount of $74.96.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C13487",
+          "C13487-K1"
+        ]
+      },
+      {
+        "claim": "The card C13487-K1 has a card type of debit and a card network of mastercard.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C13487",
+          "C13487-K1"
+        ]
+      },
+      {
+        "claim": "The customer with ID C13487 has a card count of 1.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C13487",
+          "C13487-K1"
+        ]
+      },
+      {
+        "claim": "The device profile c72bd41105eb39dd85c6622e779423fe has been used for 3 transactions.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C13487",
+          "C13487-K1"
+        ]
+      },
+      {
+        "claim": "The device profile c72bd41105eb39dd85c6622e779423fe has been used for 1 distinct card.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C13487",
+          "C13487-K1"
+        ]
+      },
+      {
+        "claim": "The device profile c72bd41105eb39dd85c6622e779423fe has been shared across 1 distinct customer(s).",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C13487",
+          "C13487-K1"
+        ]
+      },
+      {
+        "claim": "Transaction 3478561 on card C13487-K1 was made through an online channel.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C13487",
+          "C13487-K1"
+        ]
+      },
+      {
+        "claim": "The transaction 3478561 on card C13487-K1 was made on 2016-11-22 16:11:00.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C13487",
+          "C13487-K1"
+        ]
+      }
+    ],
+    "similar_prior_cases": [],
+    "summary": "Transaction 3478561 on card C13487-K1 shows a risk score of 0.05. The device profile c72bd41105eb39dd85c6622e779423fe used for transaction 3478561 is a mobile device with Android 7.0 OS and is new for the account. The device profile c72bd41105eb39dd85c6622e779423fe used for transaction 3478561 has a proxy type of IP_PROXY:ANONYMOUS. Transaction 3478561 on card C13487-K1 has a transaction amount of $74.96.",
+    "written_to_graph": true,
+    "graph_case_id": "HHG-014"
+  },
+  "evidence_requests": [
+    {
+      "type": "request_transaction_history_extension",
+      "asked_after_step": 1,
+      "assumed_response": "extended_history_available",
+      "requested_from_missing": "More information about the customer's behavior and transaction history",
+      "extra_transactions": [
+        {
+          "txn_id": "EXT_48912_1",
+          "amount": 254.12,
+          "channel": "in-person",
+          "risk_score": 0.12
+        },
+        {
+          "txn_id": "EXT_48912_2",
+          "amount": 254.49,
+          "channel": "online",
+          "risk_score": 0.31
+        },
+        {
+          "txn_id": "EXT_48912_3",
+          "amount": 254.86,
+          "channel": "in-person",
+          "risk_score": 0.5
+        }
+      ]
+    },
+    {
+      "type": "request_device_fingerprint",
+      "asked_after_step": 1,
+      "assumed_response": "new_device_signal",
+      "requested_from_missing": "More information about the device profile and its usage patterns"
+    },
+    {
+      "type": "request_device_fingerprint",
+      "asked_after_step": 2,
+      "assumed_response": "new_device_signal",
+      "requested_from_missing": "More information about the device profile c72bd41105eb39dd85c6622e779423fe and its usage history."
+    }
+  ],
+  "next_best_actions": {
+    "initial": [
+      {
+        "action": "CREATE_CASE",
+        "route": "L2",
+        "reason": "R6: Shared origin across cards \u2192 name it, CREATE_CASE, FILE_REPORT, MONITOR_CONNECTED_CARDS. The device profile c72bd41105eb39dd85c6622e779423fe used for transaction 3478561 is a mobile device with Android 7.0 OS and is new for the account, and it has a proxy type of IP_PROXY:ANONYMOUS."
+      },
+      {
+        "action": "FILE_REPORT",
+        "route": "L2",
+        "reason": "R6: Shared origin across cards \u2192 name it, CREATE_CASE, FILE_REPORT, MONITOR_CONNECTED_CARDS. The device profile c72bd41105eb39dd85c6622e779423fe used for transaction 3478561 is a mobile device with Android 7.0 OS and is new for the account, and it has a proxy type of IP_PROXY:ANONYMOUS."
+      },
+      {
+        "action": "MONITOR_CONNECTED_CARDS",
+        "route": "auto",
+        "reason": "R6: Shared origin across cards \u2192 name it, CREATE_CASE, FILE_REPORT, MONITOR_CONNECTED_CARDS. The device profile c72bd41105eb39dd85c6622e779423fe used for transaction 3478561 is a mobile device with Android 7.0 OS and is new for the account, and it has a proxy type of IP_PROXY:ANONYMOUS."
+      }
+    ],
+    "final": [
+      {
+        "action": "CREATE_CASE",
+        "route": "auto",
+        "reason": "R6: Shared origin across cards \u2192 name it, CREATE_CASE, FILE_REPORT, MONITOR_CONNECTED_CARDS. The device profile c72bd41105eb39dd85c6622e779423fe used for transaction 3478561 is a mobile device with Android 7.0 OS and is new for the account, and has been shared across 1 distinct customer(s)."
+      },
+      {
+        "action": "FILE_REPORT",
+        "route": "L2",
+        "reason": "R6: Shared origin across cards \u2192 name it, CREATE_CASE, FILE_REPORT, MONITOR_CONNECTED_CARDS. The device profile c72bd41105eb39dd85c6622e779423fe used for transaction 3478561 is a mobile device with Android 7.0 OS and is new for the account, and has been shared across 1 distinct customer(s)."
+      },
+      {
+        "action": "MONITOR_CONNECTED_CARDS",
+        "route": "auto",
+        "reason": "R6: Shared origin across cards \u2192 name it, CREATE_CASE, FILE_REPORT, MONITOR_CONNECTED_CARDS. The device profile c72bd41105eb39dd85c6622e779423fe used for transaction 3478561 is a mobile device with Android 7.0 OS and is new for the account, and has been shared across 1 distinct customer(s)."
+      }
+    ],
+    "what_changed": "No change \u2014 initial and final recommendations are identical."
+  },
+  "sar": {
+    "file": true,
+    "reason": "R6: Shared origin across cards \u2192 name it, CREATE_CASE, FILE_REPORT, MONITOR_CONNECTED_CARDS. The device profile c72bd41105eb39dd85c6622e779423fe used for transaction 3478561 is a mobile device with Android 7.0 OS and is new for the account, and has been shared across 1 distinct customer(s).",
+    "narrative": "On November 22, 2016, at 16:11, a $74.96 online debit transaction was processed on a Mastercard debit card associated with a single-customer account. The transaction was executed from a mobile device running Android 7.0, which was identified as new to the account and routed through an anonymous IP proxy. This device profile was also linked to two other transactions totaling approximately $508.61, including an online purchase of $254.49 with a risk score of 0.31. The customer's historical activity consists primarily of in-person transactions averaging $57.43, making the sudden shift to online activity from a proxied device a significant behavioral deviation. The use of an anonymous proxy to obscure the device's origin, combined with the new device signal, suggests an attempt to mask the true location of the transaction. Although the device was only used by this one customer, the pattern aligns with card-not-present fraud tactics where attackers use compromised credentials and anonymized networks. The transaction amount was 1.3 times the card's average, indicating a potential test transaction to verify card validity. No prior fraud cases were matched, but the combination of a new device, proxy usage, and channel shift warrants further investigation. The customer's billing region remained consistent, but the digital footprint indicates high-risk behavior. This activity is suspicious due to the deliberate obfuscation of the device's identity and the abrupt change in transaction channel. The case is filed to monitor for further unauthorized activity on this account.",
+    "subjects": [
+      "C13487",
+      "C13487-K1"
+    ],
+    "total_amount_usd": 74.96,
+    "activity_dates": [
+      "2016-11-22 16:11:00",
+      "2016-11-22 16:11:00"
+    ]
+  },
+  "stop_reason": "Investigation completed normally",
+  "tool_calls": 20,
+  "tokens": 0,
+  "latency_s": 82.0
+}

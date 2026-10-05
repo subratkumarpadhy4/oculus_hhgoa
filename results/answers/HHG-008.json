@@ -1,0 +1,162 @@
+{
+  "case_id": "HHG-008",
+  "case": {
+    "status": "closed_fraud",
+    "verdict": "fraud",
+    "fraud_probability": 0.85,
+    "pattern": "card_not_present_new_device",
+    "pattern_description": "",
+    "affected_txn_ids": [
+      "3558054"
+    ],
+    "first_suspicious_txn_id": "3558054",
+    "connected_card_ids": [
+      "C13171-K2"
+    ],
+    "connected_device_profiles": [
+      "f89aeb1d49ce10354e15a013984757e9"
+    ],
+    "exposure_usd": 55.68,
+    "evidence": [
+      {
+        "claim": "Customer C13171 reported transaction 3558054 for $55.68 as unauthorized, stating they never made the purchase.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C13171",
+          "C13171-K2"
+        ]
+      },
+      {
+        "claim": "Transaction 3558054 was conducted via an online channel using card C13171-K2 on 2016-12-19 22:08:56.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C13171",
+          "C13171-K2"
+        ]
+      },
+      {
+        "claim": "Device f89aeb1d49ce10354e15a013984757e9 was identified as new for the account (is_new_for_account: true).",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C13171",
+          "C13171-K2"
+        ]
+      },
+      {
+        "claim": "Device f89aeb1d49ce10354e15a013984757e9 is associated with a shared device ring involving 4 distinct customers, 4 cards, and 104 transactions.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C13171",
+          "C13171-K2"
+        ]
+      },
+      {
+        "claim": "Velocity burst detected with 3 transactions on card C13171-K2 within 1 hour and 8 transactions within 24 hours of the flagged transaction.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C13171",
+          "C13171-K2"
+        ]
+      },
+      {
+        "claim": "The transaction amount of $55.68 closely aligns with the historical card average of $54.27 across 928 transactions.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C13171",
+          "C13171-K2"
+        ]
+      }
+    ],
+    "similar_prior_cases": [
+      "CC-1715",
+      "CC-4819",
+      "CC-3422",
+      "CC-3566",
+      "CC-2716"
+    ],
+    "summary": "Customer C13171 reported transaction 3558054 for $55.68 as unauthorized, stating they never made the purchase. Transaction 3558054 was conducted via an online channel using card C13171-K2 on 2016-12-19 22:08:56. Device f89aeb1d49ce10354e15a013984757e9 was identified as new for the account (is_new_for_account: true). Device f89aeb1d49ce10354e15a013984757e9 is associated with a shared device ring involving 4 distinct customers, 4 cards, and 104 transactions.",
+    "written_to_graph": true,
+    "graph_case_id": "HHG-008"
+  },
+  "evidence_requests": [
+    {
+      "type": "request_customer_validation",
+      "asked_after_step": 1,
+      "assumed_response": "denied",
+      "requested_from_missing": "Merchant details for transaction 3558054."
+    },
+    {
+      "type": "request_customer_validation",
+      "asked_after_step": 1,
+      "assumed_response": "denied",
+      "requested_from_missing": "IP address associated with transaction 3558054."
+    },
+    {
+      "type": "request_customer_validation",
+      "asked_after_step": 1,
+      "assumed_response": "denied",
+      "requested_from_missing": "Geolocation data for the transaction and customer's typical location."
+    }
+  ],
+  "next_best_actions": {
+    "initial": [
+      {
+        "action": "BLOCK_CARD",
+        "route": "L1",
+        "reason": "R2: Customer denied the transaction (customer_report trigger type) and exposure is $55.68, which is below the $1,000 threshold. Additionally, a shared device ring is detected with a moderate strength."
+      },
+      {
+        "action": "CREATE_CASE",
+        "route": "auto",
+        "reason": "R2: Customer denied the transaction and a shared device ring is detected, which requires an internal case."
+      },
+      {
+        "action": "FILE_REPORT",
+        "route": "L2",
+        "reason": "R2: Exposure is below the $1,000 threshold, but a shared device ring is detected, which requires a SAR (Suspicious Activity Report)."
+      }
+    ],
+    "final": [
+      {
+        "action": "BLOCK_CARD",
+        "route": "L1",
+        "reason": "R2: Customer denied the transaction, and exposure is $55.68 which is less than $1,000. Additionally, a shared device ring is detected, which warrants blocking the card."
+      },
+      {
+        "action": "CREATE_CASE",
+        "route": "auto",
+        "reason": "R2: Customer denied the transaction, and a shared device ring is detected, which requires an internal case."
+      },
+      {
+        "action": "FILE_REPORT",
+        "route": "L2",
+        "reason": "R2: A shared device ring is detected, which requires a SAR report."
+      }
+    ],
+    "what_changed": "No change — initial and final recommendations are identical."
+  },
+  "sar": {
+    "file": true,
+    "reason": "R2: A shared device ring is detected, which requires a SAR report.",
+    "narrative": "On December 19, 2016, at 22:08:56, an online transaction of $55.68 was processed using a Visa credit card associated with customer C13171. The customer subsequently contacted the financial institution to dispute the purchase, explicitly stating that they did not authorize or make the transaction. The transaction was initiated over the internet using an unrecognized desktop device running the Chrome web browser and linked to a Hotmail email domain. Further analysis revealed that this desktop device was newly introduced to the account and had been utilized across four distinct customer accounts and four separate payment cards. The flagged activity coincided with a notable transaction velocity on the card, comprising three transactions within a single hour and eight transactions within a twenty-four-hour window. Although the transaction amount of $55.68 aligns closely with the cardholder's historical spending average of $54.27, the cardholder confirmed the activity was completely unauthorized. The circumstances indicate potential card-not-present fraud where compromised payment credentials were used on a shared, unverified device endpoint. To mitigate further risk, the financial institution blocked card C13171-K2 and escalated the activity for suspicious activity reporting.",
+    "subjects": [
+      "C13171",
+      "C13171-K2"
+    ],
+    "total_amount_usd": 55.68,
+    "activity_dates": [
+      "2016-12-19 22:08:56",
+      "2016-12-19 22:08:56"
+    ]
+  },
+  "stop_reason": "Investigation completed normally",
+  "tool_calls": 20,
+  "tokens": 0,
+  "latency_s": 249.0
+}

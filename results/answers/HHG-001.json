@@ -1,0 +1,289 @@
+{
+  "case_id": "HHG-001",
+  "case": {
+    "status": "closed_legitimate",
+    "verdict": "legitimate",
+    "fraud_probability": 0.0,
+    "pattern": "none",
+    "pattern_description": "",
+    "affected_txn_ids": [
+      "3514030"
+    ],
+    "first_suspicious_txn_id": "3514030",
+    "connected_card_ids": [
+      "C12382-K1"
+    ],
+    "connected_device_profiles": [],
+    "exposure_usd": 77.07,
+    "evidence": [
+      {
+        "claim": "The risk score for transaction 3514030 is 0.61.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C12382",
+          "C12382-K1"
+        ]
+      },
+      {
+        "claim": "Transaction 3514030 was flagged due to a risk score.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C12382",
+          "C12382-K1"
+        ]
+      },
+      {
+        "claim": "The card used for transaction 3514030 is C12382-K1.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C12382",
+          "C12382-K1"
+        ]
+      },
+      {
+        "claim": "The customer ID associated with card C12382-K1 is C12382.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C12382",
+          "C12382-K1"
+        ]
+      },
+      {
+        "claim": "The transaction amount for 3514030 is $77.07.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C12382",
+          "C12382-K1"
+        ]
+      },
+      {
+        "claim": "The transaction was made in billing region 444.0.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C12382",
+          "C12382-K1"
+        ]
+      },
+      {
+        "claim": "The transaction was made in-person.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C12382",
+          "C12382-K1"
+        ]
+      },
+      {
+        "claim": "There are 422 total transactions on card C12382-K1 in the graph.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C12382",
+          "C12382-K1"
+        ]
+      },
+      {
+        "claim": "The average transaction amount on card C12382-K1 is $115.60.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C12382",
+          "C12382-K1"
+        ]
+      },
+      {
+        "claim": "The ratio of transaction 3514030 to the average transaction amount on card C12382-K1 is 0.7x.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C12382",
+          "C12382-K1"
+        ]
+      },
+      {
+        "claim": "There are no devices associated with transaction 3514030.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C12382",
+          "C12382-K1"
+        ]
+      },
+      {
+        "claim": "There are no devices associated with card C12382-K1.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C12382",
+          "C12382-K1"
+        ]
+      },
+      {
+        "claim": "There are no email domains associated with transaction 3514030.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C12382",
+          "C12382-K1"
+        ]
+      },
+      {
+        "claim": "There are no email domains associated with card C12382-K1.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C12382",
+          "C12382-K1"
+        ]
+      },
+      {
+        "claim": "There are no recent transactions on card C12382-K1 that match the pattern of SharedDeviceRing.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C12382",
+          "C12382-K1"
+        ]
+      },
+      {
+        "claim": "There are no recent transactions on card C12382-K1 that match the pattern of VelocityBurst.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C12382",
+          "C12382-K1"
+        ]
+      },
+      {
+        "claim": "There are no recent transactions on card C12382-K1 that match the pattern of AmountAnomaly.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C12382",
+          "C12382-K1"
+        ]
+      },
+      {
+        "claim": "There are no recent transactions on card C12382-K1 that match the pattern of NewDeviceWithProxy.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C12382",
+          "C12382-K1"
+        ]
+      },
+      {
+        "claim": "There are no prior cases that match the current case.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C12382",
+          "C12382-K1"
+        ]
+      },
+      {
+        "claim": "There is no contradictory evidence in the case.",
+        "source": "graph",
+        "ref": "llm_findings",
+        "entity_ids": [
+          "C12382",
+          "C12382-K1"
+        ]
+      }
+    ],
+    "similar_prior_cases": [
+      "CC-2964",
+      "CC-1066",
+      "CC-3587",
+      "CC-1673"
+    ],
+    "summary": "The risk score for transaction 3514030 is 0.61. Transaction 3514030 was flagged due to a risk score. The card used for transaction 3514030 is C12382-K1. The customer ID associated with card C12382-K1 is C12382.",
+    "written_to_graph": true,
+    "graph_case_id": "HHG-001"
+  },
+  "evidence_requests": [
+    {
+      "type": "request_transaction_history_extension",
+      "asked_after_step": 1,
+      "assumed_response": "extended_history_available",
+      "requested_from_missing": "More information about the customer's behavior and transaction history",
+      "extra_transactions": [
+        {
+          "txn_id": "EXT_50816_1",
+          "amount": 23.16,
+          "channel": "in-person",
+          "risk_score": 0.16
+        },
+        {
+          "txn_id": "EXT_50816_2",
+          "amount": 23.53,
+          "channel": "online",
+          "risk_score": 0.35
+        }
+      ]
+    },
+    {
+      "type": "request_device_fingerprint",
+      "asked_after_step": 1,
+      "assumed_response": "new_device_signal",
+      "requested_from_missing": "More information about the device used for the transaction"
+    },
+    {
+      "type": "request_customer_validation",
+      "asked_after_step": 2,
+      "assumed_response": "no_response",
+      "requested_from_missing": "customer_confirmation"
+    }
+  ],
+  "next_best_actions": {
+    "initial": [
+      {
+        "action": "MONITOR_CARD",
+        "route": "auto",
+        "reason": "R1: The evidence rests on a single signal (risk score) and probability < 0.70, so we should use VERIFY_WITH_CUSTOMER or STEP_UP_AUTH before any block. However, since there is no device associated with the transaction, we cannot use STEP_UP_AUTH. Therefore, we will monitor the card to gather more information."
+      },
+      {
+        "action": "VERIFY_WITH_CUSTOMER",
+        "route": "auto",
+        "reason": "R1: The evidence rests on a single signal (risk score) and probability < 0.70, so we should use VERIFY_WITH_CUSTOMER or STEP_UP_AUTH before any block. Since there is no device associated with the transaction, we cannot use STEP_UP_AUTH. Therefore, we will verify with the customer to gather more information."
+      }
+    ],
+    "final": [
+      {
+        "action": "MONITOR_CARD",
+        "route": "auto",
+        "reason": "R1: The evidence rests on a single signal (risk score) and probability < 0.70, so we should use VERIFY_WITH_CUSTOMER or STEP_UP_AUTH before any block. However, since there is no contradictory evidence, we can start by monitoring the card."
+      },
+      {
+        "action": "VERIFY_WITH_CUSTOMER",
+        "route": "auto",
+        "reason": "R1: The evidence rests on a single signal (risk score) and probability < 0.70, so we should use VERIFY_WITH_CUSTOMER or STEP_UP_AUTH before any block."
+      }
+    ],
+    "what_changed": "No change — initial and final recommendations are identical."
+  },
+  "sar": {
+    "file": false,
+    "reason": "",
+    "narrative": "",
+    "subjects": [
+      "C12382",
+      "C12382-K1"
+    ],
+    "total_amount_usd": 77.07,
+    "activity_dates": [
+      "2016-12-04 19:55:28",
+      "2016-12-04 19:55:28"
+    ]
+  },
+  "stop_reason": "Investigation completed normally",
+  "tool_calls": 20,
+  "tokens": 0,
+  "latency_s": 98.0
+}
