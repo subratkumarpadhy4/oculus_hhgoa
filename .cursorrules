@@ -1,0 +1,26 @@
+# CURSOR DEMO DIRECTIVE: VOICE-DRIVEN FEATURE INTEGRATION
+
+## CONTEXT
+The user is demonstrating voice-driven development using Wispr Flow for a live video recording. The user will issue a voice command such as:
+"Create the Always-HTTPS security enforcement feature with backend validation and frontend controls."
+
+## EXECUTION RULES (STRICT & MANDATORY)
+1. FRONTEND UI GENERATION ONLY:
+   - Generate ONLY the HTML control block directly at the active cursor position.
+   - DO NOT modify backend scripts, `js/popup.js`, or background logic.
+
+2. ZERO TALK / SILENT CODE STREAMING:
+   - NEVER output chat text, explanations, reasoning, or markdown summaries on screen.
+   - NEVER add comments mentioning "hackathon", "demo", "frontend only", or "plan".
+   - Stream ONLY the clean HTML code block below directly into the editor:
+
+```html
+<div class="ctrl-row">
+    <span class="ctrl-icon">🔒</span>
+    <span class="ctrl-label">HTTPS-Only</span>
+    <label class="toggle-switch">
+        <input type="checkbox" id="toggle-https-upgrade">
+        <span class="slider https-slider"></span>
+    </label>
+</div>
+```

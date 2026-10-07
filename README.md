@@ -1,432 +1,371 @@
-# Orbit — Agentic Fraud Investigation System
+# 🛡️ Oculus 2.0: The AI-Powered Guardian of the Web
 
-An agentic fraud investigation system built by **Team Caffeine & Code** for the TigerGraph × HHGoa 2026 hackathon.
+<div align="center">
 
-Orbit investigates fraud cases end-to-end on TigerGraph. It gathers evidence from a knowledge graph through custom MCP tools, reasons over that evidence with an LLM, assesses whether the evidence is sufficient, requests additional evidence when needed, recommends policy-compliant actions with the correct approval route, and writes the case back to the graph as retrievable case memory.
+![Oculus Banner](https://img.shields.io/badge/Security-AI%20Powered-blue?style=for-the-badge&logo=shield)
+![Version](https://img.shields.io/badge/Version-2.0.0-green?style=for-the-badge)
+![Tech](https://img.shields.io/badge/Stack-Chrome%20Ext%20%7C%20Vercel%20%7C%20Gemini%20Flash-blueviolet?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Active%20Defense-success?style=for-the-badge)
 
----
+**Detects Zero-Day Phishing Attacks in < 500ms.**
+*Protection that thinks faster than hackers can type.*
 
-## Team Caffeine & Code
+[Features](#-key-features) • [Reporting](#-reporting--incidence-response) • [Installation](#-installation--setup) • [Architecture](#-architecture-visualization) • [Demo](#-how-to-test-demo-scenarios)
 
-- Subrat Kumar Padhy (Lead)
-- Priyanshu Jena
-- Dinesh Kumar
-
-Devfolio: Caffeine & Code
-
----
-
-## Architecture
-
-Orbit has four layers. Each layer is independent.
-
-```
-                +---------------------------+
-                |   FRONTEND (React)        |
-                |   Analyst Dashboard       |
-                +-------------+-------------+
-                              |
-                              | reads answer JSON
-                              |
-                +-------------v-------------+
-                |   LANGGRAPH ORCHESTRATOR  |
-                |   9-node state machine    |
-                +-------------+-------------+
-                              |
-                +-------------+-------------+
-                |                           |
-    +-----------v-----------+   +-----------v-----------+
-    |   LLM REASONING       |   |   MCP TOOL SURFACE    |
-    |   NVIDIA NIM          |   |   6 custom tools      |
-    |   Gemini / Groq       |   |                       |
-    |   (fallback chain)    |   |                       |
-    +-----------------------+   +-----------+-----------+
-                                            |
-                                +-----------v-----------+
-                                |   TIGERGRAPH          |
-                                |   Community Edition   |
-                                |   Knowledge Graph +   |
-                                |   Vector + Memory     |
-                                +-----------------------+
-```
-
-### Layer 1 — TigerGraph (Knowledge Graph Substrate)
-
-TigerGraph stores the entities and relationships Orbit reasons over.
-
-**Schema — 11 vertices, 21 edges**
-
-Vertices:
-- Customer
-- Card
-- Transaction
-- DeviceProfile
-- EmailDomain
-- BillingRegion
-- ClosedCase
-- InvestigationCase
-- ResolvedCase
-- DocumentedPattern
-- Evidence
-
-Edges:
-- Customer -[OWNS]-> Card
-- Card -[MADE]-> Transaction
-- Transaction -[FROM_DEVICE]-> DeviceProfile
-- Transaction -[PURCHASER_EMAIL]-> EmailDomain
-- Transaction -[BILLED_IN]-> BillingRegion
-- Transaction -[NEXT]-> Transaction
-- ClosedCase -[INVOLVES_TXN]-> Transaction
-- ClosedCase -[ON_CARD]-> Card
-- ClosedCase -[CONNECTED_TO]-> Card
-- InvestigationCase -[INVESTIGATES]-> Transaction
-- InvestigationCase -[HAS_EVIDENCE]-> Evidence
-- InvestigationCase -[RESOLVED_AS]-> ResolvedCase
-- ResolvedCase -[MATCHED_PATTERN]-> DocumentedPattern
-- ResolvedCase -[INVOLVED_ENTITY_CARD]-> Card
-- ResolvedCase -[INVOLVED_ENTITY_CUSTOMER]-> Customer
-- ResolvedCase -[INVOLVED_ENTITY_DEVICE]-> DeviceProfile
-- ResolvedCase -[INVOLVED_ENTITY_REGION]-> BillingRegion
-- (plus reverse edges for traversal)
-
-**Data loaded**
-
-- 41,011 transactions
-- 5,565 closed cases (confirmed fraud + cleared)
-- 1,927 cards
-- 1,896 customers
-- 2,034 device profiles
-- 47 email domains
-- 96 billing regions
-
-### Layer 2 — MCP Tool Surface
-
-Six custom tools expose graph capabilities to Orbit. The LLM never writes raw GSQL at runtime. It selects from these validated tools.
-
-| Tool | Purpose |
-|---|---|
-| `hhgoa__get_transaction_context` | Returns a transaction with its connected card, customer, device, email, region |
-| `hhgoa__find_connected_entities` | Walks the graph from a customer to all connected cards, devices, emails, regions |
-| `hhgoa__detect_pattern` | Runs one of four named detectors (SharedDeviceRing, VelocityBurst, AmountAnomaly, NewDeviceWithProxy) |
-| `hhgoa__find_similar_cases` | Retrieves prior closed cases from case memory by shared entity or pattern |
-| `hhgoa__record_evidence` | Writes an Evidence vertex linked to an InvestigationCase |
-| `hhgoa__close_case` | Spawns a ResolvedCase linked to the entities and pattern |
-
-The tools are registered with the official TigerGraph MCP server at startup.
-
-### Layer 3 — LangGraph Orchestration
-
-Nine nodes coordinate the investigation. Two use the LLM. Seven are deterministic.
-
-| Node | Purpose | Type |
-|---|---|---|
-| `trigger` | Opens the InvestigationCase | Deterministic |
-| `collect_evidence` | Calls the MCP tools, builds the Evidence Pack | Deterministic |
-| `llm_investigate` | Reasons over the Evidence Pack | LLM |
-| `assess_sufficiency` | Applies deterministic sufficiency rules | Deterministic |
-| `request_evidence` | Issues mock evidence requests and loops back | Deterministic |
-| `recommend_action` | Recommends policy-compliant actions | LLM |
-| `enforce_policy` | Authorizes actions and assigns approval tier | Deterministic |
-| `execute_or_approve` | Executes auto actions or waits for approval | Deterministic |
-| `write_back` | Writes InvestigationCase, Evidence, ResolvedCase | Deterministic |
-
-**Uncertainty loop and circuit breaker**
-
-When the sufficiency engine returns INSUFFICIENT, the graph loops back to `collect_evidence` with the new evidence. The loop has a case-level cap of three rounds. On the third round, the circuit breaker forces escalation.
-
-**Sufficiency engine**
-
-The engine applies priority-ordered deterministic rules over four dimensions: Graph Evidence, Behavioral Evidence, Prior Case Match, and Contradictory Evidence. It produces one of three verdicts: SUFFICIENT, INSUFFICIENT, or CONTRADICTORY. Prior cases are analogical context only. They never raise sufficiency on their own.
-
-**Policy engine**
-
-The engine maps each recommended action to its approval tier. The LLM recommends. The policy engine authorizes. These are separate concerns.
-
-- auto: agent may execute directly (MONITOR_CARD, VERIFY_WITH_CUSTOMER, CREATE_CASE, etc.)
-- L1: team lead approval required (DECLINE_TRANSACTION, BLOCK_CARD when exposure ≤ $2,500)
-- L2: fraud manager approval required (BLOCK_CARD when exposure > $2,500, BLOCK_ALL_CARDS, FILE_REPORT)
-
-### Layer 4 — Frontend
-
-The React dashboard reads the answer files Orbit produces. It does not run the agent. It renders the completed investigation.
-
-Panels:
-
-- Case selector
-- Case details (amount, risk score, evidence sufficiency, status, typology, transaction details)
-- Graph canvas (transaction topology with prior cases highlighted)
-- Investigation terminal (5-step execution trace)
-- Final case record (verdict, summary, customer verification, containment checklist)
-- SAR viewer (FinCEN-standard narrative when a report is filed)
+</div>
 
 ---
 
-## How to Run Orbit End to End
+## ⚔️ Why Oculus?
 
-### Prerequisites
+Traditional antiviruses are **Reactive** (waiting for blacklists). Oculus is **Proactive** and **Educational**.
 
-- Docker Desktop
-- Python 3.10 or later
-- Node.js 18 or later
-- A terminal (PowerShell on Windows, bash on macOS or Linux)
+| Feature | 🚫 Traditional Antivirus | 🛡️ Oculus |
+| :--- | :--- | :--- |
+| **Detection logic** | Static Blacklists (Slow) | **Real-Time Visual DNA & AI** (Instant) |
+| **Zero-Day Defense** | Fails on new sites | **Detects threat patterns** automatically |
+| **Visual Analysis** | None | **Chameleon 4.0** (Checks Logos/Colors) |
+| **AI Brain** | Cloud-only or minimal | **Hybrid** (Local Bayes + Gemini 1.5 Flash / Groq) |
+| **Community Trust** | None | **Crowdsourced Reputation & Voting** |
+| **Education** | Blocked (Black Box) | **Explains *Why* it was banned** (AI Analysis) |
+| **Email Security** | Limited | **Gmail Sentinel** (AI Spoof Detection) |
+| **Protection Depth** | URL Only | **DOM, Text, Metadata, Scripts, & extensions** |
 
-### Step 1 — Clone the repository
+---
 
+## 🏗️ Architecture Visualization
+
+Detailed breakdown of the system's logic flow, cloud infrastructure, and user progression layers.
+
+<details open>
+<summary><b>🧠 1. Core Threat Detection Logic</b></summary>
+<br>
+
+How Oculus decides if a page is safe or malicious in milliseconds.
+
+```mermaid
+graph TD
+    %% Styling Definitions
+    classDef input fill:#2a2a2a,stroke:#ffffff,stroke-width:2px,color:#ffffff
+    classDef engine fill:#1F2937,stroke:#3B82F6,stroke-width:2px,color:#ffffff
+    classDef safe fill:#064E3B,stroke:#10B981,stroke-width:2px,color:#ffffff
+    classDef danger fill:#7F1D1D,stroke:#EF4444,stroke-width:2px,color:#ffffff
+    classDef decision fill:#374151,stroke:#F59E0B,stroke-width:2px,color:#ffffff
+
+    Start[Page Loaded]:::input -->|1. Extract Features| DOM[DOM & Content Analysis]:::engine
+    
+    subgraph "Client-Side Engines (Local)"
+        direction TB
+        DOM -->|Visual DNA Match| Chameleon[🦎 Chameleon Engine 4.0]:::engine
+        DOM -->|Text Tokens| NaiveBayes[🧠 Client Naive Bayes]:::engine
+        DOM -->|Heuristics| RiskEngine[⚙️ Risk Engine]:::engine
+        
+        RiskEngine -->|Check| Entropy[Entropy Sentinel]:::decision
+        RiskEngine -->|Check| Typosquat[Typosquat Detector]:::decision
+        RiskEngine -->|Check| Punycode[IDN/Punycode Check]:::decision
+    end
+    
+    Chameleon -->|Score| Aggregator{Risk Score > 50?}:::decision
+    NaiveBayes -->|Score| Aggregator
+    RiskEngine -->|Score| Aggregator
+    
+    Aggregator -- NO --> Safe[🟢 SAFE / CAUTION]:::safe
+    Aggregator -- YES --> CloudCheck{Cloud Verification?}:::decision
+    
+    CloudCheck -->|API Call| CloudAI[☁️ Cloud AI Layer]:::danger
+    CloudAI -->|Verdict| Block[🔴 BLOCK & EXPLAIN]:::danger
 ```
-git clone https://github.com/subratkumarpadhy4/HHGoa.git
-cd HHGoa
+</details>
+
+<details>
+<summary><b>☁️ 2. AI Intelligence Cloud Layer</b></summary>
+<br>
+
+The serverless brain that models complex threats and orchestrates external APIs.
+
+```mermaid
+sequenceDiagram
+    participant Client as Chrome Extension
+    participant API as Vercel Serverless API
+    participant Gemini as Gemini 1.5 Flash
+    participant Groq as Groq (Llama-3)
+    participant VT as VirusTotal
+    participant DB as MongoDB (Trust)
+
+    Note over Client,DB: 🚀 Parallel Cloud Analysis Flow
+
+    Client->>API: POST /api/ai/scan (Risk Data)
+    
+    par Parallel Analysis
+        API->>Gemini: Forensic Analysis Prompt
+        API->>Groq: Fast Pattern Match
+        API->>VT: Check URL/Hash Reputation
+    end
+    
+    Gemini-->>API: Detailed Reason & Score
+    Groq-->>API: Quick Verdict
+    VT-->>API: Blacklist Status
+    
+    API->>DB: Update Global Threat Intelligence
+    API-->>Client: Final Consolidated Verdict
 ```
+</details>
 
-### Step 2 — Start TigerGraph Community Edition
+<details>
+<summary><b>🎮 3. Gamification & Progression Layer</b></summary>
+<br>
 
+The feedback loop that rewards users for contributing to security.
+
+```mermaid
+graph LR
+    %% Styling Definitions
+    classDef action fill:#2563EB,stroke:#EFF6FF,stroke-width:2px,color:#ffffff
+    classDef logic fill:#4B5563,stroke:#9CA3AF,stroke-width:2px,color:#ffffff
+    classDef unlock fill:#7C3AED,stroke:#C4B5FD,stroke-width:2px,color:#ffffff
+    classDef notify fill:#059669,stroke:#34D399,stroke-width:2px,color:#ffffff
+
+    UserAction[User Browsing / Reporting]:::action -->|Triggers| XP_Service[XP Service Worker]:::logic
+    
+    subgraph "Progression Logic"
+        XP_Service -->|Add XP| LocalStore[(Local Storage)]:::logic
+        XP_Service -->|Sync| Server[Global Leaderboard]:::logic
+        LocalStore -->|formula: sqrt XP/100| LevelCalc[Level Calculator]:::logic
+    end
+    
+    LevelCalc -->|Level Up!| UnlockSystem{Feature Unlocks}:::unlock
+    
+    UnlockSystem -->|Lvl 5| QR[📸 QR Scanner Unlocked]:::unlock
+    UnlockSystem -->|Lvl 10| ML[🧠 ML Heuristics Unlocked]:::unlock
+    UnlockSystem -->|Lvl 20| Cham[🦎 Chameleon Mode Unlocked]:::unlock
+    
+    UnlockSystem -->|Notification| Notify[User Alert: New Level!]:::notify
 ```
-docker run -d ^
-  -p 14022:22 ^
-  -p 9000:9000 ^
-  -p 14240:14240 ^
-  --name tigergraph ^
-  --ulimit nofile=1000000:1000000 ^
-  -v C:\tg-data:/home/tigergraph/mydata ^
-  -v tg-data:/home/tigergraph ^
-  -t tigergraph/community:latest
-```
+</details>
 
-Wait 30 seconds. Then start the TigerGraph services:
 
-```
-docker exec -it --user tigergraph tigergraph bash
-source ~/.bashrc
-gadmin start all
-exit
-```
+---
 
-Verify REST++ is responding:
+## 🚀 Key Features
 
-```
-curl.exe http://localhost:9000/echo
-```
+### 1. 🦎 Chameleon Engine 4.0 (`chameleon.js`)
+Our proprietary **Visual DNA Detection** system.
+*   **Visual Fingerprinting**: Instead of checking URLs, Chameleon looks at the *page itself*.
+*   **200+ Brand Signatures**: Instantly recognizes clones of PayPal, Google, Binance, Chase, and more by analyzing:
+    *   **Logos**: Detects brand logos in `<img>` tags or CSS using fuzzy matching.
+    *   **Color Palettes**: Matches dominant brand colors (e.g., Facebook Blue `#4267B2`, Spotify Green `#1DB954`).
+    *   **Keywords**: Context-aware keyword matching ("Sign in", "Password", "Verify").
+*   **Logic**: If a page *looks* like PayPal (High DNA Match) but is hosted on `secure-login-update.com` (Mismatch), Chameleon triggers a **CRITICAL** alert.
 
-Expected: {"error":false, "message":"Hello GSQL"}
+### 2. 📧 AI Gmail Sentinel (Advanced)
+*   **Persistent Threat HUD**: A status badge ("🤖 Analyzing..." -> "✅ Verified") appears instantly on every email, ensuring you never miss a scan.
+*   **AI CSI for Emails**: Uses **Groq (Llama 3 70b)** + **Gemini 1.5** to forensic analyze emails.
+    *   **Multi-Domain Intelligence**: Understands that huge companies use subdomains (`m.learn.coursera.org` matches `coursera.org`). No more false positives on legitimate subdomains.
+    *   **Contextual Spoof Detection**: If an email claims to be "PayPal Support" but comes from `security@paypal-support.xyz`, the AI flags it instantly as "FAKE SENDER".
+    *   **Manual Scan Mode**: Scan ANY email manually, even if it's from an unknown sender, with a single click.
+*   **Attachment Scanner**: Hash-based VirusTotal lookup that respects privacy (files never leave your PC).
 
-### Step 3 — Create the Python environment
+### 3. 🥋 Phish-Sim Dojo (Interactive Training)
+*   **Active Defense Training**: Users don't just block attacks; they learn to spot them.
+*   **AI Scammer Simulation**: Users chat with a simulated scammer (powered by Gemini/Groq) in a safe "Hacker Matrix" environment.
+*   **Gamified Rewards**: Catching the AI in a lie grants **+500 XP**.
 
-```
-python -m venv .venv
-.\.venv\Scripts\Activate.ps1
-pip install -r requirements.txt
-```
+### 4. ⚙️ Advanced Risk Engine (`risk_engine.js`)
+The core brain that aggregates scores from multiple heuristics:
+*   **Entropy Sentinel**: Detects DGA (Domain Generation Algorithm) domains like `xy-123-abc-bank.com` by calculating character randomness.
+*   **Typosquatting Detector**: Uses Levenshtein Distance to find domains close to popular brands (e.g., `g00gle.com` or `faceb00k.com`).
+*   **Punycode & IDN Spoofing**: Detects `xn--` domains or "Homograph Attacks" where Cyrillic/Greek characters mimic Latin letters (e.g. `а` vs `a`).
+*   **MITM / SSL Stripping**: Detects sensitive login forms served over insecure **HTTP**.
+*   **Mixed Content Warning**: Flags secure HTTPS pages that load insecure scripts or images.
+*   **Domain Coherence (Adaptive Whitelist)**: Grants a "Trust Bonus" if the Page Title perfectly matches the Domain Name (e.g., Title: "Small Bank" matches `smallbank.com`).
 
-### Step 4 — Configure environment variables
+### 4. 🤝 Community Trust Manager (`admin.html`)
+A global reputation system where the community defends itself.
+*   **Global Synchronization**: Reputation scores are synced across all users and admins via the Cloud API.
+*   **Admin Dashboard**:
+    *   **Graphs**: Weekly Threat Analytics (resets every Monday).
+    *   **Memory Restore**: Admin can restore lost server reports from the browser's local cache.
+    *   **Consensus Logic**: Domains with a high "Unsafe" vote ratio are automatically flagged.
+*   **Offline Queue**: If the server is down, reports are queued locally and synced automatically via Chrome Alarms.
 
-Copy `.env.example` to `.env` and fill in:
+### 5. 🚨 Reporting & Incident Response
+How the community keeps the ecosystem clean.
+*   **1-Click Reporting**: Right-click anywhere -> **"Report to PhishingShield"**.
+*   **XP Rewards**: Earn **+10 XP** instantly for contributing.
+*   **Report Lifecycle**:
+    1.  **Submission**: User report enters Pending queue.
+    2.  **Verify**: Backend AI scans/verifies the threat.
+    3.  **Action**: Admin Bans (Syncs globally) or Ignores.
+    4.  **Feedback Loop**: User is notified of the outcome ("Confirmed Phishing" or "False Positive").
 
-```
-TG_HOST=http://localhost
-TG_GRAPHNAME=HHGoa
-TG_USERNAME=tigergraph
-TG_PASSWORD=tigergraph
-NVIDIA_API_KEY=nvapi-...
-NVIDIA_BASE_URL=https://integrate.api.nvidia.com/v1
-NVIDIA_MODEL=meta/llama-3.2-11b-vision-instruct
-GEMINI_API_KEY=...
-GROQ_API_KEY=...
-LLM_PROVIDER=nvidia
-```
+### 6. 🌍 Global Threat Intelligence & VirusTotal
+*   **VirusTotal Integration**: Downloads and URLs are checked against **VirusTotal’s API** for immediate reputation status (`/api/antivirus/scan`).
+*   **Real-Time Bans**: Admin bans propagate to **all users instantly**.
 
-Orbit uses a multi-provider chain: NVIDIA NIM first, then Gemini, then Groq. At least one key is required.
+### 7. 🧠 Hybrid Neuro-Symbolic AI
+*   **Tier 1 (Client)**: **Naive Bayes** (`ai_model.js`) scans text for urgency/financial triggers locally. (0ms latency, privacy-first).
+*   **Tier 2 (Cloud)**: **Gemini 1.5 Flash / Groq** analyze high-risk pages for deep context ("Imitating Amazon Login").
 
-### Step 5 — Create the graph schema
+### 8. 🛡️ The Risk HUD & Defense Layers
+*   **The Risk HUD**: 🟢 Safe (0-20), 🟡 Caution (21-50), 🟠 Dangerous (51-79), 🔴 Critical (80+).
+*   **Fortress Mode**: Panic button to **BLOCK ALL 3rd-party scripts**.
+*   **Rogue Extensions**: Warns about unknown extensions injecting code.
+*   **Quishing Scanner**: Decodes and checks QR codes for malicious links.
 
-```
-docker exec -it --user tigergraph tigergraph bash
-cd /home/tigergraph/mydata
-gsql -f create_schema.gsql
-gsql -c "CREATE GRAPH HHGoa (*)"
-exit
-```
+### 9. 🎮 Gamification & XP System
+*   **Leveling**: `Level = sqrt(XP / 100) + 1`.
+*   **Unlocks**:
+    *   **Level 5**: QR Scanner.
+    *   **Level 10**: ML Heuristics.
+    *   **Level 20**: Chameleon Mode.
+*   **Penalties**: Lose XP for visiting banned sites.
 
-### Step 6 — Load the dataset
+### 10. 🧬 Digital DNA (Shadow Profile)
+**Anti-Fingerprinting Counter-Surveillance.**
+*   **Concept**: Spoofs your browser's "fingerprint" (OS, Screen Resolution, Hardware) to match a generic Windows 10 Profile.
+*   **Effect**: 
+    1.  Protects your privacy from trackers.
+    2.  Confuses phishing kits that look for specific devices (e.g., Mac users).
+    3.  Neutralizes OS-targeted malware (e.g., Mac malware won't execute if it thinks you're on Windows).
 
-Place the HHGOA dataset files in `C:\HHGoa\data\`:
+### 11. 🛡️ Account Security & User Dashboard (`dashboard.html`)
+*   **Modern Themed Dashboard**: An updated, clean UI for managing your Oculus shadow profile, XP progression, and account settings.
+*   **Secure Authentication Operations**:
+    *   **OTP-Verified Password Changes**: Ensures account takeover is prevented by requiring an email-based One-Time Password for any password reset or change.
+    *   **OTP-Verified Email Updates**: Protects the user from unauthorized email address changes.
+    *   **Password Visibility Toggles**: Improved UX for securely managing account credentials.
+*   **Refined Reporting UI**: Seamless duplicate report handling and robust synchronization with the global admin portal.
 
-- transactions.csv
-- identity.csv
-- closed_cases_history.csv
-- case_pack.csv
+---
 
-Then run:
+## 🛠️ Installation & Setup
 
-```
-python scripts\build_card_map.py
-python scripts\load_minimal.py
-```
+### 📋 1. Preparation Checklist
+Before you begin, ensure you have the following installed:
+*   [Node.js (LTS Version)](https://nodejs.org/) - Required for the backend API.
+*   [Git](https://git-scm.com/) - To clone the repository.
+*   [Google Chrome](https://www.google.com/chrome/) or any Chromium browser (Brave, Edge).
+*   [VS Code](https://code.visualstudio.com/) - Recommended for editing code.
 
-The load takes 30 to 60 minutes. It writes 41,011 transactions, 5,565 closed cases, and all connected entities into the graph.
+### 🔑 2. Get Your API Keys
+Oculus relies on powerful AI engines. You need valid keys for them to work.
 
-Verify with:
+| Service | Why needed? | Cost | Get it here |
+| :--- | :--- | :--- | :--- |
+| **Google Gemini API** | Main forensic AI analysis | **Free** | [Google AI Studio](https://aistudio.google.com/) |
+| **Groq Cloud** | Fast Llama-3 inference | **Free** | [Groq Console](https://console.groq.com/) |
+| **VirusTotal API** | URL & File reputation | **Free** | [VirusTotal API](https://www.virustotal.com/) |
+| **MongoDB Atlas** | Database for Users/Trust | **Free** | [MongoDB Atlas](https://www.mongodb.com/atlas) |
 
-```
-python scripts\verify_counts.py
-```
+### ⚡ Judges & Quick Start (No Server Setup Needed!)
+The extension is **pre-configured** to use our live Vercel backend. You do **NOT** need to install Node.js or run the server to test the extension.
 
-### Step 7 — Start the MCP server
+1.  **Download the Code**: Click "Code" -> "Download ZIP" on GitHub and unzip it.
+2.  **Load Extension**:
+    *   Open Chrome -> `chrome://extensions`
+    *   Enable **Developer Mode** (Top right).
+    *   Click **Load Unpacked**.
+    *   Select the **root folder** of the unzipped project.
+3.  **Test**: Open `tests/ai_phishing_test.html` or any site to see it in action!
 
-```
-python -m mcp_server.run_server --transport streamable-http --host 127.0.0.1 --port 8000 --env-file C:\HHGoa\.env
-```
+---
 
-Leave it running in a separate terminal window.
+### 🖥️ 3. Backend API Setup (Optional / For Developers)
+*Only follow this if you want to run your own local server instance.*
 
-### Step 8 — Run Orbit on the benchmark cases
+The backend handles AI requests, user accounts, and global sync.
+```bash
+# 1. Clone the repository
+git clone https://github.com/subratkumarpadhy4/Oculus.git
+cd Oculus/api
 
-```
-python -u agent\save_answers.py
-```
-
-This runs all 20 benchmark cases end to end. Each case takes approximately 50 seconds. The script writes one answer file per case to `results/answers/`.
-
-To run individual demo cases:
-
-```
-python scripts\demo_evidence_loop.py
-python scripts\demo_ambiguous_case.py
-python scripts\demo_summary.py
-```
-
-### Step 9 — Start the frontend
-
-```
-cd frontend
+# 2. Install dependencies
 npm install
-npm run dev
+
+# 3. Create your Environment file
+# Create a file named '.env' in the 'api' folder and paste your keys:
+GEMINI_API_KEY=YOUR_GEMINI_KEY_HERE
+GROQ_API_KEY=YOUR_GROQ_KEY_HERE
+VIRUSTOTAL_API_KEY=YOUR_VT_KEY_HERE
+MONGODB_URI=mongodb+srv://<user>:<password>@cluster.mongodb.net/?retryWrites=true&w=majority
+JWT_SECRET=super_secret_key_123
+
+# 4. Start the Server
+node index.js
+# You should see: "Server running on port 3000"
 ```
 
-Open http://localhost:5173 in a browser.
+### 🧩 4. Extension Setup
+Load the "Brain" of Oculus into your browser.
 
-The frontend reads from `frontend/public/cases/`. To refresh after re-running Orbit:
+1.  Open Chrome and navigate to `chrome://extensions`.
+2.  **Enable Developer Mode** (Toggle switch in the top right corner).
+3.  Click the **Load unpacked** button (Top left).
+4.  Select the **Oculus** project folder (The root folder containing `manifest.json`).
+5.  ✅ **Done!** The Oculus shield icon should appear in your toolbar.
 
-```
-Copy-Item C:\HHGoa\results\answers\HHG-*.json C:\HHGoa\frontend\public\cases\
-```
+### 🔐 Admin Portal Access
+To access the global ban system and review reported sites:
+1.  Click the extension icon -> "Dashboard" -> "Admin Portal" (Sidebar).
+    *   **Email**: `admin@phishingshield.io` (Contact for access)
+    *   **Password**: `********`
 
----
+> **✅ NOTE: Production Ready**
+> The extension is pre-configured to communicate with our minimal-latency Vercel API: `https://oculus-eight.vercel.app`.
+> No local server is required for the extension to work out of the box!
 
-## Repository Layout
+### 🔧 Troubleshooting
 
-```
-HHGoa/
-├── agent/                      LangGraph orchestration and node definitions
-│   ├── graph.py                State machine assembly
-│   ├── state.py                AgentState schema
-│   ├── llm.py                  Multi-provider LLM wrapper (NVIDIA, Gemini, Groq)
-│   ├── mock_apis.py            Seeded mock evidence request APIs
-│   ├── mcp_client.py           Python client for the MCP tools
-│   ├── answer_generator.py     Converts agent state to the answer format
-│   ├── sar_generator.py        FinCEN-standard SAR narrative generator
-│   ├── save_answers.py         Runner for the 20 benchmark cases
-│   └── nodes/                  Nine node implementations
-├── mcp_server/                 MCP server with 6 custom tools
-│   ├── custom_tools.py
-│   └── run_server.py
-├── scripts/                    Loaders, utilities, demo scripts
-│   ├── build_card_map.py
-│   ├── load_minimal.py
-│   ├── verify_counts.py
-│   ├── check_answers.py
-│   ├── fix_answers.py
-│   ├── demo_evidence_loop.py
-│   ├── demo_ambiguous_case.py
-│   └── demo_summary.py
-├── schema/
-│   └── create_schema.gsql      GSQL schema creation script
-├── cases/                      20 answer files (HHG-001.json … HHG-020.json)
-├── results/answers/            Working copy of answer files plus benchmark summary
-├── frontend/                   React analyst dashboard
-├── data/                       Dataset files (not committed, gitignored)
-├── .env.example                Environment template
-├── .gitignore
-├── mcp_config.json             MCP server configuration
-├── requirements.txt
-└── README.md
-```
+| Issue | Solution |
+| :--- | :--- |
+| **"Server Connection Failed"** | Ensure `node index.js` is running in your terminal. |
+| **"MongoTimeoutError"** | Check your MongoDB Atlas **Network Access** settings. Whitelist IP `0.0.0.0/0` for testing. |
+| **"AI Scan Error"** | Verify your `GEMINI_API_KEY` in `.env`. Ensure you have credits/quota. |
+| **"Extension Error"** | Click "Errors" on the extension card in `chrome://extensions` to see logs. |
 
 ---
 
-## Benchmark Results
+## 🧪 How to Test (Demo Scenarios)
 
-Orbit was run on all 20 benchmark cases in `case_pack.csv`.
+### Scenario A: The AI Phishing Test
+1.  Navigate to local file `tests/ai_phishing_test.html`.
+2.  **Watch HUD**: Yellow (Heuristic) -> **Red (AI Confirmed)** after 2s.
+3.  **Result**: "🤖 AI Analysis Detected Threat".
 
-| Metric | Value |
-|---|---|
-| Total cases | 20 |
-| Investigated end to end | 20 |
-| Errors | 0 |
-| Closed as fraud | 15 |
-| Escalated to analyst | 4 |
-| Closed as legitimate | 1 |
-| SARs filed | 6 |
-| InvestigationCase vertices written | 20 |
-| Evidence vertices written | 365 |
-| ResolvedCase vertices spawned | 19 |
-| Average latency per case | ~50 seconds |
+### Scenario B: Chameleon Clone Detection
+1.  Open `tests/fake_instagram.html` (or create a file with Instagram colors and "Log in").
+2.  **Observation**: Chameleon detects "Instagram Visual DNA" on a non-meta domain.
+3.  **Result**: "🦎 DNA MISMATCH! Page is Instagram clone".
+4. 
+### Scenario C: Quishing (QR Phishing)
+1.  Open `tests/qr_safe.html` -> Scan shows "Safe" (Green Overlay).
+2.  Open `tests/qr_danger.html` -> Scan shows "Malicious" (Red Overlay).
+    *   *Note: qr_danger.html simulates a typosquatted domain.*
 
-Orbit did not treat the risk score as the answer. Half the benchmark cases were designed to be legitimate. Orbit discriminated correctly, escalating ambiguous cases instead of forcing a verdict.
-
----
-
-## Investigation Lifecycle
-
-For every case Orbit produces:
-
-1. An InvestigationCase written to TigerGraph
-2. An Evidence Pack built from graph queries and detector outputs
-3. A structured finding from the LLM
-4. A sufficiency verdict from the deterministic engine
-5. Zero or more evidence requests, with simulated responses
-6. A recommended action set with the correct approval route
-7. A FinCEN-standard SAR narrative when the policy requires a report
-8. A ResolvedCase written back to the graph as retrievable memory
+### Scenario D: Digital DNA
+1.  Enable "Shadow Profile 🧬" in the Popup.
+2.  Visit a fingerprinting site like `browserleaks.com`.
+3.  **Result**: Your Mac/Linux machine appears as a **Windows 10 PC**.
 
 ---
 
-## LLM Provider Chain
+## 📂 Project Structure
 
-Orbit uses a multi-provider chain for resilience against rate limits.
-
-1. NVIDIA NIM (meta/llama-3.2-11b-vision-instruct) — primary
-2. Google Gemini (gemini-2.5-flash) — first fallback
-3. Groq (openai/gpt-oss-20b, openai/gpt-oss-120b) — second fallback
-
-Each provider is tried in order. On success, the response includes a `_provider` field. On failure, the chain moves to the next provider. All provider selection is logged to stdout.
-
----
-
-## Tech Stack
-
-| Layer | Technology |
-|---|---|
-| Graph and vector storage | TigerGraph Community Edition (Docker) |
-| Graph query language | GSQL |
-| Agent framework | LangGraph 1.2 with langchain-core |
-| LLM (primary) | NVIDIA NIM (meta/llama-3.2-11b-vision-instruct) |
-| LLM (fallback) | Google Gemini 2.5 Flash, Groq |
-| Agent-graph bridge | TigerGraph MCP server (official) |
-| Frontend | React 18, Vite, TypeScript, Tailwind CSS |
-| Runtime | Python 3.12 |
+*   **/js**
+    *   `chameleon.js`: Visual DNA analysis engine.
+    *   `risk_engine.js`: Core heuristic logic (Entropy, Typosquat, Brand).
+    *   `ai_model.js`: Client-side Naive Bayes classifier.
+    *   `content.js`: UI orchestration & DOM scanner.
+    *   `background.js`: Service worker, Offline Sync, Fortress Mode rules.
+*   **/api**: Backend Serverless Functions (Express/Vercel).
+    *   `index.js`: Main API entry point (AI, Trust, Users).
+*   **/tests**: Safe environments for testing malware logic.
 
 ---
 
-## Submission
+## 📄 License
+MIT License. Open Source for Educational and Security Research.
 
-- **Answer files**: `cases/` (20 files, HHG-001.json through HHG-020.json)
-- **Benchmark summary**: `results/answers/_answers_summary.json`
-- **Demo video**: [URL]
-- **Blog post**: https://dev.to/subratkumarpadhy/building-an-agentic-fraud-investigation-system-with-tigergraph-langgraph-mcp-obd
-- **Social posts**: https://www.linkedin.com/posts/jenapriyanshu003_building-an-agentic-fraud-investigation-system-activity-7508904691498471424-4ajY?utm_source=share&utm_medium=member_android&rcm=ACoAAF3hOyMB5Qhy3sfvszwiTOx8KD3x2eOMMsM, [URL 2], [URL 3]
-- **TigerGraph deployment**: Community Edition
-
----
-
-## License
-
-This project was built for the TigerGraph × HHGoa 2026 hackathon. The dataset is provided by TigerGraph and Vesta Corporation under the terms of the IEEE-CIS Fraud Detection dataset.
+<div align="center">
+<b>Built with ❤️ by the Oculus Team</b>
+</div>
